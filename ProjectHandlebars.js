@@ -60,6 +60,11 @@ app.get('/editTourType',function(req,res){
    res.render('editTourType',context);
 });
 
+app.get('/editServiceType',function(req,res){
+  var context = {};
+   res.render('editServiceType',context);
+});
+
 
 
 app.use(function(req,res){
