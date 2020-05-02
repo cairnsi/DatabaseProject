@@ -19,9 +19,9 @@ app.set('port', 3130);
 var pool = mysql.createPool({
   connectionLimit : 10,
   host            : 'classmysql.engr.oregonstate.edu',
-  user            : 'cs290_cairnsi',
+  user            : 'cs340_cairnsi',
   password        : credentials.databasePWD,
-  database        : 'cs290_cairnsi'
+  database        : 'cs340_cairnsi'
 });
 
 
