@@ -19,7 +19,7 @@ function bindButtons(){
 	}
 	
 	var serviceElements = document.getElementsByClassName('editServiceType');
-	for (var i = 0; i < serviceElementsElements.length; i++) {
+	for (var i = 0; i < serviceElements.length; i++) {
 	  serviceElements[i].addEventListener('click', function(event){
 		  var req = new XMLHttpRequest();
 		  var path = '/editServiceType';
