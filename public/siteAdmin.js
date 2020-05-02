@@ -1,8 +1,7 @@
 function bindButtons(){
 	var tourElements = document.getElementsByClassName('editTourType');
-	var tour;
-	for(tour in tourElements){
-	  tour.addEventListener('click', function(event){
+	for (var i = 0; i < tourElements.length; i++) {
+	  tourElements[i].addEventListener('click', function(event){
 		  var req = new XMLHttpRequest();
 		  var path = '/editTourType';
 		  req.open('GET', path, false);
