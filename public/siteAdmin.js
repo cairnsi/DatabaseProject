@@ -4,7 +4,6 @@ function bindButtons(){
 	  var path = '/editTourType';
 	  req.open('GET', path, false);
 		req.addEventListener('load',function(){
-			clearMessages();
 			if(req.status >= 200 && req.status < 400){
 				location.href = path;
 			} else {
