@@ -50,6 +50,11 @@ app.get('/siteAdmin',function(req,res){
    res.render('siteAdmin',context);
 });
 
+app.get('/yourTours',function(req,res){
+  var context = {};
+   res.render('yourTours',context);
+});
+
 
 
 app.use(function(req,res){
