@@ -5,3 +5,23 @@ td {
 th  {
 	text-align:center;
 }
+ .HeaderWelcome{
+    text-align: center;
+	font-family: "Times New Roman", Times, serif;
+ }
+ 
+ .pageLinks
+{
+    display: inline;
+	padding: 10px;
+	background-color: #b3ff66;
+	text-align: center;
+	margin:auto;
+
+}
+.outer-content{
+	background-color: #b3ff66;
+	width: 100%;
+	margin-top:20px;
+	padding: 10px;
+}
