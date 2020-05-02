@@ -55,6 +55,11 @@ app.get('/yourTours',function(req,res){
    res.render('yourTours',context);
 });
 
+app.get('/editTourType',function(req,res){
+  var context = {};
+   res.render('editTourType',context);
+});
+
 
 
 app.use(function(req,res){
