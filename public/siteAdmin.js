@@ -1,5 +1,6 @@
 function bindButtons(){
   document.getElementsByClassName('editTourType')[0].addEventListener('click', function(event){
+	  var req = new XMLHttpRequest();
 	  var path = '/editTourType';
 	  req.open('GET', path, false);
 		req.addEventListener('load',function(){
