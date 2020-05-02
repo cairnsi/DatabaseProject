@@ -45,6 +45,11 @@ app.get('/addService',function(req,res){
    res.render('addService',context);
 });
 
+app.get('/siteAdmin',function(req,res){
+  var context = {};
+   res.render('siteAdmin',context);
+});
+
 
 
 app.use(function(req,res){
