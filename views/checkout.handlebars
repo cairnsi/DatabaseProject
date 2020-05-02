@@ -1,4 +1,43 @@
 {{>header}}
 <h2>Checkout</h2>
+<h4>Cart</h4>
+<table id = "cartTable">
+  <tr>
+	<th>Item</th>
+	<th>Type</th>
+	<th>Cost</th>
+	<th>Quantity</th>
+  </tr>
+  <tr>
+	<td>Full Day Expert (2020-06-03)</td>
+	<td>Tour</td>
+	<td>$54.95</td>
+	<td>1<td>
+	<td><button type="button">Remove</button></td>
+  </tr>
+  <tr>
+	<td>Partial Service</td>
+	<td>Service</td>
+	<td>$60.00</td>
+	<td>
+		<select id="qty" value = "2">
+		  <option value="0">0</option>
+		  <option value="1">1</option>
+		  <option value="2">2</option>
+		  <option value="3">3</option>
+		  <option value="4">4</option>
+		  <option value="5">5</option>
+		</select>
+	<td>
+	<td><button type="button">Remove</button></td>
+  </tr>
+</table>
+<div id = "total" style = "display: inline-block;">
+	<h4>
+		Subtotal (2 items): $114.95
+	</h4>
+	<button type="button">Checkout</button>
+</div>
+ 
 
  <script src="edit.js"></script>
