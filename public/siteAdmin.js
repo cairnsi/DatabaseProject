@@ -39,7 +39,7 @@ function bindButtons(){
 	
 	var serviceElements = document.getElementById('addTourType').addEventListener('click', function(event){
 	  var req = new XMLHttpRequest();
-	  var path = '/editServiceType';
+	  var path = '/addTourType';
 	  req.open('GET', path, false);
 		req.addEventListener('load',function(){
 			if(req.status >= 200 && req.status < 400){
