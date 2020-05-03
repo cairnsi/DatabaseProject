@@ -1,0 +1,71 @@
+{{>header}}
+<h2>Purchases Page</h2>
+<div class = "filter">
+	<form>
+		<fieldset>
+			<legend>Filter</legend>
+			<label>Date: </label>
+			<input type="date" id="tourDate" name="tourDate">
+			<label>First Name: </label>
+			<input type="text" id="fname" name="fname">
+			<label>Last Name: </label>
+			<input type="text" id="lname" name="lname">
+			<input type="submit" id="tourAddSubmit" value= "Add">
+		</fieldset>
+	</form>
+</div>
+<div id="specificToursAdmin">
+	<td><button type="button" id = "addSpecificTour">Add</button></td>
+	<table id = "specificToursTable">
+	  <tr>
+		<th>Purchase Date</th>
+		<th>Customer First Name</th>
+		<th>Customer Last Name</th>
+	  </tr>
+      <tr>
+		<td>2020-06-03</td>
+		<td>Kevin</td>
+		<td>Hart</td>
+		<td><button type="button" class="viewPurchase">view</button></td>
+	  </tr>
+	  <tr>
+		<td>2020-06-05</td>
+		<td>Danny</td>
+		<td>DeVito</td>
+		<td><button type="button" class="viewPurchase">view</button></td>
+	  </tr>
+	  <tr>
+		<td>2020-06-09</td>
+		<td>Jason</td>
+		<td>Statham</td>
+		<td><button type="button" class="viewPurchase">view</button></td>
+	  </tr>
+	  <tr>
+		<td>2020-06-04</td>
+		<td>Dwayne</td>
+		<td>Johnson</td>
+		<td><button type="button" class="viewPurchase">view</button></td>
+	  </tr>
+	  <tr>
+		<td>2020-06-02</td>
+		<td>Ice</td>
+		<td>Cube</td>
+		<td><button type="button" class="viewPurchase">view</button></td>
+	  </tr>
+	  <tr>
+		<td>2020-06-05</td>
+		<td>Chis</td>
+		<td>Rock</td>
+		<td><button type="button" class="viewPurchase">view</button></td>
+	  </tr>
+	  <tr>
+		<td>2020-06-05</td>
+		<td>Tiffany</td>
+		<td>Haddish</td>
+		<td><button type="button" class="viewPurchase">view</button></td>
+	  </tr>
+	</table>
+</div>
+
+<script src="updateSpecificTours.js"></script>
+
