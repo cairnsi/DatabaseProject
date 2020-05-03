@@ -1,0 +1,25 @@
+{{>header}}
+<form>
+	<fieldset>
+		<legend>Add Tour</legend>
+		<ul style="list-style-type: none;">
+			<li>
+				<label>Type: </label>
+				<select id="Type">
+				  <option value="full day expert">full day expert</option>
+				  <option value="full day intermediate">full day intermediate</option>
+				  <option value="full day beginner">full day beginner</option>
+				  <option value="Half day expert">Half day expert</option>
+				  <option value="Half day intermediate">Half day intermediate</option>
+				  <option value="Half day beginner">Half day beginner</option>
+				</select>
+			</li>
+			<li>
+				<label>Date: </label>
+				<input type="date" id="tourDate" name="tourDate">
+			</li>
+			<input type="submit" id="tourAddSubmit" value= "Add">
+		</ul>
+	</fieldset>
+</form>
+ <script src="add.js"></script>

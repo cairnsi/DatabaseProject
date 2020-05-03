@@ -80,6 +80,11 @@ app.get('/addServiceType',function(req,res){
    res.render('addServiceType',context);
 });
 
+app.get('/updateSpecificTours',function(req,res){
+  var context = {};
+   res.render('updateSpecificTours',context);
+});
+
 app.use(function(req,res){
   res.status(404);
   res.render('404');
