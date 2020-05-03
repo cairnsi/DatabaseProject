@@ -1,0 +1,45 @@
+{{>header}}
+<h2>Purchase</h2>
+<div id="specificToursAdmin">
+	<table id = "specificToursTable">
+	  <tr>
+		<th>Purchase Date</th>
+		<th>Customer First Name</th>
+		<th>Customer Last Name</th>
+	  </tr>
+      <tr>
+		<td>2020-06-03</td>
+		<td>Kevin</td>
+		<td>Hart</td>
+		<td><button type="button" class="viewPurchase">view</button></td>
+	  </tr>
+	</table>
+	<table>
+		<tr>
+			<th>Item</th>
+			<th>Type</th>
+			<th>Cost</th>
+			<th>Quantity</th>
+		  </tr>
+		  <tr>
+			<td>Full Day Expert (2020-06-03)</td>
+			<td>Tour</td>
+			<td>$54.95</td>
+			<td>1</td>
+		  </tr>
+		  <tr>
+			<td>Partial Service</td>
+			<td>Service</td>
+			<td>$60.00</td>
+			<td>2</td>
+		 </tr>
+	</table>
+	<div id = "total" style = "margin-top: 5px;">
+		<h4  style = "display: inline;">
+			Subtotal (2 items): $174.95
+		</h4>
+	</div>
+</div>
+
+<script src="updateSpecificTours.js"></script>
+

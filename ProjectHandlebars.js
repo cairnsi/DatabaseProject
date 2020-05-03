@@ -90,6 +90,11 @@ app.get('/purchases',function(req,res){
    res.render('purchases',context);
 });
 
+app.get('/viewPurchase',function(req,res){
+  var context = {};
+   res.render('viewPurchase',context);
+});
+
 app.use(function(req,res){
   res.status(404);
   res.render('404');
