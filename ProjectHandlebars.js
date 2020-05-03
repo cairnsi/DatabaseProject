@@ -95,6 +95,12 @@ app.get('/viewPurchase',function(req,res){
    res.render('viewPurchase',context);
 });
 
+app.get('/customers',function(req,res){
+  var context = {};
+   res.render('customers',context);
+});
+
+
 app.use(function(req,res){
   res.status(404);
   res.render('404');
