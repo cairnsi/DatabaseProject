@@ -70,6 +70,11 @@ app.get('/updateSpecificTours',function(req,res){
    res.render('updateSpecificTours',context);
 });
 
+app.get('/addTourType',function(req,res){
+  var context = {};
+   res.render('addTourType',context);
+});
+
 app.use(function(req,res){
   res.status(404);
   res.render('404');
