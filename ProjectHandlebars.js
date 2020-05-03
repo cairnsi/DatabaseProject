@@ -65,7 +65,10 @@ app.get('/editServiceType',function(req,res){
    res.render('editServiceType',context);
 });
 
-
+app.get('/updateSpecificTours',function(req,res){
+  var context = {};
+   res.render('updateSpecificTours',context);
+});
 
 app.use(function(req,res){
   res.status(404);
