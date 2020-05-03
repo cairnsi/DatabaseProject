@@ -85,6 +85,11 @@ app.get('/addSpecificTour',function(req,res){
    res.render('addSpecificTour',context);
 });
 
+app.get('/purchases',function(req,res){
+  var context = {};
+   res.render('purchases',context);
+});
+
 app.use(function(req,res){
   res.status(404);
   res.render('404');
