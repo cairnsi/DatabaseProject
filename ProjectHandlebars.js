@@ -100,6 +100,11 @@ app.get('/customers',function(req,res){
    res.render('customers',context);
 });
 
+app.get('/createAccount',function(req,res){
+  var context = {};
+   res.render('createAccount',context);
+});
+
 
 app.use(function(req,res){
   res.status(404);
