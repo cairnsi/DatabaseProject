@@ -75,6 +75,11 @@ app.get('/addTourType',function(req,res){
    res.render('addTourType',context);
 });
 
+app.get('/addServiceType',function(req,res){
+  var context = {};
+   res.render('addServiceType',context);
+});
+
 app.use(function(req,res){
   res.status(404);
   res.render('404');
