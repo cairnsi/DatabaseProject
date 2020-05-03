@@ -51,6 +51,6 @@ function bindButtons(){
 			}
 		});
 		req.send();
-	}
+	});
 }
 document.addEventListener('DOMContentLoaded', bindButtons);
