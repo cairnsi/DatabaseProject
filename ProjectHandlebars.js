@@ -80,9 +80,9 @@ app.get('/addServiceType',function(req,res){
    res.render('addServiceType',context);
 });
 
-app.get('/updateSpecificTour',function(req,res){
+app.get('/addSpecificTour',function(req,res){
   var context = {};
-   res.render('updateSpecificTour',context);
+   res.render('addSpecificTour',context);
 });
 
 app.use(function(req,res){
