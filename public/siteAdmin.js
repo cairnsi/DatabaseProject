@@ -37,7 +37,7 @@ function bindButtons(){
 	  });
 	}
 	
-	var serviceElements = document.getElementById('addTourType')addEventListener('click', function(event){
+	var serviceElements = document.getElementById('addTourType').addEventListener('click', function(event){
 	  var req = new XMLHttpRequest();
 	  var path = '/editServiceType';
 	  req.open('GET', path, false);
