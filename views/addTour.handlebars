@@ -1,5 +1,24 @@
 {{>header}}
 <h2>Sign up for a tour</h2>
+<div class = "filter">
+	<form>
+		<fieldset>
+			<legend>Filter</legend>
+			<label>Date: </label>
+			<label>Type: </label>
+			<select id="Type">
+			  <option value="full day expert">full day expert</option>
+			  <option value="full day intermediate">full day intermediate</option>
+			  <option value="full day beginner">full day beginner</option>
+			  <option value="Half day expert">Half day expert</option>
+			  <option value="Half day intermediate">Half day intermediate</option>
+			  <option value="Half day beginner">Half day beginner</option>
+			</select>
+			<input type="submit" id="tourAddSubmit" value= "Filter">
+		</fieldset>
+	</form>
+</div>
+<br>
 <table id = "addToursTable">
   <tr>
 	<th>Tour</th>
