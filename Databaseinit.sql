@@ -72,7 +72,10 @@ INSERT INTO Customers (first_name, last_name,
 	zip, phone, emergency_phone) 
 	VALUES ("Kevin",	"Hart",	"1472 170th",	"Los Angeles",	"CA",	"98504",	"4067824598",	"4025689852"),
 ("Jason",	"Statham",	"2390 98th",	"Hollywood",	"CA",	"98504",	"4068493823",	"4029586730"),
-("Danny",	"DeVito",	"1482 170th",	"Hollywood",	"CA",	"98504",	"4067828372",	"4029587344");
+("Danny",	"DeVito",	"1482 170th",	"Hollywood",	"CA",	"98504",	"4067828372",	"4029587344"),
+("Dwayne",	"Johnson",	"1222 140th",	"Santa Cruz",	"CA",	"98504",	"4060392938",	"4026789940"),
+("Ice",	"Cube",	"209 98th",	"Los Angeles",	"CA",	"98509",	"4068950393",	"4029875093"),
+("Tiffany",	"Haddish",	"444 96th",	"San Diego",	"CA",	"98509",	"4068950399",	"4029875055");
 
 INSERT INTO Service_Types(label, cost, description) 
 	VALUES ("Full Service","25000","Includes Fork and Shock service. Also includes drivetrain maintenance, brake maintenance and bearings inspection."),
