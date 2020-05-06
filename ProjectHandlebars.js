@@ -57,7 +57,25 @@ app.get('/yourTours',function(req,res){
 
 app.get('/editTourType',function(req,res){
   var context = {};
-   res.render('editTourType',context);
+  if(req.query.id){
+	if(!req.query.label)
+		req.query.label = "";
+	if(!req.query.meet_time)
+		req.query.meet_time="";
+	if(!req.query.cost)
+		req.query.cost="";
+	
+	context.label = req.query.label;
+	context.meet_time = req.query.meet_time;
+	context.cost = req.query.cost/100;
+	context.id = req.query.id;
+	
+	res.render('editTourType',context);
+	return;
+  }
+  res.type('plain/text');
+  res.status(500);
+  res.render('500');
 });
 
 app.get('/editServiceType',function(req,res){
