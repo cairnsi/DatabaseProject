@@ -31,7 +31,7 @@ function displayTourTypeTable(){
 				  var btn = document.createElement('button');
 				  btn.setAttribute('class', 'editTourType');
 				  btn.innerHTML = 'Edit';
-				  //btn.onclick =  bindEdit(item);
+				  btn.onclick =  bindEditTourType(item);
 				  row.appendChild(btn);
 				  
 				  var btn = document.createElement('button');
@@ -53,7 +53,30 @@ function displayTourTypeTable(){
 	  req.send();
 	  
 }
-
+function bindEditTourType(item){
+	return function(){
+		var req = new XMLHttpRequest();
+		if(!item.label)
+			item.label = "";
+		if(!item.meet_time)
+			item.meet_time="";
+		if(!item.cost)
+			item.cost="";
+		var path = '/editTourType?id='+item.id+'&label='+item.label+'&meet_time='+item.meet_time+'&cost='+item.cost;
+		req.open('GET', path, false);
+	    req.addEventListener('load',function(){
+			clearMessages();
+			if(req.status >= 200 && req.status < 400){
+				location.href = path;
+			} else {
+				console.log("Error in network request: " + req.statusText);
+				document.getElementById('addMessage').textContent="Could Not Edit";
+				document.getElementById('addMessage').style.color='red';
+			}
+		});
+	    req.send();
+	}
+}
 
 
 
