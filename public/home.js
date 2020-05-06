@@ -19,16 +19,15 @@ function displayTourTypeTable(){
 			  for(var i = 0;i<response.length;i++){
 				  var item = response[i];
 				  row = table.insertRow();
-				  var cell = cell = row.insertCell();
+				  var cell = row.insertCell();
 				  cell.textContent = item.label;
 				  cell.style.width = "15%";
 				  cell = row.insertCell();
 				  cell.textContent = item.meet_time;
 				  cell.style.width = "15%";
 				  cell = row.insertCell();
-				  cell.textContent = item.cost;
+				  cell.textContent = item.cost/100;
 				  cell.style.width = "15%";
-				  cell = row.insertCell();
 				  
 				  
 				  cell = row.insertCell();
