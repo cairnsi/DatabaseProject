@@ -21,7 +21,6 @@ function displayTourTypeTable(){
 				  row = table.insertRow();
 				  var cell = row.insertCell();
 				  cell.textContent = item.label;
-				  cell.style.width = "15%";
 				  cell = row.insertCell();
 				  cell.textContent = item.meet_time;
 				  cell.style.width = "15%";
