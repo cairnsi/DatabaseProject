@@ -116,6 +116,17 @@ app.get('/tourTypeTable', function(req,res){
   });
 });
 
+app.get('/serviceTypesTable', function(req,res){
+  pool.query("Select * FROM Service_Types", function(err,result){ 
+    if(!err){
+		res.send(JSON.stringify(result));
+		
+	}else{
+		next(err);
+	}
+  });
+});
+
 
 app.use(function(req,res){
   res.status(404);
