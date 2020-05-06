@@ -89,7 +89,7 @@ function displayServiceTypeTable(){
 			  var response = JSON.parse(req.responseText);
 			  if(response.length<1){
 				var row = table.insertRow();
-				row.innerHTML = "<th>Table is empty</th>"
+				row.innerHTML = "<th>Table is empty</th>";
 				return;
 			  }
 			  
@@ -233,3 +233,4 @@ function bindButtons(){
 }
 document.addEventListener('DOMContentLoaded', bindButtons);
 displayTourTypeTable();
+displayServiceTypeTable();
