@@ -65,7 +65,6 @@ function bindEditTourType(item){
 		var path = '/editTourType?id='+item.id+'&label='+item.label+'&meet_time='+item.meet_time+'&cost='+item.cost;
 		req.open('GET', path, false);
 	    req.addEventListener('load',function(){
-			clearMessages();
 			if(req.status >= 200 && req.status < 400){
 				location.href = path;
 			} else {
