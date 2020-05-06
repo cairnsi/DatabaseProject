@@ -60,7 +60,7 @@ function displayServiceTypeTable(){
 			  
 			  table.innerHTML="";
 			  var row = table.insertRow();
-			  row.innerHTML = "<th>Service Type</th><th>Description</th><th>Cost</th>";
+			  row.innerHTML = "<th>Service Types</th><th>Description</th><th>Cost</th>";
 			  for(var i = 0;i<response.length;i++){
 				  var item = response[i];
 				  row = table.insertRow();
