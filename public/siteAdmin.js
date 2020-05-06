@@ -110,7 +110,7 @@ function displayServiceTypeTable(){
 				  var btn = document.createElement('button');
 				  btn.setAttribute('class', 'editTourType');
 				  btn.innerHTML = 'Edit';
-				  //btn.onclick =  bindEditTourType(item);
+				  btn.onclick =  bindEditServiceType(item);
 				  row.appendChild(btn);
 				  
 				  var btn = document.createElement('button');
@@ -139,11 +139,11 @@ function bindEditServiceType(item){
 		var req = new XMLHttpRequest();
 		if(!item.label)
 			item.label = "";
-		if(!item.meet_time)
-			item.meet_time="";
+		if(!item.description)
+			item.description="";
 		if(!item.cost)
 			item.cost="";
-		var path = '/editTourType?id='+item.id+'&label='+item.label+'&meet_time='+item.meet_time+'&cost='+item.cost;
+		var path = '/editServiceType?id='+item.id+'&label='+item.label+'&description='+item.description+'&cost='+item.cost;
 		req.open('GET', path, false);
 	    req.addEventListener('load',function(){
 			if(req.status >= 200 && req.status < 400){
