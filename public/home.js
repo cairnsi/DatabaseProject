@@ -10,45 +10,25 @@ function displayTourTypeTable(){
 			  if(response.length<1){
 				var row = table.insertRow();
 				row.innerHTML = "<th>Table is empty</th>"
-				document.getElementById('tableReset').style.visibility = "hidden";
 				return;
 			  }
-			  document.getElementById('tableReset').style.visibility = "visible";
 			  
 			  table.innerHTML="";
 			  var row = table.insertRow();
-			  row.innerHTML = "<th>Name</th><th>Reps</th><th>Weight</th><th>Unit</th><th>Date</th>";
+			  row.innerHTML = "<th>Tour</th><th>Meet Time</th><th>Cost</th>";
 			  for(var i = 0;i<response.length;i++){
 				  var item = response[i];
 				  row = table.insertRow();
 				  var cell = cell = row.insertCell();
-				  cell.textContent = item.name;
+				  cell.textContent = item.label;
 				  cell.style.width = "15%";
 				  cell = row.insertCell();
-				  cell.textContent = item.reps;
+				  cell.textContent = item.meet_time;
 				  cell.style.width = "15%";
 				  cell = row.insertCell();
-				  cell.textContent = item.weight;
+				  cell.textContent = item.cost;
 				  cell.style.width = "15%";
 				  cell = row.insertCell();
-				  cell.textContent = item.lbs;
-				  cell.style.width = "15%";
-				  cell = row.insertCell();
-				  cell.textContent = item.date;
-				  cell.style.width = "15%";
-				  
-				  var btn = document.createElement('button');
-				  btn.setAttribute('class', 'edit');
-				  btn.innerHTML = 'Edit';
-				  btn.onclick =  bindEdit(item);
-				  row.appendChild(btn);
-				  
-				  btn = document.createElement('button');
-				  btn.setAttribute('class', 'delete');
-				  btn.innerHTML = 'Delete';
-				  btn.style.marginLeft = "2px"
-				  btn.onclick =  bindDelete(item.id);
-				  row.appendChild(btn);
 				  
 				  
 				  cell = row.insertCell();

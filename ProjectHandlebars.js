@@ -105,6 +105,17 @@ app.get('/createAccount',function(req,res){
    res.render('createAccount',context);
 });
 
+app.get('/tourTypeTable', function(req,res){
+  pool.query("Select * FROM Guided_Tour_Types", function(err,result){ 
+    if(!err){
+		res.send(JSON.stringify(result));
+		
+	}else{
+		next(err);
+	}
+  });
+});
+
 
 app.use(function(req,res){
   res.status(404);
