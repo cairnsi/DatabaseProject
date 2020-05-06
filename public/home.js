@@ -25,7 +25,7 @@ function displayTourTypeTable(){
 				  cell.textContent = item.meet_time;
 				  cell.style.width = "15%";
 				  cell = row.insertCell();
-				  cell.textContent = item.cost/100;
+				  cell.textContent = '$'+(item.cost/100);
 				  cell.style.width = "15%";
 				  
 				  
