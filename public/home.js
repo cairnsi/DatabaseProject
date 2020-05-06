@@ -3,9 +3,9 @@ function displayTourTypeTable(){
 	req.open('GET', '/tourTypeTable', true);
 	  req.setRequestHeader('Content-Type', 'application/json');
 	  req.addEventListener('load',function(){
-		  document.getElementById('toursTypesTable').innerHTML="";
-		  var table = document.getElementById('toursTypesTable');
 		  if(req.status >= 200 && req.status < 400){
+			  document.getElementById('toursTypesTable').innerHTML="";
+			  var table = document.getElementById('toursTypesTable');
 			  var response = JSON.parse(req.responseText);
 			  if(response.length<1){
 				var row = table.insertRow();
@@ -35,8 +35,8 @@ function displayTourTypeTable(){
 				  cell.id = "rowId";
 			  }
 		  }else{
-			  var row = table.insertRow();
-			  row.innerHTML = "<th>Did not get data for Table</th>"
+			  //var row = table.insertRow();
+			  //row.innerHTML = "<th>Did not get data for Table</th>"
 		  }
 	  });
 	  req.send();
