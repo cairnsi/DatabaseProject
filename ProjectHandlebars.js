@@ -80,7 +80,25 @@ app.get('/editTourType',function(req,res){
 
 app.get('/editServiceType',function(req,res){
   var context = {};
-   res.render('editServiceType',context);
+  if(req.query.id){
+	if(!req.query.label)
+		req.query.label = "";
+	if(!req.query.description)
+		req.query.description="";
+	if(!req.query.cost)
+		req.query.cost="";
+	
+	context.label = req.query.label;
+	context.description = req.query.description;
+	context.cost = req.query.cost/100;
+	context.id = req.query.id;
+	
+	res.render('editServiceType',context);
+	return;
+  }
+  res.type('plain/text');
+  res.status(500);
+  res.render('500');
 });
 
 app.get('/updateSpecificTours',function(req,res){

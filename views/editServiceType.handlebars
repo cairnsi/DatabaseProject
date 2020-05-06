@@ -5,19 +5,19 @@
 		<ul style="list-style-type: none;">
 			<li>
 				<label>Name: </label>
-				<input type="text" name="name" id="name" value="Full Service">
+				<input type="text" name="name" id="name" value='{{label}}'>
 			</li>
 			<li>
 				<label>Description</label>
 			</li>
 			<li>
 				<textarea name="description" rows="10" cols="30">
-					Includes Fork and Shock service. Also includes drivetrain maintenance, brake maintenance and bearings inspection.
+					{{description}}
 				</textarea>
 			</li>
 			<li>
 				<label>Cost: </label>
-				<input type="text" name="cost" id="cost" value= "$250.00">
+				<input type="text" name="cost" id="cost" value= {{cost}}>
 			</li>
 			<li>
 				<input type="hidden" name="id" id="id" value={{id}}>
