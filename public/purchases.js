@@ -88,6 +88,7 @@ function bindFilter(){
 		  item.last_name = lname;
 	  }
 	  displayPurchaseTable(item);
+	  event.preventDefault();
 	});
 }
 
