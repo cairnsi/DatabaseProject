@@ -228,8 +228,9 @@ app.get('/customersTable', function(req,res){
 		  values.push(req.query.last_name);
 	  }
   }*/
-  query+= " WHERE Customers.first_name = ?";
+  query+= " WHERE Customers.first_name = ? AND Customers.last_name = ?";
   values.push("kevin");
+  values.push("hart");
 	  
   pool.query(query, values,function(err,result){ 
     if(!err){
