@@ -204,33 +204,33 @@ app.get('/purchasesTable', function(req,res){
 app.get('/customersTable', function(req,res){
   var values = [];
   var query = "SELECT first_name, last_name, street, city, state, zip, phone, emergency_phone FROM Customers";
-  /*if(req.query.phone || req.query.first_name || req.query.last_name){
+  if(req.query.phone || req.query.first_name || req.query.last_name){
 	  query+= " WHERE";
-	  var addAnd = false;
+	  var addAnd = 0;
 	  if(req.query.phone){
 		  query+= " phone = ?"
 		  values.push(req.query.phone);
-		  addAnd = true;
+		  addAnd = 1;
 	  }
 	  if(req.query.first_name){
-		  if(addAnd == true){
+		  if(addAnd == 1){
 			  query += " AND";
 		  }
 		  query+= " Customers.first_name = ?"
 		  values.push(req.query.first_name);
-		  addAnd = true;
+		  addAnd = 0;
 	  }
 	  if(req.query.last_name){
-		  if(addAnd == true){
+		  if(addAnd == 1){
 			  query += " AND";
 		  }
 		  query+= " Customers.last_name = ?"
 		  values.push(req.query.last_name);
 	  }
-  }*/
-  query+= " WHERE Customers.first_name = ? AND Customers.last_name = ?";
+  }
+  /*query+= " WHERE Customers.first_name = ? AND Customers.last_name = ?";
   values.push("kevin");
-  values.push("hart");
+  values.push("hart");*/
 	  
   pool.query(query, values,function(err,result){ 
     if(!err){
