@@ -82,11 +82,11 @@ function bindFilter(){
 	var serviceElements = document.getElementById('filter').addEventListener('click', function(event){
 	  event.preventDefault();
 	  var item = {};
-	  var date = document.getElementById('purchaseDate').value;
+	  var phone = document.getElementById('phone').value;
 	  var fname = document.getElementById('fname').value;
 	  var lname = document.getElementById('lname').value;
 	  if(date!=""){
-		  item.date = date;
+		  item.phone = phone;
 	  }
 	  if(fname!=""){
 		  item.first_name = fname;
@@ -94,7 +94,7 @@ function bindFilter(){
 	  if(lname!=""){
 		  item.last_name = lname;
 	  }
-	  displayPurchaseTable(item);
+	  displayCustomersTable(item);
 	});
 }
 
