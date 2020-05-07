@@ -192,6 +192,35 @@ app.get('/purchasesTable', function(req,res){
   });
 });
 
+app.get('/customersTable', function(req,res){
+  var values = [];
+  var query = "SELECT first_name, last_name, street, city, state, zip, phone, emergency_phone FROM Customers";
+  if(req.query.phone || req.query.first_name || req.query.last_name){
+	  query+= " WHERE ";
+	  if(req.query.phone){
+		  query+= " phone = ?"
+		  values.push(req.query.phone);
+	  }
+	  if(req.query.first_name){
+		  query+= " Customers.first_name = ?"
+		  values.push(req.query.first_name);
+	  }
+	  if(req.query.last_name){
+		  query+= " Customers.last_name = ?"
+		  values.push(req.query.last_name);
+	  }
+  }
+	  
+  pool.query(query, values,function(err,result){ 
+    if(!err){
+		res.send(JSON.stringify(result));
+		
+	}else{
+		next(err);
+	}
+  });
+});
+
 
 app.use(function(req,res){
   res.status(404);
