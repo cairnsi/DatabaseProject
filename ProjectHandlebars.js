@@ -204,8 +204,8 @@ app.get('/purchasesTable', function(req,res){
 app.get('/customersTable', function(req,res){
   var values = [];
   var query = "SELECT first_name, last_name, street, city, state, zip, phone, emergency_phone FROM Customers";
-  if(req.query.phone || req.query.first_name || req.query.last_name){
-	  query+= " WHERE ";
+  /*if(req.query.phone || req.query.first_name || req.query.last_name){
+	  query+= " WHERE";
 	  var addAnd = false;
 	  if(req.query.phone){
 		  query+= " phone = ?"
@@ -227,7 +227,9 @@ app.get('/customersTable', function(req,res){
 		  query+= " Customers.last_name = ?"
 		  values.push(req.query.last_name);
 	  }
-  }
+  }*/
+  query+= " WHERE Customers.first_name = ?";
+  values.push("kevin");
 	  
   pool.query(query, values,function(err,result){ 
     if(!err){
