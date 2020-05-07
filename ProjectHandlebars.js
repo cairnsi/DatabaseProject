@@ -168,15 +168,24 @@ app.get('/purchasesTable', function(req,res){
   var query = "SELECT Purchases.id, Purchases.purchase_date, Customers.first_name, Customers.last_name FROM Purchases JOIN Customers ON Purchases.customer_id = Customers.id";
   if(req.query.date || req.query.first_name || req.query.last_name){
 	  query+= " WHERE ";
+	  var addAnd = false;
 	  if(req.query.date){
 		  query+= " Purchases.purchase_date = ?"
 		  values.push(req.query.date);
+		  addAnd = true;
 	  }
 	  if(req.query.first_name){
+		  if(addAnd){
+			  query+= " AND";
+		  }
 		  query+= " Customers.first_name = ?"
 		  values.push(req.query.first_name);
+		  addAnd = true;
 	  }
 	  if(req.query.last_name){
+		  if(addAnd){
+			  query+= " AND";
+		  }
 		  query+= " Customers.last_name = ?"
 		  values.push(req.query.last_name);
 	  }
@@ -197,15 +206,24 @@ app.get('/customersTable', function(req,res){
   var query = "SELECT first_name, last_name, street, city, state, zip, phone, emergency_phone FROM Customers";
   if(req.query.phone || req.query.first_name || req.query.last_name){
 	  query+= " WHERE ";
+	  var addAnd = false;
 	  if(req.query.phone){
 		  query+= " phone = ?"
 		  values.push(req.query.phone);
+		  addAnd = true;
 	  }
 	  if(req.query.first_name){
+		  if(addAnd){
+			  query += " AND";
+		  }
 		  query+= " Customers.first_name = ?"
 		  values.push(req.query.first_name);
+		  addAnd = true;
 	  }
 	  if(req.query.last_name){
+		  if(addAnd){
+			  query += " AND";
+		  }
 		  query+= " Customers.last_name = ?"
 		  values.push(req.query.last_name);
 	  }
