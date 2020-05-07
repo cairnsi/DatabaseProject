@@ -72,7 +72,24 @@ function bindViewPurchase(item){
 	}
 }
 
-
+function bindFilter(){
+	var serviceElements = document.getElementById('filter').addEventListener('click', function(event){
+	  var item = {};
+	  var date = document.getElementById('purchaseDate').value();
+	  var fname = document.getElementById('fname').value();
+	  var lname = document.getElementById('lname').value();
+	  if(date!=""){
+		  item.date = date;
+	  }
+	  if(fname!=""){
+		  item.first_name = fname;
+	  }
+	  if(lname!=""){
+		  item.last_name = lname;
+	  }
+	  displayPurchaseTable(item);
+	});
+}
 
 
 function bindButtons(){
@@ -99,3 +116,4 @@ function bindButtons(){
 //document.addEventListener('DOMContentLoaded', bindButtons);
 var input={};
 displayPurchaseTable(input);
+bindFilter();
