@@ -74,6 +74,7 @@ function bindViewPurchase(item){
 
 function bindFilter(){
 	var serviceElements = document.getElementById('filter').addEventListener('click', function(event){
+	  event.preventDefault();
 	  var item = {};
 	  var date = document.getElementById('purchaseDate').value();
 	  var fname = document.getElementById('fname').value();
@@ -88,7 +89,6 @@ function bindFilter(){
 		  item.last_name = lname;
 	  }
 	  displayPurchaseTable(item);
-	  event.preventDefault();
 	});
 }
 
