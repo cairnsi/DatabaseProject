@@ -182,7 +182,7 @@ app.get('/purchasesTable', function(req,res){
 	  }
   }
 	  
-  pool.query("SELECT Purchases.purchase_date, Customers.first_name, Customers.last_name FROM Purchases JOIN Customers ON Purchases.customer_id = Customers.id", values,function(err,result){ 
+  pool.query(query, values,function(err,result){ 
     if(!err){
 		res.send(JSON.stringify(result));
 		
