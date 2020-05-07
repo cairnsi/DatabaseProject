@@ -85,7 +85,7 @@ function bindFilter(){
 	  var phone = document.getElementById('phone').value;
 	  var fname = document.getElementById('fname').value;
 	  var lname = document.getElementById('lname').value;
-	  if(date!=""){
+	  if(phone!=""){
 		  item.phone = phone;
 	  }
 	  if(fname!=""){
