@@ -82,4 +82,6 @@ function bindButtons(){
 	}
 	
 }
-document.addEventListener('DOMContentLoaded', bindButtons);
+//document.addEventListener('DOMContentLoaded', bindButtons);
+var input={};
+displayTourTypeTable(input);
