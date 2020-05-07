@@ -69,8 +69,6 @@ function bindEditTourType(item){
 				location.href = path;
 			} else {
 				console.log("Error in network request: " + req.statusText);
-				document.getElementById('addMessage').textContent="Could Not Edit";
-				document.getElementById('addMessage').style.color='red';
 			}
 		});
 	    req.send();
@@ -150,8 +148,6 @@ function bindEditServiceType(item){
 				location.href = path;
 			} else {
 				console.log("Error in network request: " + req.statusText);
-				document.getElementById('addMessage').textContent="Could Not Edit";
-				document.getElementById('addMessage').style.color='red';
 			}
 		});
 	    req.send();

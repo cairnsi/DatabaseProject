@@ -1,4 +1,4 @@
-function displayTourTypeTable(input){
+function displayPurchaseTableTable(input){
 	var query = "/purchasesTable?";
 	if(input.date){
 		query+="date="+input.date+"+";
@@ -39,7 +39,7 @@ function displayTourTypeTable(input){
 				  var btn = document.createElement('button');
 				  btn.setAttribute('class', 'view');
 				  btn.innerHTML = 'View';
-				  //btn.onclick =  bindEditTourType(item);
+				  btn.onclick =  bindViewPurchase(item);
 				  row.appendChild(btn);
 				  
 				  cell = row.insertCell();
@@ -56,7 +56,21 @@ function displayTourTypeTable(input){
 	  
 }
 
-
+function bindEditTourType(item){
+	return function(){
+		var req = new XMLHttpRequest();
+		var path = '/viewPurchase?id='+item.id;
+		req.open('GET', path, false);
+	    req.addEventListener('load',function(){
+			if(req.status >= 200 && req.status < 400){
+				location.href = path;
+			} else {
+				console.log("Error in network request: " + req.statusText);
+			}
+		});
+	    req.send();
+	}
+}
 
 
 
@@ -84,4 +98,4 @@ function bindButtons(){
 }
 //document.addEventListener('DOMContentLoaded', bindButtons);
 var input={};
-displayTourTypeTable(input);
+displayPurchaseTable(input);
