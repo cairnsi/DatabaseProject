@@ -76,9 +76,9 @@ function bindFilter(){
 	var serviceElements = document.getElementById('filter').addEventListener('click', function(event){
 	  event.preventDefault();
 	  var item = {};
-	  var date = document.getElementById('purchaseDate').value();
-	  var fname = document.getElementById('fname').value();
-	  var lname = document.getElementById('lname').value();
+	  var date = document.getElementById('purchaseDate').value;
+	  var fname = document.getElementById('fname').value;
+	  var lname = document.getElementById('lname').value;
 	  if(date!=""){
 		  item.date = date;
 	  }
