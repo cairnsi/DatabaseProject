@@ -165,6 +165,22 @@ app.get('/serviceTypesTable', function(req,res){
 
 app.get('/purchasesTable', function(req,res){
   var values = [];
+  var query = "SELECT Purchases.purchase_date, Customers.first_name, Customers.last_name FROM Purchases JOIN Customers ON Purchases.customer_id = Customers.id";
+  if(req.query.date || req.query.first_name || req.query.last_name){
+	  query+= " WHERE ";
+	  if(req.query.date){
+		  query+= " Purchases.purchase_date = ?"
+		  values.push(req.query.date);
+	  }
+	  if(req.query.first_name){
+		  query+= " Customers.first_name = ?"
+		  values.push(req.query.first_name);
+	  }
+	  if(req.query.last_name){
+		  query+= " Customers.last_name = ?"
+		  values.push(req.query.last_name);
+	  }
+  }
 	  
   pool.query("SELECT Purchases.purchase_date, Customers.first_name, Customers.last_name FROM Purchases JOIN Customers ON Purchases.customer_id = Customers.id", values,function(err,result){ 
     if(!err){
