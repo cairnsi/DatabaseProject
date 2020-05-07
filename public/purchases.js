@@ -1,5 +1,5 @@
 function displayTourTypeTable(input){
-	var query = "/purchasesTable?"
+	var query = "/purchasesTable?";
 	if(input.date){
 		query+="date="+input.date+"+";
 	}
@@ -8,6 +8,7 @@ function displayTourTypeTable(input){
 	}
 	if(input.last_name){
 		query+="last_name"+input.last_name+"+";
+	}
 	var req = new XMLHttpRequest();
 	req.open('GET', query, true);
 	  req.setRequestHeader('Content-Type', 'application/json');
