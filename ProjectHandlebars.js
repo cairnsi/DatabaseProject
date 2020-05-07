@@ -165,7 +165,7 @@ app.get('/serviceTypesTable', function(req,res){
 
 app.get('/purchasesTable', function(req,res){
   var values = [];
-  var query = "SELECT Purchases.purchase_date, Customers.first_name, Customers.last_name FROM Purchases JOIN Customers ON Purchases.customer_id = Customers.id";
+  var query = "SELECT Purchases.id, Purchases.purchase_date, Customers.first_name, Customers.last_name FROM Purchases JOIN Customers ON Purchases.customer_id = Customers.id";
   if(req.query.date || req.query.first_name || req.query.last_name){
 	  query+= " WHERE ";
 	  if(req.query.date){
