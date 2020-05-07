@@ -25,11 +25,15 @@ function displayPurchaseTable(input){
 			  
 			  table.innerHTML="";
 			  var row = table.insertRow();
-			  row.innerHTML = "<th>Purchase Date</th><th>First Name</th><th>Last Name</th>";
+			  row.innerHTML = "<th>Purchase ID</th><th>Purchase Date</th><th>First Name</th><th>Last Name</th>";
 			  for(var i = 0;i<response.length;i++){
 				  var item = response[i];
 				  row = table.insertRow();
 				  var cell = row.insertCell();
+				  cell.textContent = item.id;
+				  cell.id = "rowId";
+				  
+				  cell = row.insertCell();
 				  cell.textContent = item.purchase_date;
 				  cell = row.insertCell();
 				  cell.textContent = item.first_name;
@@ -41,11 +45,6 @@ function displayPurchaseTable(input){
 				  btn.innerHTML = 'View';
 				  btn.onclick =  bindViewPurchase(item);
 				  row.appendChild(btn);
-				  
-				  cell = row.insertCell();
-				  cell.textContent = item.id;
-				  cell.style.visibility = "hidden";
-				  cell.id = "rowId";
 			  }
 		  }else{
 			  //var row = table.insertRow();
