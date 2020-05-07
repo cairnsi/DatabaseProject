@@ -213,7 +213,7 @@ app.get('/customersTable', function(req,res){
 		  addAnd = true;
 	  }
 	  if(req.query.first_name){
-		  if(addAnd){
+		  if(addAnd == true){
 			  query += " AND";
 		  }
 		  query+= " Customers.first_name = ?"
@@ -221,7 +221,7 @@ app.get('/customersTable', function(req,res){
 		  addAnd = true;
 	  }
 	  if(req.query.last_name){
-		  if(addAnd){
+		  if(addAnd == true){
 			  query += " AND";
 		  }
 		  query+= " Customers.last_name = ?"
