@@ -14,8 +14,8 @@ function displayTourTypeTable(input){
 	  req.setRequestHeader('Content-Type', 'application/json');
 	  req.addEventListener('load',function(){
 		  if(req.status >= 200 && req.status < 400){
-			  document.getElementById('toursTypesTable').innerHTML="";
-			  var table = document.getElementById('toursTypesTable');
+			  document.getElementById('purchasesTable').innerHTML="";
+			  var table = document.getElementById('purchasesTable');
 			  var response = JSON.parse(req.responseText);
 			  if(response.length<1){
 				var row = table.insertRow();
