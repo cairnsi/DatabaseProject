@@ -163,6 +163,19 @@ app.get('/serviceTypesTable', function(req,res){
   });
 });
 
+app.get('/purchasesTable', function(req,res){
+  var values = [];
+	  
+  pool.query("SELECT Purchases.purchase_date, Customers.first_name, Customers.last_name FROM Purchases JOIN Customers ON Purchases.customer_id = Customers.id", values,function(err,result){ 
+    if(!err){
+		res.send(JSON.stringify(result));
+		
+	}else{
+		next(err);
+	}
+  });
+});
+
 
 app.use(function(req,res){
   res.status(404);
