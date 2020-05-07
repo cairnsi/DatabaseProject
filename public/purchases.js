@@ -1,4 +1,4 @@
-function displayPurchaseTableTable(input){
+function displayPurchaseTable(input){
 	var query = "/purchasesTable?";
 	if(input.date){
 		query+="date="+input.date+"+";
@@ -56,7 +56,7 @@ function displayPurchaseTableTable(input){
 	  
 }
 
-function bindEditTourType(item){
+function bindViewPurchase(item){
 	return function(){
 		var req = new XMLHttpRequest();
 		var path = '/viewPurchase?id='+item.id;
