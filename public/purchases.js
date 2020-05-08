@@ -45,6 +45,11 @@ function displayPurchaseTable(input){
 				  btn.innerHTML = 'View';
 				  btn.onclick =  bindViewPurchase(item);
 				  row.appendChild(btn);
+				  
+				  var btn = document.createElement('button');
+				  btn.setAttribute('class', 'delete');
+				  btn.innerHTML = 'Delete';
+				  row.appendChild(btn);
 			  }
 		  }else{
 			  //var row = table.insertRow();
