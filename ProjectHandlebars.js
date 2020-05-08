@@ -218,7 +218,7 @@ app.get('/customersTable', function(req,res){
 		  }
 		  query+= " Customers.first_name = ?"
 		  values.push(req.query.first_name);
-		  addAnd = 0;
+		  addAnd = 1;
 	  }
 	  if(req.query.last_name){
 		  if(addAnd == 1){
