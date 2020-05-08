@@ -131,7 +131,7 @@ app.get('/editCustomer',function(req,res){
 	context.emergency_phone = req.query.emergency_phone;
 	context.id = req.query.id;
 	
-	res.render('editServiceType',context);
+	res.render('editCustomer',context);
 	return;
   }else{
 	res.render('customers',context);
