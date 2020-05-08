@@ -101,6 +101,47 @@ app.get('/editServiceType',function(req,res){
   res.render('500');
 });
 
+app.get('/editCustomer',function(req,res){
+  var context = {};
+  if(req.query.id){
+	if(!req.query.first_name)
+		req.query.first_name = "";
+	if(!req.query.last_name)
+		req.query.last_name="";
+	if(!req.query.street)
+		req.query.street="";
+	if(!req.query.city)
+		req.query.city="";
+	if(!req.query.state)
+		req.query.state="";
+	if(!req.query.zip)
+		req.query.zip="";
+	if(!req.query.phone)
+		req.query.phone="";
+	if(!req.query.emergency_phone)
+		req.query.emergency_phone="";
+	
+	context.first_name = req.query.first_name;
+	context.last_name = req.query.last_name;
+	context.street = req.query.street;
+	context.city = req.query.city;
+	context.state = req.query.state;
+	context.zip = req.query.zip;
+	context.phone = req.query.phone;
+	context.emergency_phone = req.query.emergency_phone;
+	context.id = req.query.id;
+	
+	res.render('editServiceType',context);
+	return;
+  }else{
+	res.render('customers',context);
+	return;
+  }
+  res.type('plain/text');
+  res.status(500);
+  res.render('500');
+});
+
 app.get('/updateSpecificTours',function(req,res){
   var context = {};
    res.render('updateSpecificTours',context);

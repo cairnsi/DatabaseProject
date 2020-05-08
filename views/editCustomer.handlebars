@@ -1,27 +1,29 @@
 {{>header}}
+<h3 id="status"></h3>
 <form>
 	<fieldset>
-		<legend>Create Account</legend>
+		<legend>Edit Customer</legend>
 		<ul style="list-style-type: none;">
 			<li>
 				<label>First Name: </label>
-				<input type="text" id="fname" name="fname">
+				<input type="text" name="first_name" id="first_name" value='{{first_name}}' readonly>
 			</li>
 			<li>
 				<label>Last Name: </label>
-				<input type="text" id="lname" name="lname">
+				<input type="text" name="last_name" id="last_name" value='{{last_name}}' readonly>
 			</li>
 			<li>
 				<label>Street: </label>
-				<input type="text" id="street" name="street">
+				<input type="text" name="street" id="street" value='{{street}}'>
 			</li>
 			<li>
 				<label>City: </label>
-				<input type="text" id="city" name="city">
+				<input type="text" name="city" id="city" value='{{city}}'>
 			</li>
 			<li>
 				<label>State: </label>
 				<select name="state" size="1">
+				 <option value="{{state}}" hidden="hidden" selected="selected">{{state}}</option>
 				  <option value="AK">AK</option>
 				  <option value="AL">AL</option>
 				  <option value="AR">AR</option>
@@ -74,22 +76,24 @@
 				  <option value="WV">WV</option>
 				  <option value="WY">WY</option>
 				</select>
-				</li>
-				<li>
-					<label>Zip: </label>
-					<input type="text" id="zip" name="zip">
-				</li>
-				<li>
-					<label>Phone: </label>
-					<input type="text" id="phone" name="phone">
-				</li>
-				<li>
-					<label>Emergency Phone: </label>
-					<input type="text" id="ephone" name="ephone">
-				</li>
-			
-			<input type="submit" id="tourAddSubmit" value= "Create">
+			</li>
+			<li>
+				<label>Zip: </label>
+				<input type="text" name="zip" id="zip" value='{{zip}}'>
+			</li>
+			<li>
+				<label>Phone: </label>
+				<input type="text" name="phone" id="phone" value='{{phone}}'>
+			</li>
+			<li>
+				<label>Emergency Phone: </label>
+				<input type="text" name="emergency_phone" id="emergency_phone" value='{{emergency_phone}}'>
+			</li>
+			<li>
+				<input type="hidden" name="id" id="id" value={{id}} readonly>
+			</li>
+			<input type="submit" id="editSubmit" value = "Change" >
 		</ul>
 	</fieldset>
 </form>
- <script src="add.js"></script>
+ <script src="edit.js"></script>

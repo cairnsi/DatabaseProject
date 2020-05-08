@@ -50,7 +50,7 @@ function displayCustomersTable(input){
 				  var btn = document.createElement('button');
 				  btn.setAttribute('class', 'edit');
 				  btn.innerHTML = 'Edit';
-				  //btn.onclick =  bindViewPurchase(item);
+				  btn.onclick =  bindEditCustomer(item);
 				  row.appendChild(btn);
 			  }
 		  }else{
@@ -62,10 +62,10 @@ function displayCustomersTable(input){
 	  
 }
 
-function bindViewPurchase(item){
+function bindEditCustomer(item){
 	return function(){
 		var req = new XMLHttpRequest();
-		var path = '/viewPurchase?id='+item.id;
+		var path = '/editCustomer?id='+item.id+"&first_name="+item.first_name+"&last_name="+item.last_name+"&street="+item.street+"&city="+item.city+"&state="+item.state+"&zip="+item.zip+"&phone="+item.phone+"&emergency_phone="+item.emergency_phone;
 		req.open('GET', path, false);
 	    req.addEventListener('load',function(){
 			if(req.status >= 200 && req.status < 400){
