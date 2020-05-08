@@ -15,7 +15,7 @@ function displayTourTypeTable(){
 			  
 			  table.innerHTML="";
 			  var row = table.insertRow();
-			  row.innerHTML = "<th>Tour</th><th>Meet Time</th><th>Cost</th>";
+			  row.innerHTML = "<th>Tour</th><th>Meet Time</th><th>Cost</th><th>Active<\th>";
 			  for(var i = 0;i<response.length;i++){
 				  var item = response[i];
 				  row = table.insertRow();
@@ -27,6 +27,11 @@ function displayTourTypeTable(){
 				  cell = row.insertCell();
 				  cell.textContent = '$'+(item.cost/100);
 				  cell.style.width = "15%";
+				  cell = row.insertCell();
+				  if(item.active==1)
+					cell.textContent = "true";
+				  else
+					cell.textContent = "false";
 				  
 				  var btn = document.createElement('button');
 				  btn.setAttribute('class', 'editTourType');

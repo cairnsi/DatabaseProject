@@ -17,6 +17,7 @@ CREATE TABLE Service_Types(
 	label varchar(20) NOT NULL,
 	cost int NOT NULL,
 	description varchar(255),
+	active boolean DEFAULT true,
 	PRIMARY KEY(id),
 	CONSTRAINT UNIQUE(label)
 );
@@ -26,6 +27,7 @@ CREATE TABLE Guided_Tour_Types(
 	label varchar(100) NOT NULL,
 	meet_time time NOT NULL,
 	cost int NOT NULL,
+	active boolean DEFAULT true,
 	PRIMARY KEY(id),
 	CONSTRAINT UNIQUE(label)
 );
