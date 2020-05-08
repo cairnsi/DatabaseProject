@@ -244,7 +244,7 @@ app.get('/purchasesTable', function(req,res){
 
 app.get('/customersTable', function(req,res){
   var values = [];
-  var query = "SELECT first_name, last_name, street, city, state, zip, phone, emergency_phone FROM Customers";
+  var query = "SELECT id, first_name, last_name, street, city, state, zip, phone, emergency_phone FROM Customers";
   if(req.query.phone || req.query.first_name || req.query.last_name){
 	  query+= " WHERE";
 	  var addAnd = false;
