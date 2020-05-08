@@ -1,13 +1,13 @@
 function displayCustomersTable(input){
 	var query = "/customersTable?";
 	if(input.first_name){
-		query+="first_name="+input.first_name+"+";
+		query+="first_name="+input.first_name+"&";
 	}
 	if(input.last_name){
-		query+="last_name="+input.last_name+"+";
+		query+="last_name="+input.last_name+"&";
 	}
 	if(input.phone){
-		query+="phone="+input.phone+"+";
+		query+="phone="+input.phone+"&";
 	}
 	var req = new XMLHttpRequest();
 	req.open('GET', query, true);
