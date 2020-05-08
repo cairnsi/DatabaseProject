@@ -1,13 +1,13 @@
 function displayPurchaseTable(input){
 	var query = "/purchasesTable?";
 	if(input.date){
-		query+="date="+input.date+"+";
+		query+="date="+input.date+"&";
 	}
 	if(input.first_name){
-		query+="first_name="+input.first_name+"+";
+		query+="first_name="+input.first_name+"&";
 	}
 	if(input.last_name){
-		query+="last_name="+input.last_name+"+";
+		query+="last_name="+input.last_name+"&";
 	}
 	var req = new XMLHttpRequest();
 	req.open('GET', query, true);
