@@ -15,7 +15,7 @@ function displayTourTypeTable(){
 			  
 			  table.innerHTML="";
 			  var row = table.insertRow();
-			  row.innerHTML = "<th>Tour</th><th>Meet Time</th><th>Cost</th><th>Active<\th>";
+			  row.innerHTML = "<th>Tour</th><th>Meet Time</th><th>Cost</th><th>Active</th>";
 			  for(var i = 0;i<response.length;i++){
 				  var item = response[i];
 				  row = table.insertRow();
@@ -41,7 +41,7 @@ function displayTourTypeTable(){
 				  
 				  var btn = document.createElement('button');
 				  btn.setAttribute('class', 'removeTourType');
-				  btn.innerHTML = 'Remove';
+				  btn.innerHTML = 'Change Active State';
 				  //btn.onclick =  bindEdit(item);
 				  row.appendChild(btn);
 				  
@@ -98,7 +98,7 @@ function displayServiceTypeTable(){
 			  
 			  table.innerHTML="";
 			  var row = table.insertRow();
-			  row.innerHTML = "<th>Service Types</th><th>Description</th><th>Cost</th>";
+			  row.innerHTML = "<th>Service Types</th><th>Description</th><th>Cost</th><th>Active</th>";
 			  for(var i = 0;i<response.length;i++){
 				  var item = response[i];
 				  row = table.insertRow();
@@ -109,6 +109,11 @@ function displayServiceTypeTable(){
 				  cell = row.insertCell();
 				  cell.textContent = '$'+(item.cost/100);
 				  cell.style.width = "15%";
+				  cell = row.insertCell();
+				  if(item.active==1)
+					cell.textContent = "true";
+				  else
+					cell.textContent = "false";
 				  
 				  var btn = document.createElement('button');
 				  btn.setAttribute('class', 'editTourType');
@@ -118,7 +123,7 @@ function displayServiceTypeTable(){
 				  
 				  var btn = document.createElement('button');
 				  btn.setAttribute('class', 'removeTourType');
-				  btn.innerHTML = 'Remove';
+				  btn.innerHTML = 'Change Active State';
 				  //btn.onclick =  bindEdit(item);
 				  row.appendChild(btn);
 				  
