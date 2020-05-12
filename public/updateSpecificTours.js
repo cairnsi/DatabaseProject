@@ -61,7 +61,7 @@ function bindFilter(){
 	  if(type!=""){
 		  item.type = type;
 	  }
-	  displayPurchaseTable(item);
+	  displayToursTable(item);
 	});
 }
 
