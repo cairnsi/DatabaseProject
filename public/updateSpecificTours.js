@@ -4,7 +4,7 @@ function displayToursTable(input){
 		query+="date="+input.date+"&";
 	}
 	if(input.type){
-		query+="type="+input.type;
+		query+="type="+input.type+"&";
 	}
 	if(input.signedUp){
 		query+="signedUp="+input.signedUp;
