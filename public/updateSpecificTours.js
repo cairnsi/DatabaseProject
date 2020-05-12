@@ -73,7 +73,7 @@ function bindFilter(){
 function bindReset(){
 	var serviceElements = document.getElementById('reset').addEventListener('click', function(event){
 	  document.getElementById('tourDate').value = "";
-	  document.getElementById('Type').value = "NA";
+	  document.getElementById('Type').value = "";
 	  document.getElementById('signedUp').value = "";
 	  event.preventDefault();
 	  var item = {};
