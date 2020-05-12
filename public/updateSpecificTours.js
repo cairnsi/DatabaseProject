@@ -41,8 +41,6 @@ function displayToursTable(input){
 				  }
 			  }
 		  }else{
-			  //var row = table.insertRow();
-			  //row.innerHTML = "<th>Did not get data for Table</th>"
 		  }
 	  });
 	  req.send();
@@ -51,6 +49,24 @@ function displayToursTable(input){
 
 function bindFilter(){
 	var serviceElements = document.getElementById('filter').addEventListener('click', function(event){
+	  event.preventDefault();
+	  var item = {};
+	  var date = document.getElementById('tourDate').value;
+	  var type = document.getElementById('Type').value;
+	  if(date!=""){
+		  item.date = date;
+	  }
+	  if(type!=""){
+		  item.type = type;
+	  }
+	  displayToursTable(item);
+	});
+}
+
+function bindReset(){
+	var serviceElements = document.getElementById('reset').addEventListener('click', function(event){
+	  document.getElementById('tourDate').value = "";
+	  document.getElementById('Type').value = "NA";
 	  event.preventDefault();
 	  var item = {};
 	  var date = document.getElementById('tourDate').value;
@@ -84,6 +100,7 @@ function bindAddButton(){
 }
 document.addEventListener('DOMContentLoaded', bindAddButton);
 document.addEventListener('DOMContentLoaded', bindFilter);
+document.addEventListener('DOMContentLoaded', bindReset);
 
 var input = {};
 displayToursTable(input);
