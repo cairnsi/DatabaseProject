@@ -56,11 +56,15 @@ function bindFilter(){
 	  var item = {};
 	  var date = document.getElementById('tourDate').value;
 	  var type = document.getElementById('Type').value;
+	  var signedUp = document.getElementById('signedUp').value;
 	  if(date!=""){
 		  item.date = date;
 	  }
 	  if(type!=""){
 		  item.type = type;
+	  }
+	  if(type!=""){
+		  item.signedUp = signedUp;
 	  }
 	  displayToursTable(item);
 	});
