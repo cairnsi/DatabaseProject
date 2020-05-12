@@ -49,6 +49,21 @@ function displayToursTable(input){
 	  
 }
 
+function bindFilter(){
+	var serviceElements = document.getElementById('filter').addEventListener('click', function(event){
+	  event.preventDefault();
+	  var item = {};
+	  var date = document.getElementById('tourDate').value;
+	  var type = document.getElementById('Type').value;
+	  if(date!=""){
+		  item.date = date;
+	  }
+	  if(type!=""){
+		  item.type = type;
+	  }
+	  displayPurchaseTable(item);
+	});
+}
 
 function bindAddButton(){
 	var serviceElements = document.getElementById('addSpecificTour').addEventListener('click', function(event){
@@ -68,6 +83,7 @@ function bindAddButton(){
 	});
 }
 document.addEventListener('DOMContentLoaded', bindAddButton);
+document.addEventListener('DOMContentLoaded', bindFilter);
 
 var input = {};
 displayToursTable(input);
