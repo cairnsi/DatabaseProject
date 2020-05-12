@@ -63,7 +63,7 @@ function bindFilter(){
 	  if(type!=""){
 		  item.type = type;
 	  }
-	  if(type!=""){
+	  if(signedUp!=""){
 		  item.signedUp = signedUp;
 	  }
 	  displayToursTable(item);
