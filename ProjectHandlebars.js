@@ -297,6 +297,18 @@ app.get('/toursTable', function(req,res){
 		  }
 		  query+= " Guided_Tour_Types.label = ?"
 		  values.push(req.query.type);
+		  addAnd = true;
+	  }
+	  if(req.query.signedUp){
+		  if(addAnd){
+			  query += " AND";
+		  }
+		  if(req.query.signedUp == "true"){
+			  query+= " signedUp > 0";
+		  }
+		  else{
+			  query+= " signedUp = 0"
+		  }
 	  }
   }
 	  

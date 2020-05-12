@@ -6,6 +6,9 @@ function displayToursTable(input){
 	if(input.type){
 		query+="type="+input.type;
 	}
+	if(input.signedUp){
+		query+="signedUp="+input.signedUp;
+	}
 	var req = new XMLHttpRequest();
 	req.open('GET', query, true);
 	  req.setRequestHeader('Content-Type', 'application/json');
