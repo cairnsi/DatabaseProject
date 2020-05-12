@@ -27,10 +27,6 @@ function displayToursTable(input){
 				  var item = response[i];
 				  row = table.insertRow();
 				  var cell = row.insertCell();
-				  cell.textContent = item.id;
-				  cell.id = "rowId";
-				  
-				  cell = row.insertCell();
 				  cell.textContent = item.label;
 				  cell = row.insertCell();
 				  cell.textContent = item.date;
