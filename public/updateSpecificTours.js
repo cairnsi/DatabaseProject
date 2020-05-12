@@ -33,10 +33,12 @@ function displayToursTable(input){
 				  cell = row.insertCell();
 				  cell.textContent = item.signedUp;
 				  
+				  if(item.signedUp==0){
 				  var btn = document.createElement('button');
 				  btn.setAttribute('class', 'remove');
 				  btn.innerHTML = 'Remove';
 				  row.appendChild(btn);
+				  }
 			  }
 		  }else{
 			  //var row = table.insertRow();
