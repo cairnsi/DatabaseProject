@@ -50,7 +50,7 @@ function displayToursTable(input){
 }
 
 
-function bindButtons(){
+function bindAddButton(){
 	var serviceElements = document.getElementById('addSpecificTour').addEventListener('click', function(event){
 	  var req = new XMLHttpRequest();
 	  var path = '/addSpecificTour';
@@ -67,7 +67,7 @@ function bindButtons(){
 		req.send();
 	});
 }
-//document.addEventListener('DOMContentLoaded', bindButtons);
+document.addEventListener('DOMContentLoaded', bindAddButton);
 
 var input = {};
 displayToursTable(input);
