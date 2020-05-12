@@ -283,7 +283,7 @@ app.get('/customersTable', function(req,res){
 app.get('/toursTable', function(req,res){
   var values = [];
   var query = "SELECT Specific_Tours.id, Guided_Tour_Types.label ,Specific_Tours.date, COUNT(Purchases.id) AS signedUp FROM Specific_Tours LEFT JOIN Purchases_Tours ON Purchases_Tours.tour_id = Specific_Tours.id LEFT JOIN Purchases ON Purchases_Tours.purchase_id = Purchases.id LEFT JOIN Guided_Tour_Types ON Guided_Tour_Types.id = Specific_Tours.type_number GROUP BY Specific_Tours.id";
-  if(req.query.date || req.query.type){
+  if(req.query.date || req.query.type || req.query.signedUp){
 	  query+= " HAVING";
 	  var addAnd = false;
 	  if(req.query.date){
