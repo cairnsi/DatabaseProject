@@ -47,7 +47,7 @@ app.get('/signIn',function(req,res){
 app.post('/signIn', function(req,res,next){
   if(req.body.fname&& req.body.lname){
 	var query = "SELECT id FROM Customers WHERE first_name=? AND last_name = ?";
-	pool.query(query, [[req.body.fname,req.body.lname]],function(err,result){ 
+	pool.query(query, [req.body.fname,req.body.lname],function(err,result){ 
 	  if(!err){
 		if(result.id){
 			req.session.customerId = result.id;
