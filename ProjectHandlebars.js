@@ -6,15 +6,26 @@ var bodyParser = require('body-parser');
 var credentials = require('./credentials.js');
 var request = require('request');
 var mysql = require('mysql');
+var session = require('express-session');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static('public'));
+app.use(session({secret: credentials.sessionpwd}));
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 app.set('port', 3130);
 
+
+function checkSession(req, res){
+	if(!req.session.customerId){
+		var context={};
+		res.render('signIn',context);
+		return true;
+	}
+	return false;
+}
 
 var pool = mysql.createPool({
   connectionLimit : 10,
@@ -28,6 +39,11 @@ var pool = mysql.createPool({
 app.get('/',function(req,res){
   var context = {};
    res.render('home',context);
+});
+
+app.get('/signIn',function(req,res){
+  var context = {};
+   res.render('signIn',context);
 });
 
 app.get('/addTour',function(req,res){
