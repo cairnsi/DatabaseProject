@@ -76,11 +76,13 @@ app.post('/signIn', function(req,res,next){
     });
 	  
 	  
-  }
+  }else{
   
 	var context ={};
 	context.error = "Must enter first and last name";
-	res.render('/signIn',context);
+	res.render('signIn',context);
+	return
+  }
 });
 
 app.get('/addTour',function(req,res){
