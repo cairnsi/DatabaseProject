@@ -74,7 +74,10 @@ app.post('/signIn', function(req,res,next){
 				return;
 			}
 		}else{
-			next(err);
+			var context = {};
+			context.error = "Not a valid user";
+			res.render('signIn',context);
+			return;
 		}
 		
 		
