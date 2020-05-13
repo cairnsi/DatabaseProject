@@ -14,7 +14,7 @@ function displayYourToursTable(){
 			  }
 			  if(response.length<1){
 				var row = table.insertRow();
-				row.innerHTML = "<th>Table is empty</th>";
+				row.innerHTML = "<th>You are not signed up for any tours</th>";
 				return;
 			  }
 			  
