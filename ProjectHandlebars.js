@@ -124,7 +124,7 @@ app.get('/yourTours',function(req,res){
 app.post('/yourTours', function(req,res,next){
   if(req.session.customerId){
 	var query = "SELECT Specific_Tours.id, Guided_Tour_Types.label, Specific_Tours.date, Guided_Tour_Types.meet_time FROM Purchases JOIN Purchases_Tours ON Purchases_Tours.purchase_id = Purchases.id JOIN Specific_Tours ON Specific_Tours.id = Purchases_Tours.tour_id JOIN Guided_Tour_Types ON Guided_Tour_Types.id =Specific_Tours.type_number WHERE Purchases.customer_id = ?";
-	pool.query(query, [req.body.customerId],function(err,result){ 
+	pool.query(query, [req.session.customerId],function(err,result){ 
 	  if(!err){
 		res.json(JSON.stringify(result));
 		
