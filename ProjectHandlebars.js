@@ -54,18 +54,18 @@ app.post('/signIn', function(req,res,next){
 			if(checkSession(req,res)){
 				var context = {};
 				context.success = "Successfully signed in."; 
-				res.render('/signIn',context);
+				res.render('signIn',context);
 				return;
 			}else{
 				var context = {};
 				context.error = "Could not set session";
-				res.render('/signIn',context);
+				res.render('signIn',context);
 				return;
 			}
 		}else{
 			var context = {};
 			context.error = "Not a valid user";
-			res.render('/signIn',context);
+			res.render('signIn',context);
 			return;
 		}
 		
