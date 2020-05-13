@@ -51,6 +51,7 @@ app.post('/signIn', function(req,res,next){
 	  if(!err){
 		if(result[0]){
 			if(result[0].id){
+				req.session.destroy();
 				req.session.customerId = result[0].id;
 				if(checkSession(req,res)){
 					var context = {};
