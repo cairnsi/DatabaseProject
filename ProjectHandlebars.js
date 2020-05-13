@@ -49,24 +49,28 @@ app.post('/signIn', function(req,res,next){
 	var query = "SELECT id FROM Customers WHERE first_name=? AND last_name=?";
 	pool.query(query, [req.body.fname,req.body.lname],function(err,result){ 
 	  if(!err){
-		if(result[0] && result[0].id){
-			req.session.customerId = result[0].id;
-			if(checkSession(req,res)){
-				var context = {};
-				context.success = "Successfully signed in."; 
-				res.render('signIn',context);
-				return;
+		if(result[0]){
+			if(result[0].id){
+				req.session.customerId = result[0].id;
+				if(checkSession(req,res)){
+					var context = {};
+					context.success = "Successfully signed in."; 
+					res.render('signIn',context);
+					return;
+				}else{
+					var context = {};
+					context.error = "Could not set session";
+					res.render('signIn',context);
+					return;
+				}
 			}else{
 				var context = {};
-				context.error = "Could not set session";
+				context.error = "Not a valid user";
 				res.render('signIn',context);
 				return;
 			}
 		}else{
-			var context = {};
-			context.error = "Not a valid user";
-			res.render('signIn',context);
-			return;
+			next(err);
 		}
 		
 		
