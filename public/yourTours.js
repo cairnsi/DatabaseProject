@@ -8,11 +8,11 @@ function displayYourToursTable(){
 			  var table = document.getElementById('yourToursTable');
 			  var response = JSON.parse(req.responseText);
 			  response = JSON.parse(response);
-			  if(response[0].result){
+			  if(response.result){
 				  document.getElementById('error').innerHTML="Please sign in to view your tours";
 				  return;
 			  }
-			  if(response[0].length<1){
+			  if(response.length<1){
 				var row = table.insertRow();
 				row.innerHTML = "<th>Table is empty</th>";
 				return;
