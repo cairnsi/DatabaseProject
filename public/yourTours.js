@@ -49,3 +49,4 @@ function displayYourToursTable(){
 	  req.send();
 	  
 }
+displayYourToursTable();
