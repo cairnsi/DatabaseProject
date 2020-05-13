@@ -7,7 +7,7 @@ function displayYourToursTable(){
 			  document.getElementById('yourToursTable').innerHTML="";
 			  var table = document.getElementById('yourToursTable');
 			  var response = JSON.parse(req.responseText);
-			  if(response.result = "NO USER"){
+			  if(response.result == "NO USER"){
 				  document.getElementById('error').innerHTML="Please sign in to view your tours";
 				  return;
 			  }
