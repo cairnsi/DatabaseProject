@@ -51,7 +51,10 @@ app.post('/signIn', function(req,res,next){
 	  if(!err){
 		if(result[0]){
 			if(result[0].id){
-				req.session.destroy();
+				if(req.session.customerId){
+					req.session.cartTours=[];
+					req.session.cartService=[];
+				}
 				req.session.customerId = result[0].id;
 				if(checkSession(req,res)){
 					var context = {};
