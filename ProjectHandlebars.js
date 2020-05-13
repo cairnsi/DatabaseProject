@@ -19,9 +19,7 @@ app.set('port', 3130);
 
 
 function checkSession(req, res){
-	if(!req.session.customerId){
-		var context={};
-		res.render('signIn',context);
+	if(req.session.customerId){
 		return true;
 	}
 	return false;
@@ -44,6 +42,43 @@ app.get('/',function(req,res){
 app.get('/signIn',function(req,res){
   var context = {};
    res.render('signIn',context);
+});
+
+app.post('/signIn', function(req,res,next){
+  if(req.body.fname&& req.body.lname){
+	var query = "SELECT id FROM Customers WHERE first_name=? AND last_name = ?";
+	pool.query(query, [[req.body.fname,req.body.lname]],function(err,result){ 
+	  if(!err){
+		if(result.id){
+			req.session.customerId = result.id;
+			var context = {};
+			if(checkSession(req,res)){
+				context.success = "Successfully signed in."; 
+				res.render('/signIn',context);
+				return;
+			}else{
+				context.error = "Could not set session";
+				res.render('/signIn',context);
+				return;
+			}
+		}else{
+			context.error = "Not a valid user";
+			res.render('/signIn',context);
+			return;
+		}
+		
+		
+	  }else{
+		next(err);
+	  }
+    });
+	  
+	  
+  }
+  
+	var context ={};
+	context.error = "Must enter first and last name";
+	res.render('/signIn',context);
 });
 
 app.get('/addTour',function(req,res){

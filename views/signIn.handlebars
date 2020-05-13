@@ -1,5 +1,7 @@
 {{>header}}
-<form>
+<h3 id="success">{{success}}</h3>
+<h3 id="error">{{error}}</h3>
+<form action="/signIn" method = "post">
 	<fieldset>
 		<legend>signIn</legend>
 		<ul style="list-style-type: none;">
@@ -11,7 +13,7 @@
 				<label>Last Name: </label>
 				<input type="text" id="lname" name="lname">
 			</li>
-			<input type="submit" id="signIn" value= "signIn">
+			<input type="submit" id="signIn" value= "Sign in">
 		</ul>
 	</fieldset>
 </form>
