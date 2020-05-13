@@ -121,6 +121,27 @@ app.get('/yourTours',function(req,res){
    res.render('yourTours',context);
 });
 
+app.post('/yourTours', function(req,res,next){
+  if(req.session.customerId){
+	var query = "SELECT Specific_Tours.id, Guided_Tour_Types.label, Specific_Tours.date, Guided_Tour_Types.meet_time FROM Purchases JOIN Purchases_Tours ON Purchases_Tours.purchase_id = Purchases.id JOIN Specific_Tours ON Specific_Tours.id = Purchases_Tours.tour_id JOIN Guided_Tour_Types ON Guided_Tour_Types.id =Specific_Tours.type_number WHERE Purchases.customer_id = ?";
+	pool.query(query, [req.body.customerId],function(err,result){ 
+	  if(!err){
+		res.json(JSON.stringify(result));
+		
+	  }else{
+		next(err);
+	  }
+    });
+	  
+	  
+  }else{
+	var data={};
+	data.result = "NO USER";
+	res.json(JSON.stringify(data));
+	return
+  }
+});
+
 app.get('/editTourType',function(req,res){
   var context = {};
   if(req.query.id){
@@ -237,6 +258,8 @@ app.get('/viewPurchase',function(req,res){
   var context = {};
    res.render('viewPurchase',context);
 });
+
+
 
 app.get('/customers',function(req,res){
   var context = {};
