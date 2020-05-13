@@ -49,9 +49,9 @@ app.post('/signIn', function(req,res,next){
 	var query = "SELECT id FROM Customers WHERE first_name=? AND last_name=?";
 	pool.query(query, [req.body.fname,req.body.lname],function(err,result){ 
 	  if(!err){
-		console.log('The solution is: ', result[0]);
-		if(result.id){
-			req.session.customerId = result.id;
+		console.log('The solution is: ', result[0].id);
+		if(result[0].id){
+			req.session.customerId = result[0].id;
 			if(checkSession(req,res)){
 				var context = {};
 				context.success = "Successfully signed in."; 
