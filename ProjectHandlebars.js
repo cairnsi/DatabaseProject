@@ -189,7 +189,7 @@ app.post('/editTourType', function(req,res,next){
 						var context ={};
 						context.label = req.body.label;
 						context.meet_time = req.body.meet_time;
-						context.cost = req.body.cost/100;
+						context.cost = req.body.cost;
 						context.id = req.body.id;
 						context.error = "This tour already exists";
 						res.render('editTourType',context);
@@ -199,7 +199,7 @@ app.post('/editTourType', function(req,res,next){
 					var context ={};
 					context.label = req.body.label;
 					context.meet_time = req.body.meet_time;
-					context.cost = req.body.cost/100;
+					context.cost = req.body.cost;
 					context.id = req.body.id;
 					context.error = "Unknown Error";
 					res.render('editTourType',context);
@@ -226,7 +226,7 @@ app.post('/editTourType', function(req,res,next){
 		var context ={};
 		context.label = req.body.label;
 		context.meet_time = req.body.meet_time;
-		context.cost = req.body.cost/100;
+		context.cost = req.body.cost;
 		context.id = req.body.id;
 		context.error = "Cost must be valid";
 		res.render('editTourType',context);
@@ -238,7 +238,7 @@ app.post('/editTourType', function(req,res,next){
 	var context ={};
 	context.label = req.body.label;
 	context.meet_time = req.body.meet_time;
-	context.cost = req.body.cost/100;
+	context.cost = req.body.cost;
 	context.id = req.body.id;
 	context.error = "Must enter all fields";
 	res.render('editTourType',context);
