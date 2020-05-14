@@ -244,7 +244,7 @@ app.post('/addTourType', function(req,res,next){
 	var query = "INSERT INTO Guided_Tour_Types(label, meet_time, cost) VALUES (?)";
 	pool.query(query, [[req.body.label, req.body.meet_time, req.body.cost]],function(err,result){ 
 	  if(!err){
-		console.log(result);
+		console.log(result[0]);
 		var context = {};
 		context.success = "Success";
 		res.render('addTourType',context);
