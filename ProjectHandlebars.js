@@ -292,6 +292,89 @@ app.get('/editServiceType',function(req,res){
   res.render('500');
 });
 
+app.post('/editServiceType', function(req,res,next){
+  if(req.body.id&& req.body.label&& req.body.description&& req.body.cost){
+	var cost = req.body.cost;
+	if(!isNaN(cost)){
+		cost = cost*100;
+		cost = Math.round(cost);
+		var query = "SELECT id FROM Service_Types WHERE label = ?";
+		pool.query(query, [req.body.label],function(err1,result1){ 
+		  if(!err1){
+			if(result1[0]){
+				if(result1[0].id){
+					if(result1[0].id==req.body.id){
+						var query = "UPDATE Service_Types SET label = ?, description = ?, cost = ? WHERE id = ?";
+						pool.query(query, [req.body.label, req.body.description, (cost), req.body.id],function(err,result){ 
+						  if(!err){
+							var context = {};
+							res.render('siteAdmin',context);
+							return;
+						  }else{
+							next(err);
+						  }
+						});
+					}else{
+						var context ={};
+						context.label = req.body.label;
+						context.description = req.body.description;
+						context.cost = req.body.cost;
+						context.id = req.body.id;
+						context.error = "This service already exists";
+						res.render('editServiceType',context);
+						return;
+					}
+				}else{
+					var context ={};
+					context.label = req.body.label;
+					context.description = req.body.description;
+					context.cost = req.body.cost;
+					context.id = req.body.id;
+					context.error = "Unknown Error";
+					res.render('editServiceType',context);
+					return;
+				}
+			}else{
+				var query = "UPDATE Service_Types SET label = ?, description = ?, cost = ? WHERE id = ?";
+				pool.query(query, [req.body.label, req.body.description, (cost), req.body.id],function(err,result){ 
+				  if(!err){
+					var context = {};
+					res.render('siteAdmin',context);
+					return;
+				  }else{
+					next(err);
+				  }
+				});
+			}
+		  }else{
+			next(err1);
+		  }
+		});
+	}
+	else{
+		var context ={};
+		context.label = req.body.label;
+		context.description = req.body.description;
+		context.cost = req.body.cost;
+		context.id = req.body.id;
+		context.error = "Cost must be valid";
+		res.render('editServiceType',context);
+		return
+	}
+	  
+  }else{
+  
+	var context ={};
+	context.label = req.body.label;
+	context.description = req.body.description;
+	context.cost = req.body.cost;
+	context.id = req.body.id;
+	context.error = "Must enter all fields";
+	res.render('editServiceType',context);
+	return
+  }
+});
+
 app.get('/editCustomer',function(req,res){
   var context = {};
   if(req.query.id){
