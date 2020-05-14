@@ -168,7 +168,8 @@ app.get('/editTourType',function(req,res){
 app.post('/editTourType', function(req,res,next){
   if(req.body.id&& req.body.label&& req.body.meet_time&& req.body.cost){
 	var cost = (req.body.cost*100);
-	if(Number.isInteger(cost)){
+	if(isNaN(cost)){
+		cost = Math.round(cost);
 		var query = "SELECT id FROM Guided_Tour_Types WHERE label = ?";
 		pool.query(query, [req.body.label],function(err1,result1){ 
 		  if(!err1){
@@ -176,7 +177,7 @@ app.post('/editTourType', function(req,res,next){
 				if(result1[0].id){
 					if(result1[0].id==req.body.id){
 						var query = "UPDATE Guided_Tour_Types SET label = ?, meet_time = ?, cost = ? WHERE id = ?";
-						pool.query(query, [req.body.label, req.body.meet_time, (req.body.cost*100), req.body.id],function(err,result){ 
+						pool.query(query, [req.body.label, req.body.meet_time, (cost), req.body.id],function(err,result){ 
 						  if(!err){
 							var context = {};
 							res.render('siteAdmin',context);
@@ -207,7 +208,7 @@ app.post('/editTourType', function(req,res,next){
 				}
 			}else{
 				var query = "UPDATE Guided_Tour_Types SET label = ?, meet_time = ?, cost = ? WHERE id = ?";
-				pool.query(query, [req.body.label, req.body.meet_time, (req.body.cost*100), req.body.id],function(err,result){ 
+				pool.query(query, [req.body.label, req.body.meet_time, (cost), req.body.id],function(err,result){ 
 				  if(!err){
 					var context = {};
 					res.render('siteAdmin',context);
