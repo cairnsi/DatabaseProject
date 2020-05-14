@@ -108,7 +108,6 @@ function displayServiceTypeTable(){
 				  cell.textContent = item.description;
 				  cell = row.insertCell();
 				  cell.textContent = '$'+(item.cost/100);
-				  cell.style.width = "15%";
 				  cell = row.insertCell();
 				  if(item.active==1)
 					cell.textContent = "true";
