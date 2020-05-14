@@ -246,8 +246,8 @@ app.post('/addTourType', function(req,res,next){
 		var query = "SELECT id FROM Guided_Tour_Types WHERE label = ?";
 		pool.query(query, [req.body.label],function(err1,result1){ 
 		  if(!err1){
-			if(result[0]){
-				if(result[0].id){
+			if(result1[0]){
+				if(result1[0].id){
 					var context ={};
 					context.error = "This tour already exists";
 					res.render('addTourType',context);
