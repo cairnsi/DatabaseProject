@@ -165,6 +165,71 @@ app.get('/editTourType',function(req,res){
   res.render('500');
 });
 
+app.post('/editTourType', function(req,res,next){
+  if(req.body.id&& req.body.label&& req.body.meet_time&& req.body.cost){
+	var cost = (req.body.cost*100);
+	if(Number.isInteger(cost)){
+		var query = "SELECT id FROM Guided_Tour_Types WHERE label = ?";
+		pool.query(query, [req.body.label],function(err1,result1){ 
+		  if(!err1){
+			if(result1[0]){
+				if(result1[0].id){
+					if(result1[0].id==req.body.id){
+						var query = "UPDATE Guided_Tour_Types SET label = ?, meet_time = ?, cost = ? WHERE id = ?";
+						pool.query(query, [req.body.label, req.body.meet_time, (req.body.cost*100), req.body.id],function(err,result){ 
+						  if(!err){
+							var context = {};
+							res.render('siteAdmin',context);
+							return;
+						  }else{
+							next(err);
+						  }
+						});
+					}else{
+						var context ={};
+						context.error = "This tour already exists";
+						res.render('addTourType',context);
+						return;
+					}
+				}else{
+					var context ={};
+					context.error = "Unknown Error";
+					res.render('addTourType',context);
+					return;
+				}
+			}else{
+				var query = "UPDATE Guided_Tour_Types SET label = ?, meet_time = ?, cost = ? WHERE id = ?";
+				pool.query(query, [req.body.label, req.body.meet_time, (req.body.cost*100), req.body.id],function(err,result){ 
+				  if(!err){
+					var context = {};
+					res.render('siteAdmin',context);
+					return;
+				  }else{
+					next(err);
+				  }
+				});
+			}
+		  }else{
+			next(err1);
+		  }
+		});
+	}
+	else{
+		var context ={};
+		context.error = "Cost must be valid";
+		res.render('addTourType',context);
+		return
+	}
+	  
+  }else{
+  
+	var context ={};
+	context.error = "Must enter all fields";
+	res.render('addTourType',context);
+	return
+  }
+});
+
 app.get('/editServiceType',function(req,res){
   var context = {};
   if(req.query.id){

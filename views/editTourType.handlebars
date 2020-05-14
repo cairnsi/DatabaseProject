@@ -1,15 +1,16 @@
 {{>header}}
-<form>
+<h3>{{error}}</h3>
+<form action="/editTourType" method = "post">
 	<fieldset>
 		<legend>Edit Tour Type</legend>
 		<ul style="list-style-type: none;">
 			<li>
 				<label>Name: </label>
-				<input type="text" name="name" id="name" value='{{label}}'>
+				<input type="text" name="label" id="label" value='{{label}}'>
 			</li>
 			<li>
 				<label>Meet Time</label>
-				<input type="time" id="appt" name="appt" value = {{meet_time}}>
+				<input type="time" id="meet_time" name="meet_time" value = {{meet_time}}>
 			</li>
 			<li>
 				<label>Cost: </label>
