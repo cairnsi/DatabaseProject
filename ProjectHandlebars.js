@@ -247,7 +247,7 @@ app.post('/editTourType', function(req,res,next){
 });
 
 app.post('/activeTourType', function(req,res,next){
-  if(req.body.id&& req.body.active){
+  if(req.body.id&& (req.body.active=="0" ||req.body.active=="1")){
 	var query = "UPDATE Guided_Tour_Types SET active = ? WHERE id = ?";
 	pool.query(query, [req.body.active, req.body.id],function(err,result){ 
 	  if(!err){
