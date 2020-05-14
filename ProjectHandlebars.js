@@ -375,6 +375,27 @@ app.post('/editServiceType', function(req,res,next){
   }
 });
 
+app.post('/activeServiceType', function(req,res,next){
+  if(req.body.id&& (req.body.active=="0" ||req.body.active=="1")){
+	var query = "UPDATE Service_Types SET active = ? WHERE id = ?";
+	pool.query(query, [req.body.active, req.body.id],function(err,result){ 
+	  if(!err){
+		var data={};
+		data.result = "success";
+		res.json(JSON.stringify(data));
+		return;
+	  }else{
+		next(err);
+	  }
+	});
+  }else{
+	var data={};
+	data.result = "Components not provided";
+	res.json(JSON.stringify(data));
+	return
+  }
+});
+
 app.get('/editCustomer',function(req,res){
   var context = {};
   if(req.query.id){
