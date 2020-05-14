@@ -1,17 +1,19 @@
 {{>header}}
-<form>
+<h3 id="success">{{success}}</h3>
+<h3 id="error">{{error}}</h3>
+<form action="/addServiceType" method = "post">
 	<fieldset>
 		<legend>Add Service Type</legend>
 		<ul style="list-style-type: none;">
 			<li>
 				<label>Name: </label>
-				<input type="text" name="name" id="name">
+				<input type="text" name="label" id="label">
 			</li>
 			<li>
 				<label>Description</label>
 			</li>
 			<li>
-				<textarea name="description" rows="10" cols="30">
+				<textarea name="description" id="description" rows="10" cols="30">
 				</textarea>
 			</li>
 			<li>

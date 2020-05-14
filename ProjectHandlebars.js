@@ -345,8 +345,10 @@ app.get('/addTourType',function(req,res){
 
 app.post('/addTourType', function(req,res,next){
   if(req.body.label&& req.body.meet_time&& req.body.cost){
-	var cost = (req.body.cost*100);
-	if(Number.isInteger(cost)){
+	var cost = req.body.cost;
+	if(!isNaN(cost)){
+		cost = cost*100;
+		cost = Math.round(cost);
 		var query = "SELECT id FROM Guided_Tour_Types WHERE label = ?";
 		pool.query(query, [req.body.label],function(err1,result1){ 
 		  if(!err1){
@@ -364,7 +366,7 @@ app.post('/addTourType', function(req,res,next){
 				}
 			}else{
 				var query = "INSERT INTO Guided_Tour_Types(label, meet_time, cost) VALUES (?)";
-				pool.query(query, [[req.body.label, req.body.meet_time, (req.body.cost*100)]],function(err,result){ 
+				pool.query(query, [[req.body.label, req.body.meet_time, cost]],function(err,result){ 
 				  if(!err){
 					var context = {};
 					context.success = "Success";
@@ -399,6 +401,61 @@ app.post('/addTourType', function(req,res,next){
 app.get('/addServiceType',function(req,res){
   var context = {};
    res.render('addServiceType',context);
+});
+
+app.post('/addServiceType', function(req,res,next){
+  if(req.body.label&& req.body.description&& req.body.cost){
+	var cost = req.body.cost;
+	if(!isNaN(cost)){
+		cost = cost*100;
+		cost = Math.round(cost);
+		var query = "SELECT id FROM Service_Types WHERE label = ?";
+		pool.query(query, [req.body.label],function(err1,result1){ 
+		  if(!err1){
+			if(result1[0]){
+				if(result1[0].id){
+					var context ={};
+					context.error = "This service already exists";
+					res.render('addServiceType',context);
+					return
+				}else{
+					var context ={};
+					context.error = "Unknown Error";
+					res.render('addServiceType',context);
+					return
+				}
+			}else{
+				var query = "INSERT INTO Service_Types(label, description, cost) VALUES (?)";
+				pool.query(query, [[req.body.label, req.body.description, cost]],function(err,result){ 
+				  if(!err){
+					var context = {};
+					context.success = "Success";
+					res.render('addServiceType',context);
+					return;
+				  }else{
+					next(err);
+				  }
+				});
+			}
+		  }else{
+			next(err1);
+		  }
+		});
+	}
+	else{
+		var context ={};
+		context.error = "Cost must be valid";
+		res.render('addServiceType',context);
+		return
+	}
+	  
+  }else{
+  
+	var context ={};
+	context.error = "Must enter all fields";
+	res.render('addServiceType',context);
+	return
+  }
 });
 
 app.get('/addSpecificTour',function(req,res){
