@@ -1,15 +1,17 @@
 {{>header}}
-<form>
+<h3 id="success">{{success}}</h3>
+<h3 id="error">{{error}}</h3>
+<form action="/addTourType" method = "post">
 	<fieldset>
 		<legend>Add Tour Type</legend>
 		<ul style="list-style-type: none;">
 			<li>
 				<label>Name: </label>
-				<input type="text" name="name" id="name">
+				<input type="text" name="label" id="label">
 			</li>
 			<li>
 				<label>Meet Time</label>
-				<input type="time" id="appt" name="appt">
+				<input type="time" id="meet_time" name="meet_time">
 			</li>
 			<li>
 				<label>Cost: </label>
@@ -19,4 +21,4 @@
 		</ul>
 	</fieldset>
 </form>
- <script src="add.js"></script>
+ <script src="addTourType.js"></script>
