@@ -18,6 +18,9 @@ function displayTourTypeTable(){
 			  row.innerHTML = "<th>Tour</th><th>Meet Time</th><th>Cost</th>";
 			  for(var i = 0;i<response.length;i++){
 				  var item = response[i];
+				  if(!item.active){
+					  continue;
+				  }
 				  row = table.insertRow();
 				  var cell = row.insertCell();
 				  cell.textContent = item.label;
