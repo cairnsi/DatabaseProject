@@ -246,6 +246,27 @@ app.post('/editTourType', function(req,res,next){
   }
 });
 
+app.post('/activeTourType', function(req,res,next){
+  if(req.body.id&& req.body.active){
+	var query = "UPDATE Guided_Tour_Types SET active = ? WHERE id = ?";
+	pool.query(query, [req.body.active, req.body.id],function(err,result){ 
+	  if(!err){
+		var data={};
+		data.result = "success";
+		res.json(JSON.stringify(data));
+		return;
+	  }else{
+		next(err);
+	  }
+	});
+  }else{
+	var data={};
+	data.result = "Components not provided";
+	res.json(JSON.stringify(data));
+	return
+  }
+});
+
 app.get('/editServiceType',function(req,res){
   var context = {};
   if(req.query.id){
