@@ -253,22 +253,26 @@ app.post('/addTourType', function(req,res,next){
 					res.render('addTourType',context);
 					return
 				}else{
-					var query = "INSERT INTO Guided_Tour_Types(label, meet_time, cost) VALUES (?)";
-					pool.query(query, [[req.body.label, req.body.meet_time, (req.body.cost*100)]],function(err,result){ 
-					  if(!err){
-						var context = {};
-						context.success = "Success";
-						res.render('addTourType',context);
-						return;
-					  }else{
-						next(err);
-					  }
-					});
+					var context ={};
+					context.error = "Unknown Error";
+					res.render('addTourType',context);
+					return
 				}
+			}else{
+				var query = "INSERT INTO Guided_Tour_Types(label, meet_time, cost) VALUES (?)";
+				pool.query(query, [[req.body.label, req.body.meet_time, (req.body.cost*100)]],function(err,result){ 
+				  if(!err){
+					var context = {};
+					context.success = "Success";
+					res.render('addTourType',context);
+					return;
+				  }else{
+					next(err);
+				  }
+				});
 			}
-			next(err);
 		  }else{
-			next(err);
+			next(err1);
 		  }
 		});
 	}
