@@ -31,11 +31,9 @@ th  {
   margin-right: auto;
   width: 40%;
 }
-
 #error{
 	color: red;
 }
-
 #success{
 	color: green;
 }
