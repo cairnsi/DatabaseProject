@@ -241,25 +241,33 @@ app.get('/addTourType',function(req,res){
 
 app.post('/addTourType', function(req,res,next){
   if(req.body.label&& req.body.meet_time&& req.body.cost){
-	var query = "INSERT INTO Guided_Tour_Types(label, meet_time, cost) VALUES (?)";
-	pool.query(query, [[req.body.label, req.body.meet_time, req.body.cost]],function(err,result){ 
-	  if(!err){
-		console.log(result[0]);
-		var context = {};
-		context.success = "Success";
+	var cost = (req.body.cost*100);
+	if(Number.isInteger(cost)){
+		var query = "INSERT INTO Guided_Tour_Types(label, meet_time, cost) VALUES (?)";
+		pool.query(query, [[req.body.label, req.body.meet_time, (req.body.cost*100)]],function(err,result){ 
+		  if(!err){
+			console.log(result[0]);
+			var context = {};
+			context.success = "Success";
+			res.render('addTourType',context);
+			return;
+		  }else{
+			next(err);
+		  }
+		});
+	}
+	else{
+		var context ={};
+		context.error = "Cost must be valid";
 		res.render('addTourType',context);
-		return;
-	  }else{
-		next(err);
-	  }
-    });
-	  
+		return
+	}
 	  
   }else{
   
 	var context ={};
-	context.error = "Must enter first and last name";
-	res.render('signIn',context);
+	context.error = "Must enter all fields";
+	res.render('addTourType',context);
 	return
   }
 });
