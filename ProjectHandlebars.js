@@ -187,14 +187,22 @@ app.post('/editTourType', function(req,res,next){
 						});
 					}else{
 						var context ={};
+						context.label = req.body.label;
+						context.meet_time = req.body.meet_time;
+						context.cost = req.body.cost/100;
+						context.id = req.body.id;
 						context.error = "This tour already exists";
-						res.render('addTourType',context);
+						res.render('editTourType',context);
 						return;
 					}
 				}else{
 					var context ={};
+					context.label = req.body.label;
+					context.meet_time = req.body.meet_time;
+					context.cost = req.body.cost/100;
+					context.id = req.body.id;
 					context.error = "Unknown Error";
-					res.render('addTourType',context);
+					res.render('editTourType',context);
 					return;
 				}
 			}else{
@@ -216,16 +224,24 @@ app.post('/editTourType', function(req,res,next){
 	}
 	else{
 		var context ={};
+		context.label = req.body.label;
+		context.meet_time = req.body.meet_time;
+		context.cost = req.body.cost/100;
+		context.id = req.body.id;
 		context.error = "Cost must be valid";
-		res.render('addTourType',context);
+		res.render('editTourType',context);
 		return
 	}
 	  
   }else{
   
 	var context ={};
+	context.label = req.body.label;
+	context.meet_time = req.body.meet_time;
+	context.cost = req.body.cost/100;
+	context.id = req.body.id;
 	context.error = "Must enter all fields";
-	res.render('addTourType',context);
+	res.render('editTourType',context);
 	return
   }
 });
