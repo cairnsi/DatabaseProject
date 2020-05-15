@@ -55,7 +55,7 @@ function bindFilter(){
 	  event.preventDefault();
 	  var item = {};
 	  var date = document.getElementById('tourDate').value;
-	  var type = document.getElementById('Type').value;
+	  var type = document.getElementById('type').value;
 	  var signedUp = document.getElementById('signedUp').value;
 	  if(date!=""){
 		  item.date = date;
