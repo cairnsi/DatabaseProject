@@ -116,10 +116,11 @@ function createTourTypeOptions(){
 			  var typeSelect = document.getElementById('type');
 			  var response = JSON.parse(req.responseText);
 			  for(var i = 0;i<response.length;i++){
-					var option = document.createElement("option");
-					option.text = item.label;
-					option.value = item.label;
-					x.add(option); 
+				  var item = response[i];
+				  var option = document.createElement("option");
+				  option.text = item.label;
+				  option.value = item.label;
+				  x.add(option); 
 			  }
 		  }else{
 			  
