@@ -35,7 +35,7 @@ CREATE TABLE Guided_Tour_Types(
 CREATE TABLE Specific_Tours(
 	id int NOT NULL AUTO_INCREMENT, 
 	date date NOT NULL,
-	type_number int NOT NULL,
+	type_number int,
 	PRIMARY KEY(id),
 	FOREIGN KEY(type_number) REFERENCES Guided_Tour_Types(id)
 );
