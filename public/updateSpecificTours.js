@@ -120,7 +120,7 @@ function createTourTypeOptions(){
 				  var option = document.createElement("option");
 				  option.text = item.label;
 				  option.value = item.label;
-				  x.add(option); 
+				  typeSelect.add(option); 
 			  }
 		  }else{
 			  
