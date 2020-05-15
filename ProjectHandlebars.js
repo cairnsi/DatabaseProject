@@ -569,9 +569,7 @@ app.get('/addSpecificTour',function(req,res){
 
 app.post('/addSpecificTour', function(req,res,next){
   if(req.body.date){
-	  console.log(req.body.type_number);
 	if(req.body.type_number=="null"){
-		console.log("type number NOT THERE");
 		var query = "INSERT INTO Specific_Tours(date) VALUES (?)";
 		pool.query(query, [[req.body.date]],function(err,result){ 
 		  if(!err){
@@ -584,7 +582,6 @@ app.post('/addSpecificTour', function(req,res,next){
 		  }
 		});
 	}else{
-		console.log("type number there");
 		var query = "INSERT INTO Specific_Tours(date, type_number) VALUES (?)";
 		pool.query(query, [[req.body.date, req.body.type_number]],function(err,result){ 
 		  if(!err){
