@@ -37,3 +37,6 @@ th  {
 #success{
 	color: green;
 }
+.manditoryField{
+	color: red;
+}
