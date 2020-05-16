@@ -442,7 +442,7 @@ app.get('/updateSpecificTours',function(req,res){
    res.render('updateSpecificTours',context);
 });
 
-app.post('/removeSpecificTours', function(req,res,next){
+app.post('/removeSpecificTour', function(req,res,next){
   if(req.body.id){
 	
 		
