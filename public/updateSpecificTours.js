@@ -40,6 +40,7 @@ function displayToursTable(input){
 				  var btn = document.createElement('button');
 				  btn.setAttribute('class', 'remove');
 				  btn.innerHTML = 'Remove';
+				  btn.onclick =  bindRemoveSpecificTour(item);
 				  row.appendChild(btn);
 				  }
 			  }
@@ -48,6 +49,38 @@ function displayToursTable(input){
 	  });
 	  req.send();
 	  
+}
+
+function bindRemoveSpecificTour(item){
+	return function(){
+	    var req = new XMLHttpRequest();
+		  var payload = {};
+		  payload.id = item.id;
+		  req.open('POST', '/removeSpecificTour', true);
+		  req.setRequestHeader('Content-Type', 'application/json');
+		  req.addEventListener('load',function(){
+		  if(req.status >= 200 && req.status < 400){
+			var response = JSON.parse(req.responseText);
+			  var item = {};
+			  var date = document.getElementById('tourDate').value;
+			  var type = document.getElementById('type').value;
+			  var signedUp = document.getElementById('signedUp').value;
+			  if(date!=""){
+				  item.date = date;
+			  }
+			  if(type!=""){
+				  item.type = type;
+			  }
+			  if(signedUp!=""){
+				  item.signedUp = signedUp;
+			  }
+			  displayToursTable(item);
+		  } else {
+			console.log("Error in network request: " + req.statusText);
+		  }});
+		  req.send(JSON.stringify(payload));
+		  event.preventDefault();
+	}
 }
 
 function bindFilter(){

@@ -442,6 +442,53 @@ app.get('/updateSpecificTours',function(req,res){
    res.render('updateSpecificTours',context);
 });
 
+app.post('/removeSpecificTours', function(req,res,next){
+  if(req.body.id){
+	
+		
+		var query = "SELECT Specific_Tours.id, Guided_Tour_Types.label ,Specific_Tours.date, COUNT(Purchases.id) AS signedUp FROM Specific_Tours LEFT JOIN Purchases_Tours ON Purchases_Tours.tour_id = Specific_Tours.id LEFT JOIN Purchases ON Purchases_Tours.purchase_id = Purchases.id LEFT JOIN Guided_Tour_Types ON Guided_Tour_Types.id = Specific_Tours.type_number WHERE Specific_Tours.id = ?  GROUP BY Specific_Tours.id";
+		pool.query(query, [req.body.id],function(err1,result1){ 
+		  if(!err1){
+			if(result1[0]){
+				if(result1[0].signedUp==0){
+					var query = "DELETE FROM Specific_Tours WHERE id = ?";
+					pool.query(query, [req.body.id],function(err,result){ 
+					  if(!err){
+						var context = {};
+						context.success = "Success";
+						res.send(JSON.stringify(context));
+						return;
+					  }else{
+						next(err);
+					  }
+					});
+				}else{
+					var context ={};
+					context.error = "Resource is Active";
+					res.send(JSON.stringify(context));
+					return
+				}
+			}else{
+				var context ={};
+				context.error = "No Data";
+				res.send(JSON.stringify(context));
+				return
+			}
+		  }else{
+			next(err1);
+		  }
+		});
+	
+	  
+  }else{
+  
+	var context ={};
+	context.error = "Must enter all fields";
+	res.render('addServiceType',context);
+	return
+  }
+});
+
 app.get('/addTourType',function(req,res){
   var context = {};
    res.render('addTourType',context);
