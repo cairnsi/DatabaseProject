@@ -17,4 +17,25 @@ SELECT id, first_name, last_name, street, city, state, zip, phone, emergency_pho
 SELECT id, first_name, last_name, street, city, state, zip, phone, emergency_phone FROM Customers WHERE phone = ? AND Customers.first_name = ? AND Customers.last_name = ?
 
 
+--Purchases Section
+--View Purchases
+SELECT Purchases.id, Purchases.purchase_date, Customers.first_name, Customers.last_name FROM Purchases JOIN Customers ON Purchases.customer_id = Customers.id
+--View Purchases Filtered
+SELECT Purchases.id, Purchases.purchase_date, Customers.first_name, Customers.last_name FROM Purchases JOIN Customers ON Purchases.customer_id = Customers.id WHERE Purchases.purchase_date = ? AND Customers.first_name = ? AND Customers.last_name = ?
+
+
+--Delete Purchases
+DELETE FROM Purchases WHERE id = ?
+--Note Before this we will run
+DELETE FROM Purchases_Service_Types WHERE purchase_id = ?
+DELETE FROM Purchases_Tours WHERE purchase_id = ?
+
+--Add Purchases
+INSERT INTO Purchases(purchase_date, customer_id) VALUES (?)
+--Directly after this we will run
+--retrieve purchase_id
+SELECT id FROM Purchases WHERE customer_id=? ORDER BY id DESC LIMIT 1
+--add items to M:M tables of tours and service
+INSERT INTO Purchases_Service_Types(purchase_id, service_id, quantity) VALUES (?)
+INSERT INTO Purchases_Tours(purchase_id, tour_id) VALUES (?)
 
