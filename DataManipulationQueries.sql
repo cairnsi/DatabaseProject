@@ -31,11 +31,14 @@ DELETE FROM Purchases_Service_Types WHERE purchase_id = ?
 DELETE FROM Purchases_Tours WHERE purchase_id = ?
 
 --Add Purchases
-INSERT INTO Purchases(purchase_date, customer_id) VALUES (?)
+INSERT INTO Purchases(purchase_date, customer_id) OUTPUT Inserted.id VALUES (?)
 --Directly after this we will run
---retrieve purchase_id
+--retrieve purchase_id. ANY ADVISE on how to do this better would be appreciated.
 SELECT id FROM Purchases WHERE customer_id=? ORDER BY id DESC LIMIT 1
 --add items to M:M tables of tours and service
 INSERT INTO Purchases_Service_Types(purchase_id, service_id, quantity) VALUES (?)
 INSERT INTO Purchases_Tours(purchase_id, tour_id) VALUES (?)
+
+--Specific_Tours Section
+
 
