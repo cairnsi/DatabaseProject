@@ -30,6 +30,9 @@ DELETE FROM Purchases WHERE id = ?
 DELETE FROM Purchases_Service_Types WHERE purchase_id = ?
 DELETE FROM Purchases_Tours WHERE purchase_id = ?
 
+--Remove specific Tour for a customer:
+DELETE FROM Purchases_Tours WHERE purchase_id = ?
+
 --Add Purchases
 INSERT INTO Purchases(purchase_date, customer_id) OUTPUT Inserted.id VALUES (?)
 --Directly after this we will run
@@ -40,5 +43,28 @@ INSERT INTO Purchases_Service_Types(purchase_id, service_id, quantity) VALUES (?
 INSERT INTO Purchases_Tours(purchase_id, tour_id) VALUES (?)
 
 --Specific_Tours Section
+--View Specific_Tours. This also gets the number of people signed up
+SELECT Specific_Tours.id, Guided_Tour_Types.label ,Specific_Tours.date, COUNT(Purchases.id) AS signedUp FROM Specific_Tours LEFT JOIN Purchases_Tours ON Purchases_Tours.tour_id = Specific_Tours.id LEFT JOIN Purchases ON Purchases_Tours.purchase_id = Purchases.id LEFT JOIN Guided_Tour_Types ON Guided_Tour_Types.id = Specific_Tours.type_number GROUP BY Specific_Tours.id
+--View Specific_Tours Filtered Where people are signed up
+SELECT Specific_Tours.id, Guided_Tour_Types.label ,Specific_Tours.date, COUNT(Purchases.id) AS signedUp FROM Specific_Tours LEFT JOIN Purchases_Tours ON Purchases_Tours.tour_id = Specific_Tours.id LEFT JOIN Purchases ON Purchases_Tours.purchase_id = Purchases.id LEFT JOIN Guided_Tour_Types ON Guided_Tour_Types.id = Specific_Tours.type_number WHERE Specific_Tours.date = ? AND Guided_Tour_Types.label = ? GROUP BY Specific_Tours.id HAVING signedUp > 0
+--View Specific_Tours Filtered Where people are not signed up
+SELECT Specific_Tours.id, Guided_Tour_Types.label ,Specific_Tours.date, COUNT(Purchases.id) AS signedUp FROM Specific_Tours LEFT JOIN Purchases_Tours ON Purchases_Tours.tour_id = Specific_Tours.id LEFT JOIN Purchases ON Purchases_Tours.purchase_id = Purchases.id LEFT JOIN Guided_Tour_Types ON Guided_Tour_Types.id = Specific_Tours.type_number WHERE Specific_Tours.date = ? AND Guided_Tour_Types.label = ? GROUP BY Specific_Tours.id HAVING signedUp = 0
+
+--View Your specific tours
+SELECT Specific_Tours.id, Guided_Tour_Types.label, Specific_Tours.date, Guided_Tour_Types.meet_time FROM Purchases JOIN Purchases_Tours ON Purchases_Tours.purchase_id = Purchases.id JOIN Specific_Tours ON Specific_Tours.id = Purchases_Tours.tour_id JOIN Guided_Tour_Types ON Guided_Tour_Types.id =Specific_Tours.type_number WHERE Purchases.customer_id = ?
+
+--Add specific_Tours
+--If only a date is provided:
+INSERT INTO Specific_Tours(date) VALUES (?)
+--If a date and tour type is provided:
+INSERT INTO Specific_Tours(date, type_number) VALUES (?)
+
+--DELETE
+--OUR CODE CHECKS THAT THERE IS NO ONE SIGNED UP PRIOR TO DELETE. THIS is checked both in the on the client side and on the server side.
+DELETE FROM Specific_Tours WHERE id = ?
+
+
+
+
 
 
