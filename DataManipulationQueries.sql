@@ -39,7 +39,11 @@ INSERT INTO Purchases(purchase_date, customer_id) OUTPUT Inserted.id VALUES (?)
 --retrieve purchase_id. ANY ADVISE on how to do this better would be appreciated.
 SELECT id FROM Purchases WHERE customer_id=? ORDER BY id DESC LIMIT 1
 --add items to M:M tables of tours and service
+--first check if service is available:
+SELECT active FROM Service_Types WHERE id = ?
+--then insert
 INSERT INTO Purchases_Service_Types(purchase_id, service_id, quantity) VALUES (?)
+--insert into purchase Tours (ids are aways allowed if they exist)
 INSERT INTO Purchases_Tours(purchase_id, tour_id) VALUES (?)
 
 --Specific_Tours Section
@@ -63,7 +67,39 @@ INSERT INTO Specific_Tours(date, type_number) VALUES (?)
 --OUR CODE CHECKS THAT THERE IS NO ONE SIGNED UP PRIOR TO DELETE. THIS is checked both in the on the client side and on the server side.
 DELETE FROM Specific_Tours WHERE id = ?
 
+--Guided_Tour_Types Section
+--View:
+Select * FROM Guided_Tour_Types
 
+--Update:
+UPDATE Guided_Tour_Types SET label = ?, meet_time = ?, cost = ? WHERE id = ?
+--UpdateActiveProperty (This removes it as a possibility for purchase)
+UPDATE Guided_Tour_Types SET active = ? WHERE id = ?
+
+--ADD
+--First check that the label doesn't already exist:
+SELECT id FROM Guided_Tour_Types WHERE label = ?
+--Then insert:
+INSERT INTO Guided_Tour_Types(label, meet_time, cost) VALUES (?)
+
+--Service_Types Section
+--view
+Select * FROM Service_Types
+
+--ADD
+--First check if label already exists
+SELECT id FROM Service_Types WHERE label = ?
+--next insert:
+INSERT INTO Service_Types(label, description, cost) VALUES (?)
+
+--update:
+--First check label doesn't exist as another service:
+SELECT id FROM Service_Types WHERE label = ?
+--next update:
+UPDATE Service_Types SET label = ?, description = ?, cost = ? WHERE id = ?
+
+--Set Active variable. This controls what is allowed to be purchased:
+UPDATE Service_Types SET active = ? WHERE id = ?
 
 
 
