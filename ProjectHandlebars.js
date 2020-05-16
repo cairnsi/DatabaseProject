@@ -444,8 +444,6 @@ app.get('/updateSpecificTours',function(req,res){
 
 app.post('/removeSpecificTour', function(req,res,next){
   if(req.body.id){
-	
-		
 		var query = "SELECT Specific_Tours.id, Guided_Tour_Types.label ,Specific_Tours.date, COUNT(Purchases.id) AS signedUp FROM Specific_Tours LEFT JOIN Purchases_Tours ON Purchases_Tours.tour_id = Specific_Tours.id LEFT JOIN Purchases ON Purchases_Tours.purchase_id = Purchases.id LEFT JOIN Guided_Tour_Types ON Guided_Tour_Types.id = Specific_Tours.type_number WHERE Specific_Tours.id = ?  GROUP BY Specific_Tours.id";
 		pool.query(query, [req.body.id],function(err1,result1){ 
 		  if(!err1){
@@ -478,13 +476,10 @@ app.post('/removeSpecificTour', function(req,res,next){
 			next(err1);
 		  }
 		});
-	
-	  
   }else{
-  
 	var context ={};
-	context.error = "Must enter all fields";
-	res.render('addServiceType',context);
+	context.error = "Must have tour id";
+	res.send(JSON.stringify(context));
 	return
   }
 });
