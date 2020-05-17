@@ -36,8 +36,6 @@ DELETE FROM Purchases_Tours WHERE purchase_id = ?
 --Add Purchases
 INSERT INTO Purchases(purchase_date, customer_id) OUTPUT Inserted.id VALUES (?)
 --Directly after this we will run
---retrieve purchase_id. ANY ADVISE on how to do this better would be appreciated.
-SELECT id FROM Purchases WHERE customer_id=? ORDER BY id DESC LIMIT 1
 --add items to M:M tables of tours and service
 --first check if service is available:
 SELECT active FROM Service_Types WHERE id = ?
