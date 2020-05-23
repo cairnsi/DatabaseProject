@@ -121,7 +121,7 @@ app.post('/addServiceToCart', function(req,res,next){
 	var found = false;
 	for(var i = 0;i< req.session.cartService.length;i++){
 		if(req.session.cartService[i][0]==req.body.id){
-			req.session.cartService[i][1]= parseInt(req.session.cartService[i][1])+ req.body.qty;
+			req.session.cartService[i][1]= (parseInt(req.session.cartService[i][1])+ parseInt(req.body.qty));
 			found = true;
 			console.log(req.session.cartService[i][1]);
 		}
