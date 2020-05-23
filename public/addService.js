@@ -36,11 +36,11 @@ function displayServiceTypeTable(){
 				  row.appendChild(btn);
 				  
 				  var qty = document.createElement("SELECT");
-				  for(var i = 0;i<6;i++){
-					  var item = i;
+				  for(var j = 0;j<6;j++){
+					  var item = j;
 					  var option = document.createElement("option");
-					  option.text = i;
-					  option.value = i;
+					  option.text = j;
+					  option.value = j;
 					  qty.add(option); 
 				  }
 				  row.appendChild(qty);
