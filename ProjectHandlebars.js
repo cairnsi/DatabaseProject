@@ -123,17 +123,14 @@ app.post('/addServiceToCart', function(req,res,next){
 		if(req.session.cartService[i][0]==req.body.id){
 			req.session.cartService[i][1]= (parseInt(req.session.cartService[i][1])+ parseInt(req.body.qty));
 			found = true;
-			console.log(req.session.cartService[i][1]);
 		}
 	}
 	if(!found){
 		req.session.cartService.push([req.body.id, req.body.qty]);
-		console.log(req.body.qty);
 	}
   }else{
 	  req.session.cartService=[];
 	  req.session.cartService.push([req.body.id, req.body.qty]);
-	  console.log(req.body.qty);
   }
   res.status(200);
   res.send("success");
