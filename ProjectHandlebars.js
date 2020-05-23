@@ -734,7 +734,7 @@ app.post('/createAccount', function(req,res,next){
 					return
 				}
 			}
-			var query +=" ) VALUES (?)";
+			query += " ) VALUES (?)";
 			pool.query(query, [values],function(err,result){ 
 			  if(!err){
 				var context = {};
