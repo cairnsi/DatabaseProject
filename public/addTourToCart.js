@@ -89,3 +89,4 @@ function createTourTypeOptions(){
 document.addEventListener('DOMContentLoaded', bindFilter);
 var input = {};
 displayToursTable(input);
+createTourTypeOptions()
