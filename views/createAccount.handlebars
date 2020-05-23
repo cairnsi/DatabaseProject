@@ -1,5 +1,7 @@
 {{>header}}
-<form>
+<h3 id="success">{{success}}</h3>
+<h3 id="error">{{error}}</h3>
+<form action="/createAccount" method = "post">
 	<fieldset>
 		<legend>Create Account</legend>
 		<ul style="list-style-type: none;">
@@ -22,6 +24,7 @@
 			<li>
 				<label>State: </label>
 				<select name="state" size="1">
+				  <option value="">NA</option>
 				  <option value="AK">AK</option>
 				  <option value="AL">AL</option>
 				  <option value="AR">AR</option>
@@ -88,8 +91,7 @@
 					<input type="text" id="ephone" name="ephone">
 				</li>
 			
-			<input type="submit" id="tourAddSubmit" value= "Create">
+			<input type="submit" id="createSubmit" value= "Create">
 		</ul>
 	</fieldset>
 </form>
- <script src="add.js"></script>

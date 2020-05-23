@@ -667,6 +667,83 @@ app.get('/createAccount',function(req,res){
    res.render('createAccount',context);
 });
 
+app.post('/createAccount', function(req,res,next){
+  if(req.body.fname&& req.body.lname){
+	var query = "SELECT id FROM Customers WHERE first_name = ? AND last_name = ?";
+	pool.query(query, [req.body.fname, req.body.lname],function(err1,result1){ 
+	  if(!err1){
+		if(result1[0]){
+			if(result1[0].id){
+				var context ={};
+				context.error = "This customer already exists";
+				res.render('createAccount',context);
+				return
+			}else{
+				var context ={};
+				context.error = "Unknown Error";
+				res.render('createAccount',context);
+				return
+			}
+		}else{
+			var values = [];
+			var query = "INSERT INTO Guided_Tour_Types(first_name, last_name"; 
+			values.push(req.body.fname);
+			values.push(req.body.lname);
+			if(req.body.street!=""){
+				query += ", street";
+				values.push(req.body.street);
+			}
+			if(req.body.city!=""){
+				query += ", city";
+				values.push(req.body.city);
+			}
+			if(req.body.state!=""){
+				query += ", state";
+				values.push(req.body.state);
+			}
+			if(req.body.zip!=""){
+				if(req.body.zip.length==5 && /^\d+$/.test(req.body.zip)){
+				query += ", state";
+				values.push(req.body.state);
+				}else{
+					var context ={};
+					context.error = "Zip must contain numbers only";
+					res.render('createAccount',context);
+					return
+				}
+			}
+			
+			var context ={};
+					context.success = "would work";
+					res.render('createAccount',context);
+					return
+			/*var query +=" ) VALUES (?)";
+			pool.query(query, [[req.body.label, req.body.meet_time, cost]],function(err,result){ 
+			  if(!err){
+				var context = {};
+				context.success = "Success";
+				res.render('addTourType',context);
+				return;
+			  }else{
+				next(err);
+			  }
+			});*/
+		}
+	  }else{
+		next(err1);
+	  }
+	});
+	
+	  
+  }else{
+  
+	var context ={};
+	context.error = "Must enter First Name and Last Name";
+	res.render('createAccount',context);
+	return
+  }
+});
+
 app.get('/tourTypeTable', function(req,res){
   pool.query("Select * FROM Guided_Tour_Types", function(err,result){ 
     if(!err){
