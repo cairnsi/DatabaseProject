@@ -64,5 +64,6 @@ function bindFilter(){
 	});
 }
 
+document.addEventListener('DOMContentLoaded', bindFilter);
 var input = {};
 displayToursTable(input);
