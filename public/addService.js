@@ -60,10 +60,15 @@ function displayServiceTypeTable(){
 
 function bindAddToCart(item){
 	return function(){
+		if(document.getElementById(item.selectId).value<1){
+			document.getElementById('success').innerHTML="";
+			document.getElementById('error').innerHTML="Please select a quantity";
+			return;
+		}
 	    var req = new XMLHttpRequest();
 		  var payload = {};
 		  payload.id = item.id;
-		  payload.qty = document.getElementById(item.selectId).value
+		  payload.qty = document.getElementById(item.selectId).value;
 		  req.open('POST', '/addServiceToCart', true);
 		  req.setRequestHeader('Content-Type', 'application/json');
 		  req.addEventListener('load',function(){
