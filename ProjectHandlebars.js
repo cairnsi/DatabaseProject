@@ -713,7 +713,7 @@ app.post('/createAccount', function(req,res,next){
 				}
 			}
 			if(req.body.phone!=""){
-				if(req.body.zip.phone==10 && /^\d+$/.test(req.body.phone)){
+				if(req.body.phone==10 && /^\d+$/.test(req.body.phone)){
 					query += ", phone";
 					values.push(req.body.phone);
 				}else{
@@ -724,7 +724,7 @@ app.post('/createAccount', function(req,res,next){
 				}
 			}
 			if(req.body.ephone!=""){
-				if(req.body.zip.ephone==10 && /^\d+$/.test(req.body.ephone)){
+				if(req.body.ephone==10 && /^\d+$/.test(req.body.ephone)){
 					query += ", emergency_phone";
 					values.push(req.body.ephone);
 				}else{
