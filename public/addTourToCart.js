@@ -35,13 +35,12 @@ function displayToursTable(input){
 				  cell = row.insertCell();
 				  cell.textContent = item.cost/100;
 				  
-				  if(item.signedUp==0){
+				  
 				  var btn = document.createElement('button');
 				  btn.setAttribute('class', 'add');
 				  btn.innerHTML = 'Add to Cart';
 				  //btn.onclick =  bindRemoveSpecificTour(item);
 				  row.appendChild(btn);
-				  }
 			  }
 		  }else{
 		  }
