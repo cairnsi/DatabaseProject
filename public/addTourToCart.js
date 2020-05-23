@@ -33,7 +33,7 @@ function displayToursTable(input){
 				  cell = row.insertCell();
 				  cell.textContent = item.meet_time;
 				  cell = row.insertCell();
-				  cell.textContent = item.cost/100;
+				  cell.textContent = "$"+(item.cost/100);
 				  
 				  
 				  var btn = document.createElement('button');
