@@ -39,7 +39,7 @@ function displayServiceTypeTable(){
 				  row.appendChild(btn);
 				  
 				  var qty = document.createElement("SELECT");
-				  qty.setAttribute('class', selectId);
+				  qty.setAttribute('id', selectId);
 				  for(var j = 0;j<6;j++){
 					  var item = j;
 					  var option = document.createElement("option");
