@@ -41,8 +41,9 @@ function displayServiceTypeTable(){
 					  var option = document.createElement("option");
 					  option.text = i;
 					  option.value = i;
-					  typeSelect.add(option); 
+					  qty.add(option); 
 				  }
+				  row.appendChild(qty);
 			  }
 		  }else{
 			  
