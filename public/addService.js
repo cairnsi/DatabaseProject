@@ -60,21 +60,22 @@ function displayServiceTypeTable(){
 
 function bindAddToCart(item){
 	return function(){
-	    /*var req = new XMLHttpRequest();
+	    var req = new XMLHttpRequest();
 		  var payload = {};
 		  payload.id = item.id;
-		  payload.active = (item.active+1)%2;
-		  req.open('POST', '/activeServiceType', true);
+		  payload.qty = document.getElementById(item.selectId).value
+		  req.open('POST', '/addServiceToCart', true);
 		  req.setRequestHeader('Content-Type', 'application/json');
 		  req.addEventListener('load',function(){
 		  if(req.status >= 200 && req.status < 400){
-			var response = JSON.parse(req.responseText);
-			 displayServiceTypeTable();
+			document.getElementById('error').innerHTML="";
+			document.getElementById('success').innerHTML=item.label + " added to cart";
 		  } else {
 			console.log("Error in network request: " + req.statusText);
+			document.getElementById('success').innerHTML="";
+			document.getElementById('error').innerHTML="Error adding item to cart";
 		  }});
-		  req.send(JSON.stringify(payload));*/
-		  console.log(document.getElementById(item.selectId).value);
+		  req.send(JSON.stringify(payload));
 		  event.preventDefault();
 	}
 }
