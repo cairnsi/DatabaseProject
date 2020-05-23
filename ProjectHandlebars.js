@@ -734,22 +734,18 @@ app.post('/createAccount', function(req,res,next){
 					return
 				}
 			}
-			
-			var context ={};
-					context.success = "would work";
-					res.render('createAccount',context);
-					return
-			/*var query +=" ) VALUES (?)";
-			pool.query(query, [[req.body.label, req.body.meet_time, cost]],function(err,result){ 
+			var query +=" ) VALUES (?)";
+			pool.query(query, [values],function(err,result){ 
 			  if(!err){
 				var context = {};
 				context.success = "Success";
-				res.render('addTourType',context);
+				console.log(result.insertedID);
+				res.render('createAccount',context);
 				return;
 			  }else{
 				next(err);
 			  }
-			});*/
+			});
 		}
 	  }else{
 		next(err1);
