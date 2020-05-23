@@ -119,7 +119,7 @@ app.post('/addServiceToCart', function(req,res,next){
   }
   if(req.session.cartService){
 	var found = false;
-	for(var i = 0;i< req.session.cartService.length){
+	for(var i = 0;i< req.session.cartService.length;i++){
 		if(req.session.cartService[i][0]==req.body.id){
 			req.session.cartService[i][1]+=req.body.qty;
 			found = true;
