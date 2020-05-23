@@ -5,7 +5,7 @@ function displayServiceTypeTable(){
 	  req.addEventListener('load',function(){
 		  if(req.status >= 200 && req.status < 400){
 			  document.getElementById('addServiceTable').innerHTML="";
-			  var table = document.getElementById('serviceTypesTable');
+			  var table = document.getElementById('addServiceTable');
 			  var response = JSON.parse(req.responseText);
 			  if(response.length<1){
 				var row = table.insertRow();
