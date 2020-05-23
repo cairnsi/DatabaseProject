@@ -75,6 +75,7 @@ function bindAddToCart(item){
 		  if(req.status >= 200 && req.status < 400){
 			document.getElementById('error').innerHTML="";
 			document.getElementById('success').innerHTML=item.label + " added to cart";
+			document.getElementById(item.selectId).value = 0;
 		  } else {
 			console.log("Error in network request: " + req.statusText);
 			document.getElementById('success').innerHTML="";
