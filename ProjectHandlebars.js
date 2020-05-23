@@ -703,11 +703,33 @@ app.post('/createAccount', function(req,res,next){
 			}
 			if(req.body.zip!=""){
 				if(req.body.zip.length==5 && /^\d+$/.test(req.body.zip)){
-				query += ", state";
-				values.push(req.body.state);
+					query += ", zip";
+					values.push(req.body.zip);
 				}else{
 					var context ={};
-					context.error = "Zip must contain numbers only";
+					context.error = "Zip must have a length of 5 and contain numbers only";
+					res.render('createAccount',context);
+					return
+				}
+			}
+			if(req.body.phone!=""){
+				if(req.body.zip.phone==10 && /^\d+$/.test(req.body.phone)){
+					query += ", phone";
+					values.push(req.body.phone);
+				}else{
+					var context ={};
+					context.error = "Phone must have a length of 10 and contain numbers only";
+					res.render('createAccount',context);
+					return
+				}
+			}
+			if(req.body.ephone!=""){
+				if(req.body.zip.ephone==10 && /^\d+$/.test(req.body.ephone)){
+					query += ", emergency_phone";
+					values.push(req.body.ephone);
+				}else{
+					var context ={};
+					context.error = "Emergency Phone must have a length of 10 and contain numbers only";
 					res.render('createAccount',context);
 					return
 				}
