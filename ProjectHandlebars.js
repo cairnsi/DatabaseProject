@@ -686,7 +686,7 @@ app.post('/createAccount', function(req,res,next){
 			}
 		}else{
 			var values = [];
-			var query = "INSERT INTO Guided_Tour_Types(first_name, last_name"; 
+			var query = "INSERT INTO Customers(first_name, last_name"; 
 			values.push(req.body.fname);
 			values.push(req.body.lname);
 			if(req.body.street!=""){
