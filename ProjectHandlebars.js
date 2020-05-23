@@ -907,12 +907,12 @@ app.get('/toursTable', function(req,res){
 app.get('/addToursTable', function(req,res){
   var values = [];
   var query = "SELECT Specific_Tours.id, Specific_Tours.date, Guided_Tour_Types.label, Guided_Tour_Types.meet_time, Guided_Tour_Types.cost FROM Specific_Tours JOIN Guided_Tour_Types ON Specific_Tours.type_number = Guided_Tour_Types.id";
-  if(req.query.tourDate || req.query.type){
+  if(req.query.date || req.query.type){
 	  query+= " WHERE";
 	  var addAnd = false;
-	  if(req.query.tourDate){
+	  if(req.query.date){
 		  query+= " Specific_Tours.date = ?"
-		  values.push(req.query.tourDate);
+		  values.push(req.query.date);
 		  addAnd = true;
 	  }
 	  if(req.query.type){
