@@ -111,6 +111,37 @@ app.get('/addService',function(req,res){
    res.render('addService',context);
 });
 
+app.post('/addServiceToCart', function(req,res,next){
+  if(!req.body.id || !req.body.qty){
+	  res.status(404);
+	  res.send("service id and quantity required");
+	  return;
+  }
+  if(req.session.cartService){
+	var found = false;
+	for(int i = 0;i< req.session.cartService.length){
+		if(req.session.cartService[i][0]==req.body.id){
+			req.session.cartService[i][1]+=req.body.qty;
+			found = true;
+			console.log(req.session.cartService[i][1]);
+		}
+	}
+	if(!found){
+		req.session.cartService.push([req.body.id, req.body.qty]);
+		console.log(req.body.qty);
+	}
+  }else{
+	  req.session.cartService=[];
+	  req.session.cartService.push([req.body.id, req.body.qty]);
+	  console.log(req.body.qty);
+  }
+  res.status(200);
+  res.send("success");
+  return;
+	  
+  
+});
+
 app.get('/siteAdmin',function(req,res){
   var context = {};
    res.render('siteAdmin',context);
