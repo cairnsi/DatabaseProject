@@ -738,8 +738,8 @@ app.post('/createAccount', function(req,res,next){
 			pool.query(query, [values],function(err,result){ 
 			  if(!err){
 				var context = {};
-				context.success = "Success";
-				console.log(JSON.stringify(result));
+				context.success = "Success: You are now signed in as " + req.body.fname + " " + req.body.lname;
+				req.session.customerId = result.insertId;
 				res.render('createAccount',context);
 				return;
 			  }else{
