@@ -904,6 +904,36 @@ app.get('/toursTable', function(req,res){
   });
 });
 
+app.get('/addToursTable', function(req,res){
+  var values = [];
+  var query = "SELECT Specific_Tours.id, Specific_Tours.date, Guided_Tour_Types.label, Guided_Tour_Types.meet_time, Guided_Tour_Types.cost FROM Specific_Tours JOIN Guided_Tour_Types ON Specific_Tours.type_number = Guided_Tour_Types.id";
+  if(req.query.date || req.query.type){
+	  query+= " WHERE";
+	  var addAnd = false;
+	  if(req.query.date){
+		  query+= " Specific_Tours.date = ?"
+		  values.push(req.query.date);
+		  addAnd = true;
+	  }
+	  if(req.query.type){
+		  if(addAnd){
+			  query += " AND";
+		  }
+		  query+= " Guided_Tour_Types.label = ?"
+		  values.push(req.query.type);
+	  }
+  }
+	  
+  pool.query(query, values,function(err,result){ 
+    if(!err){
+		res.send(JSON.stringify(result));
+		
+	}else{
+		next(err);
+	}
+  });
+});
+
 
 app.use(function(req,res){
   res.status(404);
