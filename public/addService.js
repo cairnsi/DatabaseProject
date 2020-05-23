@@ -74,7 +74,7 @@ function bindAddToCart(item){
 			console.log("Error in network request: " + req.statusText);
 		  }});
 		  req.send(JSON.stringify(payload));*/
-		  console.log(document.getElementById(item.selectId));
+		  console.log(document.getElementById(item.selectId).value);
 		  event.preventDefault();
 	}
 }
