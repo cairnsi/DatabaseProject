@@ -739,7 +739,7 @@ app.post('/createAccount', function(req,res,next){
 			  if(!err){
 				var context = {};
 				context.success = "Success";
-				console.log(result.insertedID);
+				console.log(JSON.stringify(result));
 				res.render('createAccount',context);
 				return;
 			  }else{
