@@ -64,6 +64,28 @@ function bindFilter(){
 	});
 }
 
+function createTourTypeOptions(){
+	var req = new XMLHttpRequest();
+	req.open('GET', '/tourTypeTable', true);
+	  req.setRequestHeader('Content-Type', 'application/json');
+	  req.addEventListener('load',function(){
+		  if(req.status >= 200 && req.status < 400){
+			  var typeSelect = document.getElementById('type');
+			  var response = JSON.parse(req.responseText);
+			  for(var i = 0;i<response.length;i++){
+				  var item = response[i];
+				  var option = document.createElement("option");
+				  option.text = item.label;
+				  option.value = item.label;
+				  typeSelect.add(option); 
+			  }
+		  }else{
+			  
+		  }
+	  });
+	  req.send();
+}
+
 document.addEventListener('DOMContentLoaded', bindFilter);
 var input = {};
 displayToursTable(input);
