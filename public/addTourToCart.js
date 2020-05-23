@@ -47,5 +47,22 @@ function displayToursTable(input){
 	  });
 	  req.send();
 }
+
+function bindFilter(){
+	var serviceElements = document.getElementById('filter').addEventListener('click', function(event){
+	  event.preventDefault();
+	  var item = {};
+	  var date = document.getElementById('tourDate').value;
+	  var type = document.getElementById('type').value;
+	  if(date!=""){
+		  item.date = date;
+	  }
+	  if(type!=""){
+		  item.type = type;
+	  }
+	  displayToursTable(item);
+	});
+}
+
 var input = {};
 displayToursTable(input);
