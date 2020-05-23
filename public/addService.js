@@ -29,6 +29,9 @@ function displayServiceTypeTable(){
 				  cell = row.insertCell();
 				  cell.textContent = '$'+(item.cost/100);
 				  
+				  var selectId = "select" + i;
+				  item.selectId = selectId;
+				  
 				  var btn = document.createElement('button');
 				  btn.setAttribute('class', 'add');
 				  btn.innerHTML = 'Add to Cart';
@@ -36,12 +39,14 @@ function displayServiceTypeTable(){
 				  row.appendChild(btn);
 				  
 				  var qty = document.createElement("SELECT");
+				  qty.setAttribute('class', selectId);
 				  for(var j = 0;j<6;j++){
 					  var item = j;
 					  var option = document.createElement("option");
 					  option.text = j;
 					  option.value = j;
 					  qty.add(option); 
+					  
 				  }
 				  row.appendChild(qty);
 			  }
@@ -69,7 +74,7 @@ function bindAddToCart(item){
 			console.log("Error in network request: " + req.statusText);
 		  }});
 		  req.send(JSON.stringify(payload));*/
-		  console.log(this.next().value);
+		  console.log(document.getElementById(item.selectId));
 		  event.preventDefault();
 	}
 }
