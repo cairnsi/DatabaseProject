@@ -58,7 +58,7 @@ app.post('/signIn', function(req,res,next){
 				req.session.customerId = result[0].id;
 				if(checkSession(req,res)){
 					var context = {};
-					context.success = "Successfully signed in."; 
+					context.success = "Successfully signed in as " + req.body.fname + " " + req.body.lname; 
 					res.render('signIn',context);
 					return;
 				}else{
