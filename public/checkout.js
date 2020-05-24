@@ -52,7 +52,7 @@ function displayCartTable(){
 						  cell.textContent = "Service";
 						  cell = row.insertCell();
 						  cell.textContent = '$'+(item.cost/100);
-						  cost +=(item.cost/100)
+						  cost +=((item.cost/100)*parseInt(item.qty));
 						  cell = row.insertCell();
 						  cell.textContent = item.qty;
 						  
@@ -63,7 +63,7 @@ function displayCartTable(){
 						  btn.innerHTML = 'remove';
 						  //btn.onclick =  bindAddToCart(item);
 						  row.appendChild(btn);
-						  qty++;
+						  qty+= parseInt(item.qty);
 					  }
 					  document.getElementById('cost').innerHTML="$"+cost;
 					  document.getElementById('qty').innerHTML=qty;
