@@ -209,6 +209,47 @@ app.get('/checkout',function(req,res){
    res.render('checkout',context);
 });
 
+function purchase(req, res){
+	query = "INSERT INTO Purchases(purchase_date, customer_id) VALUES (?)";
+	pool.query(query, [[new Date(),req.session.customerId]],function(err,result){ 
+	  if(!err){
+		  var purchaseId = result.insertId;
+		  if(req.session.cartTours.length>0){
+			    query = "INSERT INTO Purchases_Tours(purchase_id, tour_id) VALUES (?)";
+			    var tourValues = [];
+			    for(var i = 0;i<req.session.cartTours.length;i++){
+					tourValues.push([purchaseId, req.session.cartTours[i]]);
+				}
+				pool.query(query, [tourValues],function(err,result){ 
+				  if(!err){
+					  console.log("inserted Tours");
+					  res.status(200);
+						res.send("inserted Tours");
+						return;
+					  }
+				  else{
+					  res.status(500);
+					  res.send("server error");
+					  return;
+						
+				  }
+				});
+		  }else {
+			  //purchaseService(purchaseId, req, res);
+			  console.log("inserted Tours");
+			  res.status(200);
+			  res.send("no tours");
+			  return;
+		  }
+	  else{
+		  res.status(500);
+		  res.send("server error");
+		  return;
+			
+	  }
+	});
+}
+
 app.post('/checkout', function(req,res,next){
   if(!checkSession(req,res)){
 		res.status(400);
@@ -229,45 +270,15 @@ app.post('/checkout', function(req,res,next){
 				res.send(JSON.stringify(result));
 				return;
 		  }
-			/*query = "INSERT INTO Purchases(purchase_date, customer_id) VALUES (?)";
-			pool.query(query, [[new Date(),req.session.customerId]],function(err,result){ 
-			  if(!err){
-				  if(
-				  query = "INSERT INTO Purchases_Tours(purchase_id, tour_id) VALUES (?)";
-				  var tourValues = [];
-				  for(var i = 0;i<req.session.cartTours.length
-					pool.query(query, [[new Date(),req.session.customerId]],function(err,result){ 
-					  if(!err){
-						  console.log(result.insertId);
-						  res.status(200);
-							res.send(JSON.stringify(result));
-							return;
-						  }
-					  else{
-						  res.status(500);
-						  res.send("server error");
-						  return;
-							
-					  }
-					});
-			  else{
-				  res.status(500);
-				  res.send("server error");
-				  return;
-					
-			  }
-			});*/
-				  res.status(200);
-				  res.send("length>0");
-				  return;
+		  purchase(req, res);
+		  return;
 	  }else{
 		next(err);
 	  }
     });
   }else{
-	  res.status(200);
-				  res.send("length==0");
-				  return;
+	  purchase(req, res);
+	  return;
   }
 });
 
