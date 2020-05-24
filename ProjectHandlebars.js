@@ -103,18 +103,18 @@ app.get('/addTour',function(req,res){
 
 app.get('/cartToursTable',function(req,res){
   if(!req.session.cartTours){
-	  var item = {};
-	  res.json(JSON.stringify(item));
+	  var item = [];
+	  res.send(JSON.stringify(item));
   }
   if(req.session.cartTours.length==0){
 	  var item = [];
-	  res.json(JSON.stringify(item));
+	  res.send(JSON.stringify(item));
   }
   var query = "SELECT Specific_Tours.id, Specific_Tours.date, Guided_Tour_Types.label, Guided_Tour_Types.cost FROM Specific_Tours JOIN Guided_Tour_Types ON Guided_Tour_Types.id = Specific_Tours.type_number WHERE Specific_Tours.id IN ?";
 	pool.query(query, [req.session.cartTours],function(err,result){ 
 	  if(!err){
 		console.log(JSON.stringify(result));
-		res.json(JSON.stringify(result));
+		res.send(JSON.stringify(result));
 	  }else{
 		next(err);
 	  }
