@@ -252,8 +252,8 @@ function purchase(req, res){
 				}
 				pool.query(query, [tourValues],function(err,result){ 
 				  if(!err){
+						req.session.cartTours = [];
 					    purchaseService(purchaseId, req, res);
-					    req.session.cartTours = [];
 						return;
 				  }
 				  else{
