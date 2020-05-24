@@ -71,3 +71,4 @@ function displayItemsTable(){
 	  
 }
 displayPurchaseInfoTable();
+displayItemsTable();
