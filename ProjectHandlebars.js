@@ -165,25 +165,44 @@ app.post('/addServiceToCart', function(req,res,next){
 	  res.send("service id and quantity required");
 	  return;
   }
-  if(req.session.cartService){
-	var found = false;
-	for(var i = 0;i< req.session.cartService.length;i++){
-		if(req.session.cartService[i][0]==req.body.id){
-			req.session.cartService[i][1]= (parseInt(req.session.cartService[i][1])+ parseInt(req.body.qty));
-			found = true;
-		}
-	}
-	if(!found){
-		req.session.cartService.push([req.body.id, req.body.qty]);
-	}
-  }else{
-	  req.session.cartService=[];
-	  req.session.cartService.push([req.body.id, req.body.qty]);
-  }
-  res.status(200);
-  res.send("success");
-  return;
-	  
+  var query = "SELECT id FROM Service_Types WHERE id = ?";
+	pool.query(query, [req.body.id],function(err,result){ 
+	  if(!err){
+		  if(result[0]){
+				if(result[0].id){
+				  if(req.session.cartService){
+					var found = false;
+					for(var i = 0;i< req.session.cartService.length;i++){
+						if(req.session.cartService[i][0]==req.body.id){
+							req.session.cartService[i][1]= (parseInt(req.session.cartService[i][1])+ parseInt(req.body.qty));
+							found = true;
+						}
+					}
+					if(!found){
+						req.session.cartService.push([req.body.id, req.body.qty]);
+					}
+				  }else{
+					  req.session.cartService=[];
+					  req.session.cartService.push([req.body.id, req.body.qty]);
+				  }
+				  res.status(200);
+				  res.send("success");
+				  return;
+				  else{
+				  res.status(400);
+				  res.send("Service id does not exist");
+				  return;
+				}
+		  }
+		  else{
+			  res.status(500);
+			  res.send("server error");
+			  return;
+			}
+	  }else{
+		next(err);
+	  }
+    });
   
 });
 
