@@ -1036,6 +1036,8 @@ app.get('/purchasesTable', function(req,res){
 		  values.push(req.query.last_name);
 	  }
   }
+  
+  query+= " ORDER BY Purchases.id";
 	  
   pool.query(query, values,function(err,result){ 
     if(!err){
