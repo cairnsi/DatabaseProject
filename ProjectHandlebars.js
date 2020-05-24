@@ -204,7 +204,7 @@ app.get('/checkout',function(req,res){
 });
 
 app.post('/checkout', function(req,res,next){
-  if(!req.session.id){
+  if(!checkSession(req,res)){
 		res.status(400);
 		res.send("Please sign in to complete purchase");
 		return;
