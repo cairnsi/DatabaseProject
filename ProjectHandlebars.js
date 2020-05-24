@@ -223,6 +223,7 @@ function purchaseService(purchaseId, req, res){
 	  if(!err){
 			res.status(200);
 			res.send("success");
+			req.session.cartService=[];
 			return;
 	  }
 	  else{
