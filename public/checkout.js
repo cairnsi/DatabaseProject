@@ -61,9 +61,8 @@ function displayCartTable(){
 						  btn.innerHTML = 'remove';
 						  //btn.onclick =  bindAddToCart(item);
 						  row.appendChild(btn);
-						  
-						  document.getElementById('cost').innerHTML=cost;
 					  }
+					  document.getElementById('cost').innerHTML=cost;
 				  }
 			  });
 			  innerreq.send();
