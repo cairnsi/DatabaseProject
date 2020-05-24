@@ -834,6 +834,7 @@ app.get('/purchases',function(req,res){
 
 app.get('/viewPurchase',function(req,res){
   var context = {};
+  context.id = req.query.id;
    res.render('viewPurchase',context);
 });
 
