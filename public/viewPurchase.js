@@ -82,7 +82,7 @@ function displayItemsTable(){
 						  cost +=(parseInt(item.cost)*parseInt(item.quantity));
 						  cell = row.insertCell();
 						  cell.textContent = item.quantity;
-						  qty+= parseInt(item.qty);
+						  qty+= parseInt(item.quantity);
 					  }
 					  document.getElementById('cost').innerHTML="$"+(cost/100);
 					  document.getElementById('qty').innerHTML=qty;
