@@ -16,7 +16,7 @@ function displayPurchaseInfoTable(){
 				  var item = response[i];
 				  row = table.insertRow();
 				  var cell = row.insertCell();
-				  cell.textContent = item.date.substring(0, 10);
+				  cell.textContent = item.purchase_date.substring(0, 10);
 				  cell = row.insertCell();
 				  cell.textContent = item.first_name;
 				  cell = row.insertCell();
