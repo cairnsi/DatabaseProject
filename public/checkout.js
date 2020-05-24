@@ -114,10 +114,21 @@ function bindCheckout(){
 	  req.setRequestHeader('Content-Type', 'application/json');
 	  req.addEventListener('load',function(){
 		  if(req.status >= 200 && req.status < 400){
+			  document.getElementById('error').innerHTML="";
 			  document.getElementById('success').innerHTML="success";
 		  }else if(req.status==400){
+			  document.getElementById('success').innerHTML="";
 			  document.getElementById('error').innerHTML=req.responseText;
-		  }
+		  }else if(req.status==409){
+			  var response = JSON.parse(req.responseText);
+			  var message = "You are already signed up for:
+			  for(int i=0;i<response.length;i++){
+				  message += item.label + " ("+ item.date.substring(0, 10) + "),  "
+			  }
+			  message += " Please remove them before checkout";
+			  document.getElementById('success').innerHTML="";
+			  document.getElementById('error').innerHTML= message;
+		    }
 		});
 		req.send();
 	});
