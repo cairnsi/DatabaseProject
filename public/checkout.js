@@ -105,4 +105,20 @@ function bindAddToCart(item){
 		  event.preventDefault();
 	}
 }
-displayCartTable()
+
+function bindCheckout(){
+	var serviceElements = document.getElementById('checkout').addEventListener('click', function(event){
+	  event.preventDefault();
+	  var req = new XMLHttpRequest();
+	  req.open('POST', '/yourTours', true);
+	  req.setRequestHeader('Content-Type', 'application/json');
+	  req.addEventListener('load',function(){
+		  if(req.status >= 200 && req.status < 400){
+			  document.getElementById('success').innerHTML="success";
+		  }else if(req.status==400){
+			  document.getElementById('error').innerHTML=req.responseText;
+		  }
+	});
+}
+displayCartTable();
+bindCheckout();

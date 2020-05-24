@@ -142,7 +142,7 @@ app.get('/cartServiceTable',function(req,res){
 	  if(!err){
 		for(var j = 0; j< result.length;j++){
 			result[j].qty = req.session.cartService[j][1];
-		}
+		}fcd fdrs
 		res.send(JSON.stringify(result));
 	  }else{
 		next(err);
@@ -201,6 +201,55 @@ app.post('/addTourToCart', function(req,res,next){
 app.get('/checkout',function(req,res){
   var context = {};
    res.render('checkout',context);
+});
+
+app.post('/checkout', function(req,res,next){
+  if(!req.session.id){
+		res.status(400);
+		res.send("Please sign in to complete purchase");
+		return;
+  }
+  /*var query = "SELECT id FROM Specific_Tours WHERE id = ?";
+	pool.query(query, [req.body.id],function(err,result){ 
+	  if(!err){
+		  if(result[0]){
+				if(result[0].id){
+				  if(req.session.cartTours){
+					var found = false;
+					for(var i = 0;i< req.session.cartTours.length;i++){
+						if(req.session.cartTours[i]==req.body.id){
+							res.status(409);
+							res.send("Tour is already in cart");
+							return;
+						}
+					}
+					if(!found){
+						req.session.cartTours.push(req.body.id);
+					}
+				  }else{
+					  req.session.cartTours=[];
+					  req.session.cartTours.push([req.body.id]);
+				  }
+				  res.status(200);
+				  res.send("success");
+				  return;
+				}else{
+				  res.status(400);
+				  res.send("tour id does not exist");
+				  return;
+				}
+		  }
+		  else{
+			  res.status(500);
+			  res.send("server error");
+			  return;
+			}
+	  }else{
+		next(err);
+	  }
+    });*/
+	res.status(200);
+	res.send("would be success");
 });
 
 app.get('/addService',function(req,res){
