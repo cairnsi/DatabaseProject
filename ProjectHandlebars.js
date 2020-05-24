@@ -218,6 +218,9 @@ app.post('/checkout', function(req,res,next){
 				res.send(JSON.stringify(result));
 				return;
 		  }
+		  res.status(200);
+			  res.send("would be success");
+			  return;
 	  }else{
 		next(err);
 	  }
@@ -263,9 +266,7 @@ app.post('/checkout', function(req,res,next){
 		next(err);
 	  }
     });*/
-	res.status(200);
-			  res.send("would be success");
-			  return;
+	
 });
 
 app.get('/addService',function(req,res){
