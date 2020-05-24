@@ -68,7 +68,7 @@ function displayItemsTable(){
 			  innerreq.setRequestHeader('Content-Type', 'application/json');
 			  innerreq.addEventListener('load',function(){
 				  if(innerreq.status >= 200 && innerreq.status < 400){
-					  var table = document.getElementById('cartTable');
+					  var table = document.getElementById('itemsTable');
 					  var response = JSON.parse(innerreq.responseText);
 					  for(var i = 0;i<response.length;i++){
 						  var item = response[i];
