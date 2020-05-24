@@ -241,7 +241,7 @@ function purchase(req, res){
 			  res.send("no tours");
 			  return;
 		  }
-	  else{
+	  }else{
 		  res.status(500);
 		  res.send("server error");
 		  return;
