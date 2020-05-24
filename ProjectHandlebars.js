@@ -218,9 +218,11 @@ function purchaseService(purchaseId, req, res){
 	var serviceValues = [];
 	for(var i = 0;i<req.session.cartService.length;i++){
 		serviceValues.push([purchaseId, req.session.cartService[i][0],req.session.cartService[i][1]]);
+		console.log(i);
 	}
 	pool.query(query, [serviceValues],function(err,result){ 
 	  if(!err){
+		  console.log("here");
 			res.status(200);
 			res.send("success");
 			req.session.cartService=[];
