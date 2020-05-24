@@ -119,6 +119,7 @@ function bindCheckout(){
 			  document.getElementById('error').innerHTML=req.responseText;
 		  }
 		});
+		req.send();
 	});
 }
 displayCartTable();
