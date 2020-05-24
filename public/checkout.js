@@ -23,7 +23,7 @@ function displayCartTable(){
 				  cell.textContent = "Tour";
 				  cell = row.insertCell();
 				  cell.textContent = '$'+(item.cost/100);
-				  cost +=(item.cost)
+				  cost +=parseInt(item.cost)
 				  cell = row.insertCell();
 				  cell.textContent = "1";
 				  
@@ -52,7 +52,7 @@ function displayCartTable(){
 						  cell.textContent = "Service";
 						  cell = row.insertCell();
 						  cell.textContent = '$'+(item.cost/100);
-						  cost +=((item.cost)*parseInt(item.qty));
+						  cost +=(parseInt(item.cost)*parseInt(item.qty));
 						  cell = row.insertCell();
 						  cell.textContent = item.qty;
 						  
