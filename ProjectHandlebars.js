@@ -212,6 +212,8 @@ app.get('/checkout',function(req,res){
 function purchaseService(purchaseId, req, res){
 	if(req.session.cartService.length==0){
 		req.session.cartService=[];
+		res.status(200);
+		res.send("success");
 		return;
 	}
 	query = "INSERT INTO Purchases_Service_Types(purchase_id, service_id, quantity) VALUES ?";
