@@ -209,6 +209,31 @@ app.get('/checkout',function(req,res){
    res.render('checkout',context);
 });
 
+function purchaseService(purchaseId, req, res){
+	if(req.session.cartService.length==0){
+		req.session.cartService=[];
+		return;
+	}
+	query = "INSERT INTO Purchases_Service_Types(purchase_id, service_id, quantity) VALUES ?";
+	var serviceValues = [];
+	for(var i = 0;i<req.session.cartService.length;i++){
+		serviceValues.push([purchaseId, req.session.cartService[i][0],req.session.cartService[i][1]]);
+	}
+	pool.query(query, [serviceValues],function(err,result){ 
+	  if(!err){
+			res.status(200);
+			res.send("success");
+			return;
+	  }
+	  else{
+		  res.status(500);
+		  res.send("server1 error");
+		  return;
+			
+	  }
+	}); 
+}
+
 function purchase(req, res){
 	query = "INSERT INTO Purchases(purchase_date, customer_id) VALUES (?)";
 	pool.query(query, [[new Date(),req.session.customerId]],function(err,result){ 
@@ -219,27 +244,23 @@ function purchase(req, res){
 			    var tourValues = [];
 			    for(var i = 0;i<req.session.cartTours.length;i++){
 					tourValues.push([purchaseId, req.session.cartTours[i]]);
-					console.log(i);
 				}
 				pool.query(query, [tourValues],function(err,result){ 
 				  if(!err){
-					  console.log("inserted Tours");
-					  res.status(200);
-						res.send("inserted Tours");
+					    purchaseService(purchaseId, req, res);
+					    req.session.cartTours = [];
 						return;
-					  }
+				  }
 				  else{
 					  res.status(500);
-					  res.send("server1 error");
+					  res.send("server error");
 					  return;
 						
 				  }
 				});
 		  }else {
-			  //purchaseService(purchaseId, req, res);
-			  console.log("no Tours");
-			  res.status(200);
-			  res.send("no tours");
+			  purchaseService(purchaseId, req, res);
+			  req.session.cartTours = [];
 			  return;
 		  }
 	  }else{
