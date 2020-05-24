@@ -113,7 +113,6 @@ function bindCheckout(){
 	  req.open('POST', '/checkout', true);
 	  req.setRequestHeader('Content-Type', 'application/json');
 	  req.addEventListener('load',function(){
-		  displayCartTable();
 		  if(req.status >= 200 && req.status < 400){
 			  document.getElementById('error').innerHTML="";
 			  document.getElementById('success').innerHTML="success";
