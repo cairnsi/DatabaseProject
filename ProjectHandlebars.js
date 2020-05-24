@@ -221,7 +221,7 @@ function purchase(req, res){
 					tourValues.push([purchaseId, req.session.cartTours[i]]);
 					console.log(i);
 				}
-				pool.query(query, tourValues,function(err,result){ 
+				pool.query(query, [tourValues],function(err,result){ 
 				  if(!err){
 					  console.log("inserted Tours");
 					  res.status(200);
