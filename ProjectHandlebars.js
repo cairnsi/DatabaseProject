@@ -211,7 +211,7 @@ app.post('/checkout', function(req,res,next){
   }
   if(req.session.cartTours){
 	var query = "SELECT Specific_Tours.id, Guided_Tour_Types.label, Specific_Tours.date FROM Purchases JOIN Purchases_Tours ON Purchases_Tours.purchase_id = Purchases.id JOIN Specific_Tours ON Specific_Tours.id = Purchases_Tours.tour_id JOIN Guided_Tour_Types ON Guided_Tour_Types.id =Specific_Tours.type_number WHERE Purchases.customer_id = ? AND Specific_Tours.id IN ?";
-	pool.query(query, [req.sessiong.customerId, [req.session.cartTours]],function(err,result){ 
+	pool.query(query, [req.session.customerId, [req.session.cartTours]],function(err,result){ 
 	  if(!err){
 		  if(result.length>0){
 				res.status(409);
