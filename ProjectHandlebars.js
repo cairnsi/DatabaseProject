@@ -142,7 +142,7 @@ app.get('/cartServiceTable',function(req,res){
 	  if(!err){
 		for(var j = 0; j< result.length;j++){
 			result[j].qty = req.session.cartService[j][1];
-		}fcd fdrs
+		}
 		res.send(JSON.stringify(result));
 	  }else{
 		next(err);
