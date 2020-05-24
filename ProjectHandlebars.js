@@ -188,7 +188,8 @@ app.post('/addServiceToCart', function(req,res,next){
 				  res.status(200);
 				  res.send("success");
 				  return;
-				  else{
+				}
+				else{
 				  res.status(400);
 				  res.send("Service id does not exist");
 				  return;
