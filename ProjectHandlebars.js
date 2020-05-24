@@ -226,13 +226,11 @@ app.post('/checkout', function(req,res,next){
 					res.send(JSON.stringify(result));
 					return;
 				  }
-				  else{
-					  res.status(500);
-					  res.send("server error");
-					  return;
-					}
-			  }else{
-				next(err);
+			  else{
+				  res.status(500);
+				  res.send("server error");
+				  return;
+					
 			  }
 			});
 	  }else{
