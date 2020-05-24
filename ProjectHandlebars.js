@@ -55,6 +55,12 @@ app.post('/signIn', function(req,res,next){
 					req.session.cartTours=[];
 					req.session.cartService=[];
 				}
+				if(!req.session.cartTours){
+					req.session.cartTours=[];
+				}
+				if(!req.session.cartService){
+					req.session.cartService=[];
+				}
 				req.session.customerId = result[0].id;
 				if(checkSession(req,res)){
 					var context = {};
