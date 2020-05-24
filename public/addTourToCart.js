@@ -60,7 +60,7 @@ function bindAddToCart(item){
 			document.getElementById('error').innerHTML="";
 			document.getElementById('success').innerHTML=item.label + " added to cart";
 		  } else if(req.status ==  409){
-			document.getElementById('success').innerHTML=item.label + "";
+			document.getElementById('success').innerHTML="";
 			document.getElementById('error').innerHTML="This item is already in your cart";
 		  }else {
 			console.log("Error in network request: " + req.statusText);
