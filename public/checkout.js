@@ -23,7 +23,7 @@ function displayCartTable(){
 				  cell.textContent = "Tour";
 				  cell = row.insertCell();
 				  cell.textContent = '$'+(item.cost/100);
-				  cost +=(item.cost/100)
+				  cost +=(item.cost)
 				  cell = row.insertCell();
 				  cell.textContent = "1";
 				  
@@ -52,7 +52,7 @@ function displayCartTable(){
 						  cell.textContent = "Service";
 						  cell = row.insertCell();
 						  cell.textContent = '$'+(item.cost/100);
-						  cost +=((item.cost/100)*parseInt(item.qty));
+						  cost +=((item.cost)*parseInt(item.qty));
 						  cell = row.insertCell();
 						  cell.textContent = item.qty;
 						  
@@ -65,7 +65,7 @@ function displayCartTable(){
 						  row.appendChild(btn);
 						  qty+= parseInt(item.qty);
 					  }
-					  document.getElementById('cost').innerHTML="$"+cost;
+					  document.getElementById('cost').innerHTML="$"+(cost/100);
 					  document.getElementById('qty').innerHTML=qty;
 				  }
 			  });
