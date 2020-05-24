@@ -220,7 +220,7 @@ function purchase(req, res){
 			    for(var i = 0;i<req.session.cartTours.length;i++){
 					tourValues.push([purchaseId, req.session.cartTours[i]]);
 				}
-				pool.query(query, [tourValues],function(err,result){ 
+				pool.query(query, [[tourValues]],function(err,result){ 
 				  if(!err){
 					  console.log("inserted Tours");
 					  res.status(200);
@@ -229,7 +229,7 @@ function purchase(req, res){
 					  }
 				  else{
 					  res.status(500);
-					  res.send("server error");
+					  res.send("server1 error");
 					  return;
 						
 				  }
