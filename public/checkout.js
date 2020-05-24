@@ -15,14 +15,14 @@ function displayCartTable(){
 				  var item = response[i];
 				  row = table.insertRow();
 				  var cell = row.insertCell();
-				  var itemname = item.label + " ("+ item.date + ") ";
+				  var itemname = item.label + " ("+ item.date.substring(0, 10) + ") ";
 				  cell.textContent = itemname;
 				  cell = row.insertCell();
 				  cell.textContent = "Tour";
 				  cell = row.insertCell();
 				  cell.textContent = '$'+(item.cost/100);
 				  cell = row.insertCell();
-				  cell.textContent = "0";
+				  cell.textContent = "1";
 				  
 				  
 				  
