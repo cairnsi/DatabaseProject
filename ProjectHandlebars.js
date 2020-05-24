@@ -142,7 +142,7 @@ app.get('/cartServiceTable',function(req,res){
 	pool.query(query, [[ids]],function(err,result){ 
 	  if(!err){
 		for(var j = 0; j< result.length;j++){
-			result[j].qty = req.session.cartService[i][1];
+			result[j].qty = req.session.cartService[j][1];
 		}
 		console.log(JSON.stringify(result));
 		res.send(JSON.stringify(result));
