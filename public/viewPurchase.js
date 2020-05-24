@@ -1,6 +1,6 @@
 function displayPurchaseInfoTable(){
 	var req = new XMLHttpRequest();
-	var path = "/purchaseInfoTable?id="+document.getElementById('id');
+	var path = "/purchaseInfoTable?id="+document.getElementById('id').value;
 	req.open('GET', path, true);
 	  req.setRequestHeader('Content-Type', 'application/json');
 	  req.addEventListener('load',function(){
