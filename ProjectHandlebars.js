@@ -209,6 +209,21 @@ app.post('/checkout', function(req,res,next){
 		res.send("Please sign in to complete purchase");
 		return;
   }
+  if(req.session.cartTours){
+	var query = "SELECT Specific_Tours.id, Guided_Tour_Types.label, Specific_Tours.date FROM Purchases JOIN Purchases_Tours ON Purchases_Tours.purchase_id = Purchases.id JOIN Specific_Tours ON Specific_Tours.id = Purchases_Tours.tour_id JOIN Guided_Tour_Types ON Guided_Tour_Types.id =Specific_Tours.type_number WHERE Purchases.customer_id = ? AND Specific_Tours.id IN ?";
+	pool.query(query, [req.sessiong.customerId, [req.session.cartTours]],function(err,result){ 
+	  if(!err){
+		  if(result.length>0){
+				res.status(409);
+				res.send(JSON.stringify(result));
+				return;
+		  }
+	  }else{
+		next(err);
+	  }
+    });
+  }
+  
   /*var query = "SELECT id FROM Specific_Tours WHERE id = ?";
 	pool.query(query, [req.body.id],function(err,result){ 
 	  if(!err){
@@ -249,7 +264,8 @@ app.post('/checkout', function(req,res,next){
 	  }
     });*/
 	res.status(200);
-	res.send("would be success");
+			  res.send("would be success");
+			  return;
 });
 
 app.get('/addService',function(req,res){
