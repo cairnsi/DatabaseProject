@@ -236,7 +236,7 @@ function purchase(req, res){
 				});
 		  }else {
 			  //purchaseService(purchaseId, req, res);
-			  console.log("inserted Tours");
+			  console.log("no Tours");
 			  res.status(200);
 			  res.send("no tours");
 			  return;
