@@ -1039,6 +1039,23 @@ app.get('/purchaseToursTable', function(req,res){
   });
 });
 
+app.get('/purchaseServicesTable', function(req,res){
+	if(!req.query.id){
+		res.status(404);
+	  res.send("puchase id required");
+	  return;
+	}
+  var query = "SELECT Service_Types.label, Service_Types.cost, Purchases_Service_Types.quantity FROM Purchases_Service_Types JOIN Service_Types ON Purchases_Service_Types.service_id = Service_Types.id WHERE Purchases_Service_Types.purchase_id = ?";
+  pool.query(query, req.query.id,function(err,result){ 
+    if(!err){
+		res.send(JSON.stringify(result));
+		
+	}else{
+		next(err);
+	}
+  });
+});
+
 app.get('/customersTable', function(req,res){
   var values = [];
   var query = "SELECT id, first_name, last_name, street, city, state, zip, phone, emergency_phone FROM Customers";

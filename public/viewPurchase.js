@@ -62,6 +62,33 @@ function displayItemsTable(){
 				  cell.textContent = "1";
 				  qty++;
 			  }
+			  var innerreq = new XMLHttpRequest();
+			  var innerpath = '/purchaseServicesTable?id='+document.getElementById('id').value;
+			  innerreq.open('GET', innerpath, true);
+			  innerreq.setRequestHeader('Content-Type', 'application/json');
+			  innerreq.addEventListener('load',function(){
+				  if(innerreq.status >= 200 && innerreq.status < 400){
+					  var table = document.getElementById('cartTable');
+					  var response = JSON.parse(innerreq.responseText);
+					  for(var i = 0;i<response.length;i++){
+						  var item = response[i];
+						  row = table.insertRow();
+						  var cell = row.insertCell();
+						  cell.textContent = item.label;
+						  cell = row.insertCell();
+						  cell.textContent = "Service";
+						  cell = row.insertCell();
+						  cell.textContent = '$'+(item.cost/100);
+						  cost +=(parseInt(item.cost)*parseInt(item.quantity));
+						  cell = row.insertCell();
+						  cell.textContent = item.quantity;
+						  qty+= parseInt(item.qty);
+					  }
+					  document.getElementById('cost').innerHTML="$"+(cost/100);
+					  document.getElementById('qty').innerHTML=qty;
+				  }
+			  });
+			  innerreq.send();
 		  }else{
 			  //var row = table.insertRow();
 			  //row.innerHTML = "<th>Did not get data for Table</th>"
