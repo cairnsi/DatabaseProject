@@ -8,7 +8,6 @@ function displayPurchaseInfoTable(){
 			  document.getElementById('purchaseInfoTable').innerHTML="";
 			  var table = document.getElementById('purchaseInfoTable');
 			  var response = JSON.parse(req.responseText);
-			  response = JSON.parse(response);
 			  
 			  table.innerHTML="";
 			  var row = table.insertRow();
