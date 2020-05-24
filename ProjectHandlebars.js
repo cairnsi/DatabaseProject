@@ -1005,6 +1005,23 @@ app.get('/purchasesTable', function(req,res){
   });
 });
 
+app.get('/purchaseInfoTable', function(req,res){
+	if(!req.query.id){
+		res.status(404);
+	  res.send("puchase id required");
+	  return;
+	}
+  var query = "SELECT Customers.first_name, Customers.last_name, Purchases.purchase_date FROM Purchases JOIN Customers ON Purchases.customer_id = Customers.id WHERE Purchases.id = ?";
+  pool.query(query, req.query.id,function(err,result){ 
+    if(!err){
+		res.send(JSON.stringify(result));
+		
+	}else{
+		next(err);
+	}
+  });
+});
+
 app.get('/customersTable', function(req,res){
   var values = [];
   var query = "SELECT id, first_name, last_name, street, city, state, zip, phone, emergency_phone FROM Customers";
