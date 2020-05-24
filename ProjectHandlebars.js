@@ -102,6 +102,10 @@ app.get('/addTour',function(req,res){
 });
 
 app.get('/cartToursTable',function(req,res){
+  if(!req.session.cartTours){
+	  var item = [];
+	  res.json(JSON.stringify(item));
+  }
   if(req.session.cartTours.length==0){
 	  var item = [];
 	  res.json(JSON.stringify(item));
