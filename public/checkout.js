@@ -121,9 +121,9 @@ function bindCheckout(){
 			  document.getElementById('error').innerHTML=req.responseText;
 		  }else if(req.status==409){
 			  var response = JSON.parse(req.responseText);
-			  var message = "You are already signed up for:
+			  var message = "You are already signed up for: ";
 			  for(int i=0;i<response.length;i++){
-				  message += item.label + " ("+ item.date.substring(0, 10) + "),  "
+				  message += item.label + " ("+ item.date.substring(0, 10) + "),  ";
 			  }
 			  message += " Please remove them before checkout";
 			  document.getElementById('success').innerHTML="";
