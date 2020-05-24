@@ -1022,6 +1022,23 @@ app.get('/purchaseInfoTable', function(req,res){
   });
 });
 
+app.get('/purchaseToursTable', function(req,res){
+	if(!req.query.id){
+		res.status(404);
+	  res.send("puchase id required");
+	  return;
+	}
+  var query = "SELECT Specific_Tours.date, Guided_Tour_Types.label, Guided_Tour_Types.cost FROM Purchases_Tours JOIN Specific_Tours ON Purchases_Tours.tour_id = Specific_Tours.id JOIN Guided_Tour_Types ON Specific_Tours.type_number = Guided_Tour_Types.id WHERE Purchases_Tours.purchase_id = ?";
+  pool.query(query, req.query.id,function(err,result){ 
+    if(!err){
+		res.send(JSON.stringify(result));
+		
+	}else{
+		next(err);
+	}
+  });
+});
+
 app.get('/customersTable', function(req,res){
   var values = [];
   var query = "SELECT id, first_name, last_name, street, city, state, zip, phone, emergency_phone FROM Customers";
