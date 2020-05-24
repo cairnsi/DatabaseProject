@@ -110,7 +110,7 @@ function bindCheckout(){
 	var serviceElements = document.getElementById('checkout').addEventListener('click', function(event){
 	  event.preventDefault();
 	  var req = new XMLHttpRequest();
-	  req.open('POST', '/yourTours', true);
+	  req.open('POST', '/checkout', true);
 	  req.setRequestHeader('Content-Type', 'application/json');
 	  req.addEventListener('load',function(){
 		  if(req.status >= 200 && req.status < 400){
