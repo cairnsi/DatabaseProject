@@ -215,7 +215,7 @@ function purchase(req, res){
 	  if(!err){
 		  var purchaseId = result.insertId;
 		  if(req.session.cartTours.length>0){
-			    query = "INSERT INTO Purchases_Tours(purchase_id, tour_id) VALUES (?)";
+			    query = "INSERT INTO Purchases_Tours(purchase_id, tour_id) VALUES ?";
 			    var tourValues = [];
 			    for(var i = 0;i<req.session.cartTours.length;i++){
 					tourValues.push([purchaseId, req.session.cartTours[i]]);
