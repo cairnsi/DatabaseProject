@@ -101,6 +101,35 @@ app.get('/addTour',function(req,res){
    res.render('addTour',context);
 });
 
+app.post('/addTourToCart', function(req,res,next){
+  if(!req.body.id){
+	  res.status(404);
+	  res.send("service id required");
+	  return;
+  }
+  if(req.session.cartTours){
+	var found = false;
+	for(var i = 0;i< req.session.cartService.length;i++){
+		if(req.session.cartService[i]==req.body.id){
+			res.status(409);
+			res.send("Tour is already in cart");
+			return;
+		}
+	}
+	if(!found){
+		req.session.cartService.push(req.body.id);
+	}
+  }else{
+	  req.session.cartTours=[];
+	  req.session.cartTours.push([req.body.id]);
+  }
+  res.status(200);
+  res.send("success");
+  return;
+	  
+  
+});
+
 app.get('/checkout',function(req,res){
   var context = {};
    res.render('checkout',context);
