@@ -123,6 +123,7 @@ function bindCheckout(){
 			  var response = JSON.parse(req.responseText);
 			  var message = "You are already signed up for: ";
 			  for(var i=0;i<response.length;i++){
+				  var item = response[i];
 				  message += item.label + " ("+ item.date.substring(0, 10) + "),  ";
 			  }
 			  message += " Please remove them before checkout";
