@@ -60,6 +60,7 @@ function displayCartTable(){
 					  }
 				  }
 			  });
+			  req.send();
 		  }else{
 			  
 		  }
