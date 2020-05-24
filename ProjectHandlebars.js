@@ -219,6 +219,7 @@ function purchase(req, res){
 			    var tourValues = [];
 			    for(var i = 0;i<req.session.cartTours.length;i++){
 					tourValues.push([purchaseId, req.session.cartTours[i]]);
+					console.log(i);
 				}
 				pool.query(query, tourValues,function(err,result){ 
 				  if(!err){
