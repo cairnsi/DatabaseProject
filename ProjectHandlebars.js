@@ -218,16 +218,30 @@ app.post('/checkout', function(req,res,next){
 				res.send(JSON.stringify(result));
 				return;
 		  }
-		  res.status(200);
-			  res.send("would be success");
-			  return;
+		  query = "INSERT INTO Purchases(purchase_date, customer_id) VALUES (?)";
+			pool.query(query, [[new Date(),req.session.customerId]],function(err,result){ 
+			  if(!err){
+				  console.log(result.insertId);
+				  res.status(200);
+					res.send(JSON.stringify(result));
+					return;
+				  }
+				  else{
+					  res.status(500);
+					  res.send("server error");
+					  return;
+					}
+			  }else{
+				next(err);
+			  }
+			});
 	  }else{
 		next(err);
 	  }
     });
   }
   
-  /*var query = "SELECT id FROM Specific_Tours WHERE id = ?";
+  var query = "SELECT id FROM Specific_Tours WHERE id = ?";
 	pool.query(query, [req.body.id],function(err,result){ 
 	  if(!err){
 		  if(result[0]){
@@ -265,7 +279,7 @@ app.post('/checkout', function(req,res,next){
 	  }else{
 		next(err);
 	  }
-    });*/
+    });
 	
 });
 
