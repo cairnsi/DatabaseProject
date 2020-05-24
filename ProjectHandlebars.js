@@ -221,9 +221,9 @@ function purchaseService(purchaseId, req, res){
 	}
 	pool.query(query, [serviceValues],function(err,result){ 
 	  if(!err){
-			req.session.cartService=[];
 			res.status(200);
 			res.send("success");
+			req.session.cartService=[];
 			return;
 	  }
 	  else{
