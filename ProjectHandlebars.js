@@ -209,7 +209,7 @@ app.post('/checkout', function(req,res,next){
 		res.send("Please sign in to complete purchase");
 		return;
   }
-  if(req.session.cartTours){
+  if(req.session.cartTours.length>0){
 	var query = "SELECT Specific_Tours.id, Guided_Tour_Types.label, Specific_Tours.date FROM Purchases JOIN Purchases_Tours ON Purchases_Tours.purchase_id = Purchases.id JOIN Specific_Tours ON Specific_Tours.id = Purchases_Tours.tour_id JOIN Guided_Tour_Types ON Guided_Tour_Types.id =Specific_Tours.type_number WHERE Purchases.customer_id = ? AND Specific_Tours.id IN ?";
 	pool.query(query, [req.session.customerId, [req.session.cartTours]],function(err,result){ 
 	  if(!err){
@@ -218,25 +218,45 @@ app.post('/checkout', function(req,res,next){
 				res.send(JSON.stringify(result));
 				return;
 		  }
-		  query = "INSERT INTO Purchases(purchase_date, customer_id) VALUES (?)";
+			/*query = "INSERT INTO Purchases(purchase_date, customer_id) VALUES (?)";
 			pool.query(query, [[new Date(),req.session.customerId]],function(err,result){ 
 			  if(!err){
-				  console.log(result.insertId);
-				  res.status(200);
-					res.send(JSON.stringify(result));
-					return;
-				  }
+				  if(
+				  query = "INSERT INTO Purchases_Tours(purchase_id, tour_id) VALUES (?)";
+				  var tourValues = [];
+				  for(var i = 0;i<req.session.cartTours.length
+					pool.query(query, [[new Date(),req.session.customerId]],function(err,result){ 
+					  if(!err){
+						  console.log(result.insertId);
+						  res.status(200);
+							res.send(JSON.stringify(result));
+							return;
+						  }
+					  else{
+						  res.status(500);
+						  res.send("server error");
+						  return;
+							
+					  }
+					});
 			  else{
 				  res.status(500);
 				  res.send("server error");
 				  return;
 					
 			  }
-			});
+			});*/
+				  res.status(200);
+				  res.send("length>0");
+				  return;
 	  }else{
 		next(err);
 	  }
     });
+  }else{
+	  res.status(200);
+				  res.send("length==0");
+				  return;
   }
 });
 
