@@ -110,8 +110,8 @@ app.post('/addTourToCart', function(req,res,next){
   var query = "SELECT id FROM Specific_Tours WHERE id = ?";
 	pool.query(query, [req.body.id],function(err,result){ 
 	  if(!err){
-		  if(result1[0]){
-				if(result1[0].id){
+		  if(result[0]){
+				if(result[0].id){
 				  if(req.session.cartTours){
 					var found = false;
 					for(var i = 0;i< req.session.cartTours.length;i++){
