@@ -8,6 +8,7 @@ function displayCartTable(){
 			  var table = document.getElementById('cartTable');
 			  var response = JSON.parse(req.responseText);
 			  var cost = 0;
+			  var qty = 0;
 			  
 			  table.innerHTML="";
 			  var row = table.insertRow();
@@ -33,6 +34,7 @@ function displayCartTable(){
 				  btn.innerHTML = 'remove';
 				  //btn.onclick =  bindAddToCart(item);
 				  row.appendChild(btn);
+				  qty++;
 			  }
 			  var innerreq = new XMLHttpRequest();
 			  innerreq.open('GET', '/cartServiceTable', true);
@@ -61,8 +63,10 @@ function displayCartTable(){
 						  btn.innerHTML = 'remove';
 						  //btn.onclick =  bindAddToCart(item);
 						  row.appendChild(btn);
+						  qty++;
 					  }
-					  document.getElementById('cost').innerHTML=cost;
+					  document.getElementById('cost').innerHTML="$"+cost;
+					  document.getElementById('qty').innerHTML=qty;
 				  }
 			  });
 			  innerreq.send();
