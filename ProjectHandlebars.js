@@ -109,15 +109,15 @@ app.post('/addTourToCart', function(req,res,next){
   }
   if(req.session.cartTours){
 	var found = false;
-	for(var i = 0;i< req.session.cartService.length;i++){
-		if(req.session.cartService[i]==req.body.id){
+	for(var i = 0;i< req.session.cartTours.length;i++){
+		if(req.session.cartTours[i]==req.body.id){
 			res.status(409);
 			res.send("Tour is already in cart");
 			return;
 		}
 	}
 	if(!found){
-		req.session.cartService.push(req.body.id);
+		req.session.cartTours.push(req.body.id);
 	}
   }else{
 	  req.session.cartTours=[];
