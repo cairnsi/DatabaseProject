@@ -32,12 +32,13 @@ function displayCartTable(){
 				  //btn.onclick =  bindAddToCart(item);
 				  row.appendChild(btn);
 			  }
-			  req.open('GET', '/cartServiceTable', true);
-			  req.setRequestHeader('Content-Type', 'application/json');
-			  req.addEventListener('load',function(){
-				  if(req.status >= 200 && req.status < 400){
+			  var innerreq = new XMLHttpRequest();
+			  innerreq.open('GET', '/cartServiceTable', true);
+			  innerreq.setRequestHeader('Content-Type', 'application/json');
+			  innerreq.addEventListener('load',function(){
+				  if(innerreq.status >= 200 && innerreq.status < 400){
 					  var table = document.getElementById('cartTable');
-					  var response = JSON.parse(req.responseText);
+					  var response = JSON.parse(innerreq.responseText);
 					  for(var i = 0;i<response.length;i++){
 						  var item = response[i];
 						  row = table.insertRow();
@@ -60,7 +61,7 @@ function displayCartTable(){
 					  }
 				  }
 			  });
-			  req.send();
+			  innerreq.send();
 		  }else{
 			  
 		  }
