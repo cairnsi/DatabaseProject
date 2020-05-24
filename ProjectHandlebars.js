@@ -238,47 +238,6 @@ app.post('/checkout', function(req,res,next){
 	  }
     });
   }
-  
-  var query = "SELECT id FROM Specific_Tours WHERE id = ?";
-	pool.query(query, [req.body.id],function(err,result){ 
-	  if(!err){
-		  if(result[0]){
-				if(result[0].id){
-				  if(req.session.cartTours){
-					var found = false;
-					for(var i = 0;i< req.session.cartTours.length;i++){
-						if(req.session.cartTours[i]==req.body.id){
-							res.status(409);
-							res.send("Tour is already in cart");
-							return;
-						}
-					}
-					if(!found){
-						req.session.cartTours.push(req.body.id);
-					}
-				  }else{
-					  req.session.cartTours=[];
-					  req.session.cartTours.push([req.body.id]);
-				  }
-				  res.status(200);
-				  res.send("success");
-				  return;
-				}else{
-				  res.status(400);
-				  res.send("tour id does not exist");
-				  return;
-				}
-		  }
-		  else{
-			  res.status(500);
-			  res.send("server error");
-			  return;
-			}
-	  }else{
-		next(err);
-	  }
-    });
-	
 });
 
 app.get('/addService',function(req,res){
