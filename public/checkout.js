@@ -118,6 +118,7 @@ function bindCheckout(){
 		  }else if(req.status==400){
 			  document.getElementById('error').innerHTML=req.responseText;
 		  }
+		});
 	});
 }
 displayCartTable();
