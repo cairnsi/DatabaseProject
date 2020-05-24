@@ -32,6 +32,34 @@ function displayCartTable(){
 				  //btn.onclick =  bindAddToCart(item);
 				  row.appendChild(btn);
 			  }
+			  req.open('GET', '/cartServiceTable', true);
+			  req.setRequestHeader('Content-Type', 'application/json');
+			  req.addEventListener('load',function(){
+				  if(req.status >= 200 && req.status < 400){
+					  var table = document.getElementById('cartTable');
+					  var response = JSON.parse(req.responseText);
+					  for(var i = 0;i<response.length;i++){
+						  var item = response[i];
+						  row = table.insertRow();
+						  var cell = row.insertCell();
+						  cell.textContent = item.label;
+						  cell = row.insertCell();
+						  cell.textContent = "Service";
+						  cell = row.insertCell();
+						  cell.textContent = '$'+(item.cost/100);
+						  cell = row.insertCell();
+						  cell.textContent = item.qty;
+						  
+						  
+						  
+						  var btn = document.createElement('button');
+						  btn.setAttribute('class', 'remove');
+						  btn.innerHTML = 'remove';
+						  //btn.onclick =  bindAddToCart(item);
+						  row.appendChild(btn);
+					  }
+				  }
+			  });
 		  }else{
 			  
 		  }

@@ -123,6 +123,35 @@ app.get('/cartToursTable',function(req,res){
     });
 });
 
+app.get('/cartServiceTable',function(req,res){
+  if(!req.session.cartService){
+	  var item = [];
+	  res.send(JSON.stringify(item));
+	  return;
+  }
+  if(req.session.cartService.length==0){
+	  var item = [];
+	  res.send(JSON.stringify(item));
+	  return;
+  }
+  var ids = [];
+  for(var i = 0;i<req.session.cartService.length;i++){
+	  ids.push(req.session.cartService[i][0]);
+  }
+  var query = "SELECT * FROM Service_Types WHERE id IN ?";
+	pool.query(query, [[ids]],function(err,result){ 
+	  if(!err){
+		for(var j = 0; j< result.length;j++){
+			result[j].qty = req.session.cartService[i][1];
+		}
+		console.log(JSON.stringify(result));
+		res.send(JSON.stringify(result));
+	  }else{
+		next(err);
+	  }
+    });
+});
+
 app.post('/addTourToCart', function(req,res,next){
   if(!req.body.id){
 	  res.status(404);
