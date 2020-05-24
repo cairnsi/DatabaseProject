@@ -31,4 +31,4 @@ function displayPurchaseInfoTable(){
 	  req.send();
 	  
 }
-displayYourToursTable();
+displayPurchaseInfoTable();
