@@ -32,7 +32,7 @@ function displayCartTable(){
 				  var btn = document.createElement('button');
 				  btn.setAttribute('class', 'remove');
 				  btn.innerHTML = 'remove';
-				  //btn.onclick =  bindAddToCart(item);
+				  btn.onclick =  bindRemoveTour(item);
 				  row.appendChild(btn);
 				  qty++;
 			  }
