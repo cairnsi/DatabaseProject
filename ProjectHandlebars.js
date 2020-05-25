@@ -204,7 +204,7 @@ app.post('/addTourToCart', function(req,res,next){
   
 });
 
-app.post('/removeTourToCart', function(req,res,next){
+app.post('/removeTourCart', function(req,res,next){
   if(!req.body.id){
 	  res.status(404);
 	  res.send("tour id required");
