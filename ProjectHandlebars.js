@@ -231,9 +231,9 @@ app.post('/removeServiceCart', function(req,res,next){
 	  return;
   }
   var newTours = [];
-  for(var i = 0;i< req.session.cartTours.length;i++){
+  for(var i = 0;i< req.session.cartService.length;i++){
 	  if(req.session.cartService[i][0] != req.body.id){
-		  newTours.push(req.session.cartTours[i]);
+		  newTours.push(req.session.cartService[i]);
 	  }
 	  
   }
