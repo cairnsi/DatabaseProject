@@ -61,7 +61,7 @@ function displayCartTable(){
 						  var btn = document.createElement('button');
 						  btn.setAttribute('class', 'remove');
 						  btn.innerHTML = 'remove';
-						  //btn.onclick =  bindAddToCart(item);
+						  btn.onclick =  bindRemoveService(item);
 						  row.appendChild(btn);
 						  qty+= parseInt(item.qty);
 					  }
@@ -84,6 +84,24 @@ function bindRemoveTour(item){
 		  var payload = {};
 		  payload.id = item.id;
 		  req.open('POST', '/removeTourCart', true);
+		  req.setRequestHeader('Content-Type', 'application/json');
+		  req.addEventListener('load',function(){
+		  if(req.status >= 200 && req.status < 400){
+			displayCartTable()
+		  } else {
+			console.log("Error in network request: " + req.statusText);
+		  }});
+		  req.send(JSON.stringify(payload));
+		  event.preventDefault();
+	}
+}
+
+function bindRemoveService(item){
+	return function(){
+		  var req = new XMLHttpRequest();
+		  var payload = {};
+		  payload.id = item.id;
+		  req.open('POST', '/removeServiceCart', true);
 		  req.setRequestHeader('Content-Type', 'application/json');
 		  req.addEventListener('load',function(){
 		  if(req.status >= 200 && req.status < 400){

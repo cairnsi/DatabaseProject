@@ -224,6 +224,26 @@ app.post('/removeTourCart', function(req,res,next){
   
 });
 
+app.post('/removeServiceCart', function(req,res,next){
+  if(!req.body.id){
+	  res.status(404);
+	  res.send("Service id required");
+	  return;
+  }
+  var newTours = [];
+  for(var i = 0;i< req.session.cartTours.length;i++){
+	  if(req.session.cartService[i][0] != req.body.id){
+		  newTours.push(req.session.cartTours[i]);
+	  }
+	  
+  }
+    req.session.cartService = newTours;
+	res.status(200);
+	res.send("success");
+	return;			
+  
+});
+
 app.get('/checkout',function(req,res){
   var context = {};
    res.render('checkout',context);
