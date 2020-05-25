@@ -29,7 +29,7 @@ function displayToursTable(input){
 				  var cell = row.insertCell();
 				  cell.textContent = item.label;
 				  cell = row.insertCell();
-				  cell.textContent = item.date;
+				  cell.textContent = item.date.substring(0, 10);
 				  cell = row.insertCell();
 				  cell.textContent = item.meet_time;
 				  cell = row.insertCell();
