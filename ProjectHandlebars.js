@@ -939,6 +939,45 @@ app.get('/purchases',function(req,res){
    res.render('purchases',context);
 });
 
+app.post('/deletePurchase', function(req,res,next){
+  if(req.body.id){
+		var query = "DELETE FROM Purchases_Tours WHERE purchase_id =  ?";
+		pool.query(query, [req.body.id],function(err1,result1){ 
+		  if(!err1){
+			var query = "DELETE FROM Purchases_Service_Types WHERE purchase_id = ?";
+			pool.query(query, [req.body.id],function(err,result){ 
+			  if(!err){
+				var query = "DELETE FROM Purchases WHERE id = ?";
+				pool.query(query, [req.body.id],function(err,result){ 
+				  if(!err){
+					res.status(200);
+					res.send("success");
+					return;
+				  }else{
+					res.status(500);
+					res.send("Could not delete from Purchases");
+					return;
+				  }
+				});
+			  }else{
+				res.status(500);
+				res.send("Could not delete from Purchases_Service_Types");
+				return;
+			  }
+			});
+		  }else{
+			res.status(500);
+			res.send("Could not delete from Purchases_Tours");
+			return;
+		  }
+		});
+  }else{
+	res.status(400);
+	res.send("puchase id required");
+	return;
+  }
+});
+
 app.get('/viewPurchase',function(req,res){
   var context = {};
   context.id = req.query.id;
