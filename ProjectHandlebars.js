@@ -1277,6 +1277,20 @@ app.get('/addToursTable', function(req,res){
   });
 });
 
+router.get('/customers', function(req, res){
+        callbackCount = 0;
+        var context = {};
+        context.jsscripts = ["customers.js", "editCustomers.js"];
+        var mysql = req.app.get('mysql');
+        getCustomers(res, mysql, context, req.params.id, complete);
+        function complete(){
+            callbackCount++;
+            if(callbackCount >= 2){
+                res.render('editCustomer', context);
+            }
+
+        }
+    });
 
 app.use(function(req,res){
   res.status(404);
