@@ -729,6 +729,102 @@ app.get('/editCustomer',function(req,res){
   res.render('500');
 });
 
+app.post('/editCustomer', function(req,res,next){
+  if(!req.body.stateValue || req.body.stateValue==""){
+	  req.body.state = "NA";
+  }
+  if(req.body.fname&& req.body.lname && false){
+	var query = "SELECT id FROM Customers WHERE first_name = ? AND last_name = ?";
+	pool.query(query, [req.body.fname, req.body.lname],function(err1,result1){ 
+	  if(!err1){
+		if(result1[0]){
+			if(result1[0].id){
+				var context ={};
+				context.error = "This customer already exists";
+				res.render('createAccount',context);
+				return
+			}else{
+				var context ={};
+				context.error = "Unknown Error";
+				res.render('createAccount',context);
+				return
+			}
+		}else{
+			var values = [];
+			var query = "INSERT INTO Customers(first_name, last_name"; 
+			values.push(req.body.fname);
+			values.push(req.body.lname);
+			if(req.body.street!=""){
+				query += ", street";
+				values.push(req.body.street);
+			}
+			if(req.body.city!=""){
+				query += ", city";
+				values.push(req.body.city);
+			}
+			if(req.body.state!=""){
+				query += ", state";
+				values.push(req.body.state);
+			}
+			if(req.body.zip!=""){
+				if(req.body.zip.length==5 && /^\d+$/.test(req.body.zip)){
+					query += ", zip";
+					values.push(req.body.zip);
+				}else{
+					var context ={};
+					context.error = "Zip must have a length of 5 and contain numbers only";
+					res.render('createAccount',context);
+					return
+				}
+			}
+			if(req.body.phone!=""){
+				if(req.body.phone.length==10 && /^\d+$/.test(req.body.phone)){
+					query += ", phone";
+					values.push(req.body.phone);
+				}else{
+					var context ={};
+					context.error = "Phone must have a length of 10 and contain numbers only";
+					res.render('createAccount',context);
+					return
+				}
+			}
+			if(req.body.ephone!=""){
+				if(req.body.ephone.length==10 && /^\d+$/.test(req.body.ephone)){
+					query += ", emergency_phone";
+					values.push(req.body.ephone);
+				}else{
+					var context ={};
+					context.error = "Emergency Phone must have a length of 10 and contain numbers only";
+					res.render('createAccount',context);
+					return
+				}
+			}
+			query += " ) VALUES (?)";
+			pool.query(query, [values],function(err,result){ 
+			  if(!err){
+				var context = {};
+				context.success = "Success: You are now signed in as " + req.body.fname + " " + req.body.lname;
+				req.session.customerId = result.insertId;
+				res.render('createAccount',context);
+				return;
+			  }else{
+				next(err);
+			  }
+			});
+		}
+	  }else{
+		next(err1);
+	  }
+	});
+	
+	  
+  }else{
+	req.body.error = "Must enter First Name and Last Name";
+	res.render('createAccount',req.body);
+	return
+  }
+});
+
 app.get('/updateSpecificTours',function(req,res){
   var context = {};
    res.render('updateSpecificTours',context);
