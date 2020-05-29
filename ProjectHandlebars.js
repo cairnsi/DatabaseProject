@@ -754,7 +754,6 @@ function updateCustomer(context,req, res){
 			query += ", zip = ?";
 			values.push(req.body.zip);
 		}else{
-			var context ={};
 			context.error = "Zip must have a length of 5 and contain numbers only";
 			res.render('editCustomer',context);
 			return
@@ -765,7 +764,6 @@ function updateCustomer(context,req, res){
 			query += ", phone = ?";
 			values.push(req.body.phone);
 		}else{
-			var context ={};
 			context.error = "Phone must have a length of 10 and contain numbers only";
 			res.render('editCustomer',context);
 			return
@@ -776,7 +774,6 @@ function updateCustomer(context,req, res){
 			query += ", emergency_phone = ?";
 			values.push(req.body.emergency_phone);
 		}else{
-			var context ={};
 			context.error = "Emergency Phone must have a length of 10 and contain numbers only";
 			res.render('editCustomer',context);
 			return
