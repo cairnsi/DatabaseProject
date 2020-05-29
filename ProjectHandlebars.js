@@ -742,9 +742,12 @@ function updateCustomer(context,req, res){
 		query += ", city = ?";
 		values.push(req.body.city);
 	}
-	if(req.body.state!=""){
+	if(req.body.state!="" && req.body.state!="NA"){
 		query += ", state = ?";
 		values.push(req.body.state);
+	}else{
+		query += ", state = ?";
+		values.push(null);
 	}
 	if(req.body.zip!=""){
 		if(req.body.zip.length==5 && /^\d+$/.test(req.body.zip)){
