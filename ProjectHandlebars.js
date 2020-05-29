@@ -731,60 +731,61 @@ app.get('/editCustomer',function(req,res){
 
 function updateCustomer(context,req, res){
 	var values = [];
-	var query = "UPDATE Customers SET first_name=? , last_name = ?"; 
+	var query = "UPDATE Customers SET first_name=? , last_name = ?, street = ?, city = ?, state = ?, zip = ?, phone = ?, emergency_phone = ? WHERE id = ?"; 
 	values.push(req.body.first_name);
 	values.push(req.body.last_name);
 	if(req.body.street!=""){
-		query += ", street = ?";
 		values.push(req.body.street);
+	}else{
+		values.push(null);
 	}
 	if(req.body.city!=""){
-		query += ", city = ?";
 		values.push(req.body.city);
+	}else{
+		values.push(null);
 	}
 	if(req.body.state!="" && req.body.state!="NA"){
-		query += ", state = ?";
 		values.push(req.body.state);
 	}else{
-		query += ", state = ?";
 		values.push(null);
 	}
 	if(req.body.zip!=""){
 		if(req.body.zip.length==5 && /^\d+$/.test(req.body.zip)){
-			query += ", zip = ?";
 			values.push(req.body.zip);
 		}else{
 			context.error = "Zip must have a length of 5 and contain numbers only";
 			res.render('editCustomer',context);
 			return
 		}
+	}else{
+		values.push(null);
 	}
 	if(req.body.phone!=""){
 		if(req.body.phone.length==10 && /^\d+$/.test(req.body.phone)){
-			query += ", phone = ?";
 			values.push(req.body.phone);
 		}else{
 			context.error = "Phone must have a length of 10 and contain numbers only";
 			res.render('editCustomer',context);
 			return
 		}
+	}else{
+		values.push(null);
 	}
 	if(req.body.emergency_phone!=""){
 		if(req.body.emergency_phone.length==10 && /^\d+$/.test(req.body.emergency_phone)){
-			query += ", emergency_phone = ?";
 			values.push(req.body.emergency_phone);
 		}else{
 			context.error = "Emergency Phone must have a length of 10 and contain numbers only";
 			res.render('editCustomer',context);
 			return
 		}
+	}else{
+		values.push(null);
 	}
-	query += " WHERE id = ?";
 	values.push(req.body.id);
 	pool.query(query, values,function(err,result){ 
 	  if(!err){
 		context.success = "Success";
-		req.session.customerId = result.insertId;
 		res.render('editCustomer',context);
 		return;
 	  }else{
