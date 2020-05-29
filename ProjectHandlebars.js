@@ -690,21 +690,24 @@ app.get('/editCustomer',function(req,res){
   if(req.query.id){
 	if(!req.query.first_name || req.query.first_name =="null")
 		req.query.first_name = "";
-	if(!req.query.last_name)
+	if(!req.query.last_name ||req.query.last_name"")
 		req.query.last_name="";
 	if(!req.query.street || req.query.street=="null")
 		req.query.street="";
-	if(!req.query.city)
+	if(!req.query.city || req.query.city=="null")
 		req.query.city="";
-	if(!req.query.state)
-		req.query.state="";
-	if(!req.query.zip)
+	if(!req.query.state || req.query.state=="null"){
+		req.query.state="NA";
+		context.stateValue = "";
+	}else{
+		context.stateValue = req.query.state;
+	}
+	if(!req.query.zip ||req.query.zip=="null")
 		req.query.zip="";
-	if(!req.query.phone)
+	if(!req.query.phone || req.query.phone=="null")
 		req.query.phone="";
-	if(!req.query.emergency_phone)
+	if(!req.query.emergency_phone || req.query.emergency_phone=="null")
 		req.query.emergency_phone="";
-	
 	context.first_name = req.query.first_name;
 	context.last_name = req.query.last_name;
 	context.street = req.query.street;
