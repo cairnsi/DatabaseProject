@@ -690,7 +690,7 @@ app.get('/editCustomer',function(req,res){
   if(req.query.id){
 	if(!req.query.first_name || req.query.first_name =="null")
 		req.query.first_name = "";
-	if(!req.query.last_name ||req.query.last_name"")
+	if(!req.query.last_name ||req.query.last_name=="null")
 		req.query.last_name="";
 	if(!req.query.street || req.query.street=="null")
 		req.query.street="";
