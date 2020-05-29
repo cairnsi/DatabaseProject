@@ -685,7 +685,7 @@ app.post('/activeServiceType', function(req,res,next){
   }
 });
 
-app.get('/editCustomer',function(req,res){
+app.get('/editCustomer',function(context,req,res){
   var context = {};
   if(req.query.id){
 	if(!req.query.first_name || req.query.first_name =="null")
@@ -729,6 +729,72 @@ app.get('/editCustomer',function(req,res){
   res.render('500');
 });
 
+function updateCustomer(req, res){
+	var values = [];
+	var query = "UPDATE Customers SET first_name=? , last_name = ?"; 
+	values.push(req.body.first_name);
+	values.push(req.body.last_name);
+	if(req.body.street!=""){
+		query += ", street = ?";
+		values.push(req.body.street);
+	}
+	if(req.body.city!=""){
+		query += ", city = ?";
+		values.push(req.body.city);
+	}
+	if(req.body.state!=""){
+		query += ", state = ?";
+		values.push(req.body.state);
+	}
+	if(req.body.zip!=""){
+		if(req.body.zip.length==5 && /^\d+$/.test(req.body.zip)){
+			query += ", zip = ?";
+			values.push(req.body.zip);
+		}else{
+			var context ={};
+			context.error = "Zip must have a length of 5 and contain numbers only";
+			res.render('editCustomer',context);
+			return
+		}
+	}
+	if(req.body.phone!=""){
+		if(req.body.phone.length==10 && /^\d+$/.test(req.body.phone)){
+			query += ", phone = ?";
+			values.push(req.body.phone);
+		}else{
+			var context ={};
+			context.error = "Phone must have a length of 10 and contain numbers only";
+			res.render('editCustomer',context);
+			return
+		}
+	}
+	if(req.body.ephone!=""){
+		if(req.body.ephone.length==10 && /^\d+$/.test(req.body.ephone)){
+			query += ", emergency_phone = ?";
+			values.push(req.body.ephone);
+		}else{
+			var context ={};
+			context.error = "Emergency Phone must have a length of 10 and contain numbers only";
+			res.render('editCustomer',context);
+			return
+		}
+	}
+	query += " WHERE id = ?";
+	values.push(req.body.id);
+	pool.query(query, [values],function(err,result){ 
+	  if(!err){
+		context.success = "Success";
+		req.session.customerId = result.insertId;
+		res.render('editCustomer',context);
+		return;
+	  }else{
+		res.status(500);
+		res.send("Could not update");
+		return;
+	  }
+	});
+}
+
 app.post('/editCustomer', function(req,res,next){
 	context = {};
     if(!req.body.first_name || req.body.first_name =="null")
@@ -760,95 +826,33 @@ app.post('/editCustomer', function(req,res,next){
 	context.phone = req.body.phone;
 	context.emergency_phone = req.body.emergency_phone;
 	context.id = req.body.id;
-	console.log(JSON.stringify(context));
-  if(req.body.fname&& req.body.lname && false){
+  if(req.body.fname&& req.body.lname){
 	var query = "SELECT id FROM Customers WHERE first_name = ? AND last_name = ?";
-	pool.query(query, [req.body.fname, req.body.lname],function(err1,result1){ 
+	pool.query(query, [req.body.first_name, req.body.last_name],function(err1,result1){ 
 	  if(!err1){
 		if(result1[0]){
-			if(result1[0].id){
-				var context ={};
+			if(result1[0].id!=req.body.id){
 				context.error = "This customer already exists";
-				res.render('createAccount',context);
-				return
+				res.render('editCustomer',context);
+				return;
 			}else{
-				var context ={};
-				context.error = "Unknown Error";
-				res.render('createAccount',context);
-				return
+				updateCustomer(context,req,res);
+				return;
 			}
 		}else{
-			var values = [];
-			var query = "INSERT INTO Customers(first_name, last_name"; 
-			values.push(req.body.fname);
-			values.push(req.body.lname);
-			if(req.body.street!=""){
-				query += ", street";
-				values.push(req.body.street);
-			}
-			if(req.body.city!=""){
-				query += ", city";
-				values.push(req.body.city);
-			}
-			if(req.body.state!=""){
-				query += ", state";
-				values.push(req.body.state);
-			}
-			if(req.body.zip!=""){
-				if(req.body.zip.length==5 && /^\d+$/.test(req.body.zip)){
-					query += ", zip";
-					values.push(req.body.zip);
-				}else{
-					var context ={};
-					context.error = "Zip must have a length of 5 and contain numbers only";
-					res.render('createAccount',context);
-					return
-				}
-			}
-			if(req.body.phone!=""){
-				if(req.body.phone.length==10 && /^\d+$/.test(req.body.phone)){
-					query += ", phone";
-					values.push(req.body.phone);
-				}else{
-					var context ={};
-					context.error = "Phone must have a length of 10 and contain numbers only";
-					res.render('createAccount',context);
-					return
-				}
-			}
-			if(req.body.ephone!=""){
-				if(req.body.ephone.length==10 && /^\d+$/.test(req.body.ephone)){
-					query += ", emergency_phone";
-					values.push(req.body.ephone);
-				}else{
-					var context ={};
-					context.error = "Emergency Phone must have a length of 10 and contain numbers only";
-					res.render('createAccount',context);
-					return
-				}
-			}
-			query += " ) VALUES (?)";
-			pool.query(query, [values],function(err,result){ 
-			  if(!err){
-				var context = {};
-				context.success = "Success: You are now signed in as " + req.body.fname + " " + req.body.lname;
-				req.session.customerId = result.insertId;
-				res.render('createAccount',context);
-				return;
-			  }else{
-				next(err);
-			  }
-			});
+			updateCustomer(context,req,res);
+			return;
 		}
 	  }else{
-		next(err1);
+		res.status(500);
+		res.send("Failed Query for Customer Name");
+		return;
 	  }
 	});
 	
 	  
   }else{
 	context.error = "Must enter First Name and Last Name";
-	console.log(JSON.stringify(context));
 	res.render('editCustomer',context);
 	return;
   }
