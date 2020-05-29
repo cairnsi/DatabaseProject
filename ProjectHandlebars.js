@@ -798,9 +798,9 @@ function updateCustomer(context,req, res){
 app.post('/editCustomer', function(req,res,next){
 	context = {};
     if(!req.body.first_name || req.body.first_name =="null")
-		req.body.first_name = "";
+		context.first_name = "";
 	if(!req.body.last_name ||req.body.last_name=="null")
-		req.body.last_name="";
+		context.last_name="";
 	if(!req.body.street || req.body.street=="null")
 		req.body.street="";
 	if(!req.body.city || req.body.city=="null")
@@ -826,7 +826,7 @@ app.post('/editCustomer', function(req,res,next){
 	context.phone = req.body.phone;
 	context.emergency_phone = req.body.emergency_phone;
 	context.id = req.body.id;
-  if(req.body.fname&& req.body.lname){
+  if(req.body.first_name&& req.body.last_name){
 	var query = "SELECT id FROM Customers WHERE first_name = ? AND last_name = ?";
 	pool.query(query, [req.body.first_name, req.body.last_name],function(err1,result1){ 
 	  if(!err1){
