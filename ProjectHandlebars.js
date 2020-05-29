@@ -742,9 +742,9 @@ function updateCustomer(context,req, res){
 		query += ", city = ?";
 		values.push(req.body.city);
 	}
-	if(req.body.state!=""){
+	if(req.body.stateValue!=""){
 		query += ", state = ?";
-		values.push(req.body.state);
+		values.push(req.body.stateValue);
 	}
 	if(req.body.zip!=""){
 		if(req.body.zip.length==5 && /^\d+$/.test(req.body.zip)){
@@ -783,7 +783,7 @@ function updateCustomer(context,req, res){
 	values.push(req.body.id);
 	console.log(query);
 	console.log(JSON.stringify(values));
-	pool.query(query, [values],function(err,result){ 
+	pool.query(query, values,function(err,result){ 
 	  if(!err){
 		context.success = "Success";
 		req.session.customerId = result.insertId;
