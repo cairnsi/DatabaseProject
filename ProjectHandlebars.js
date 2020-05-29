@@ -781,6 +781,8 @@ function updateCustomer(context,req, res){
 	}
 	query += " WHERE id = ?";
 	values.push(req.body.id);
+	console.log(query);
+	console.log(JSON.stringify(values));
 	pool.query(query, [values],function(err,result){ 
 	  if(!err){
 		context.success = "Success";
