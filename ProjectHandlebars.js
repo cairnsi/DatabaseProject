@@ -688,11 +688,11 @@ app.post('/activeServiceType', function(req,res,next){
 app.get('/editCustomer',function(req,res){
   var context = {};
   if(req.query.id){
-	if(!req.query.first_name)
+	if(!req.query.first_name || req.query.first_name =="null")
 		req.query.first_name = "";
 	if(!req.query.last_name)
 		req.query.last_name="";
-	if(!req.query.street)
+	if(!req.query.street || req.query.street=="null")
 		req.query.street="";
 	if(!req.query.city)
 		req.query.city="";
