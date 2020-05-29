@@ -685,7 +685,7 @@ app.post('/activeServiceType', function(req,res,next){
   }
 });
 
-app.get('/editCustomer',function(context,req,res){
+app.get('/editCustomer',function(req,res){
   var context = {};
   if(req.query.id){
 	if(!req.query.first_name || req.query.first_name =="null")
@@ -724,9 +724,12 @@ app.get('/editCustomer',function(context,req,res){
 	res.render('customers',context);
 	return;
   }
+  res.type('plain/text');
+  res.status(500);
+  res.render('500');
 });
 
-function updateCustomer(req, res){
+function updateCustomer(context,req, res){
 	var values = [];
 	var query = "UPDATE Customers SET first_name=? , last_name = ?"; 
 	values.push(req.body.first_name);
