@@ -730,9 +730,36 @@ app.get('/editCustomer',function(req,res){
 });
 
 app.post('/editCustomer', function(req,res,next){
-  if(!req.body.stateValue || req.body.stateValue==""){
-	  req.body.state = "NA";
-  }
+	context = {};
+    if(!req.body.first_name || req.body.first_name =="null")
+		req.body.first_name = "";
+	if(!req.body.last_name ||req.body.last_name=="null")
+		req.body.last_name="";
+	if(!req.body.street || req.body.street=="null")
+		req.body.street="";
+	if(!req.body.city || req.body.city=="null")
+		req.body.city="";
+	if(!req.body.state || req.body.state=="null"){
+		req.body.state="NA";
+		context.stateValue = "";
+	}else{
+		context.stateValue = req.body.state;
+	}
+	if(!req.body.zip ||req.body.zip=="null")
+		req.body.zip="";
+	if(!req.body.phone || req.body.phone=="null")
+		req.body.phone="";
+	if(!req.body.emergency_phone || req.body.emergency_phone=="null")
+		req.body.emergency_phone="";
+	context.first_name = req.body.first_name;
+	context.last_name = req.body.last_name;
+	context.street = req.body.street;
+	context.city = req.body.city;
+	context.state = req.body.state;
+	context.zip = req.body.zip;
+	context.phone = req.body.phone;
+	context.emergency_phone = req.body.emergency_phone;
+	context.id = req.body.id;
   if(req.body.fname&& req.body.lname && false){
 	var query = "SELECT id FROM Customers WHERE first_name = ? AND last_name = ?";
 	pool.query(query, [req.body.fname, req.body.lname],function(err1,result1){ 
@@ -819,8 +846,8 @@ app.post('/editCustomer', function(req,res,next){
 	
 	  
   }else{
-	req.body.error = "Must enter First Name and Last Name";
-	res.render('createAccount',req.body);
+	context.error = "Must enter First Name and Last Name";
+	res.render('createAccount',context);
 	return
   }
 });
