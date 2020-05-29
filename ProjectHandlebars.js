@@ -768,10 +768,10 @@ function updateCustomer(context,req, res){
 			return
 		}
 	}
-	if(req.body.ephone!=""){
-		if(req.body.ephone.length==10 && /^\d+$/.test(req.body.ephone)){
+	if(req.body.emergency_phone!=""){
+		if(req.body.emergency_phone.length==10 && /^\d+$/.test(req.body.emergency_phone)){
 			query += ", emergency_phone = ?";
-			values.push(req.body.ephone);
+			values.push(req.body.emergency_phone);
 		}else{
 			var context ={};
 			context.error = "Emergency Phone must have a length of 10 and contain numbers only";
