@@ -849,8 +849,8 @@ app.post('/editCustomer', function(req,res,next){
   }else{
 	context.error = "Must enter First Name and Last Name";
 	console.log(JSON.stringify(context));
-	res.render('editAccount',context);
-	return
+	res.render('editCustomer',context);
+	return;
   }
 });
 
