@@ -847,9 +847,9 @@ app.post('/editCustomer', function(req,res,next){
 	
 	  
   }else{
-	console.log(JSON.stringify(context));
 	context.error = "Must enter First Name and Last Name";
-	res.render('createAccount',context);
+	console.log(JSON.stringify(context));
+	res.render('editAccount',context);
 	return
   }
 });
