@@ -760,6 +760,7 @@ app.post('/editCustomer', function(req,res,next){
 	context.phone = req.body.phone;
 	context.emergency_phone = req.body.emergency_phone;
 	context.id = req.body.id;
+	console.log(JSON.stringify(context));
   if(req.body.fname&& req.body.lname && false){
 	var query = "SELECT id FROM Customers WHERE first_name = ? AND last_name = ?";
 	pool.query(query, [req.body.fname, req.body.lname],function(err1,result1){ 
@@ -846,6 +847,7 @@ app.post('/editCustomer', function(req,res,next){
 	
 	  
   }else{
+	console.log(JSON.stringify(context));
 	context.error = "Must enter First Name and Last Name";
 	res.render('createAccount',context);
 	return
