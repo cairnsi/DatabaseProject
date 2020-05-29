@@ -724,9 +724,6 @@ app.get('/editCustomer',function(context,req,res){
 	res.render('customers',context);
 	return;
   }
-  res.type('plain/text');
-  res.status(500);
-  res.render('500');
 });
 
 function updateCustomer(req, res){
