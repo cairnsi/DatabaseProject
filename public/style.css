@@ -42,4 +42,11 @@ th  {
 }
 a:hover {
   background-color: #2E8B57;
+  border: 1px solid black;
+}
+.headerDiv{
+	background-color: #e6e6ff;
+}
+body {
+  background-color: #e6e6ff;
 }
