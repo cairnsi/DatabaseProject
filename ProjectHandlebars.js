@@ -436,7 +436,7 @@ app.post('/cancelTour', function(req,res,next){
 	var query = "DELETE FROM Purchases_Tours WHERE id = ?";
 	pool.query(query, [req.body.id],function(err,result){ 
 	  if(!err){
-		res.status(400);
+		res.status(200);
 		res.send("success");
 		return;
 	  }else{
