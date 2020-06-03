@@ -431,6 +431,27 @@ app.post('/yourTours', function(req,res,next){
   }
 });
 
+app.post('/cancelTour', function(req,res,next){
+  if(req.body.id){
+	var query = "DELETE FROM Purchases_Tours WHERE id = ?";
+	pool.query(query, [req.body.id],function(err,result){ 
+	  if(!err){
+		res.status(400);
+		res.send("success");
+		return;
+	  }else{
+		res.status(500);
+		res.send("Could not delete");
+		return;
+	  }
+	});
+  }else{
+	res.status(400);
+    res.send("No purchase id provided");
+	return;
+  }
+});
+
 app.get('/editTourType',function(req,res){
   var context = {};
   if(req.query.id){
