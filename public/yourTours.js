@@ -50,4 +50,38 @@ function displayYourToursTable(){
 	  req.send();
 	  
 }
+
+function bindCancel(item){
+	return function(){
+		var req = new XMLHttpRequest();
+		var payload = {id:null};
+		payload.id = item.id;
+		req.open('POST', '/deletePurchase', true);
+	    req.setRequestHeader('Content-Type', 'application/json');
+	    req.addEventListener('load',function(){
+			if(req.status >= 200 && req.status < 400){
+			  document.getElementById('error').textContent="";
+			  var item = {};
+			  var date = document.getElementById('purchaseDate').value;
+			  var fname = document.getElementById('fname').value;
+			  var lname = document.getElementById('lname').value;
+			  if(date!=""){
+				  item.date = date;
+			  }
+			  if(fname!=""){
+				  item.first_name = fname;
+			  }
+			  if(lname!=""){
+				  item.last_name = lname;
+			  }
+			  displayPurchaseTable(item);
+			} else {
+				console.log("Error in network request: " + req.statusText);
+				document.getElementById('error').textContent="Error";
+			}
+		});
+	  req.send(JSON.stringify(payload));
+	}
+}
+
 displayYourToursTable();
