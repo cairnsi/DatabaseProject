@@ -1,6 +1,6 @@
 --Customer Section
 --Add a Customer. 
---NOTE the values that are used will be appened to the string based on what the user has entered. 
+--NOTE the values that are used will be appended to the string based on what the user has entered. 
 --The input values will be added to the Array corresponding to the ? in the query formatter
 INSERT INTO Customers(first_name, last_name, street, city, state, zip, phone, emergency_phone) VALUES (?)
 INSERT INTO Customers(first_name, last_name, street, city, state, zip, phone) VALUES (?)
@@ -34,14 +34,11 @@ DELETE FROM Purchases_Tours WHERE purchase_id = ?
 DELETE FROM Purchases_Tours WHERE purchase_id = ?
 
 --Add Purchases
-INSERT INTO Purchases(purchase_date, customer_id) OUTPUT Inserted.id VALUES (?)
+INSERT INTO Purchases(purchase_date, customer_id) VALUES (?)
 --Directly after this we will run
---add items to M:M tables of tours and service
---first check if service is available:
-SELECT active FROM Service_Types WHERE id = ?
---then insert
+--insert Service
 INSERT INTO Purchases_Service_Types(purchase_id, service_id, quantity) VALUES (?)
---insert into purchase Tours (ids are aways allowed if they exist)
+--insert into purchase Tours
 INSERT INTO Purchases_Tours(purchase_id, tour_id) VALUES (?)
 
 --Specific_Tours Section
@@ -64,18 +61,23 @@ INSERT INTO Specific_Tours(date, type_number) VALUES (?)
 --DELETE
 --OUR CODE CHECKS THAT THERE IS NO ONE SIGNED UP PRIOR TO DELETE. THIS is checked both in the on the client side and on the server side.
 DELETE FROM Specific_Tours WHERE id = ?
+--Check prior to delete. If the signed up is >0 it won't delete.
+SELECT Specific_Tours.id, Guided_Tour_Types.label ,Specific_Tours.date, COUNT(Purchases.id) AS signedUp FROM Specific_Tours LEFT JOIN Purchases_Tours ON Purchases_Tours.tour_id = Specific_Tours.id LEFT JOIN Purchases ON Purchases_Tours.purchase_id = Purchases.id LEFT JOIN Guided_Tour_Types ON Guided_Tour_Types.id = Specific_Tours.type_number WHERE Specific_Tours.id = ?  GROUP BY Specific_Tours.id
 
 --Guided_Tour_Types Section
 --View:
 Select * FROM Guided_Tour_Types
 
---Update:
+--Update Guided tour type:
+--first check the label does not exist as another tour types label. It is ok if it is it's own
+SELECT id FROM Guided_Tour_Types WHERE label = ?
+--then update
 UPDATE Guided_Tour_Types SET label = ?, meet_time = ?, cost = ? WHERE id = ?
 --UpdateActiveProperty (This removes it as a possibility for purchase)
 UPDATE Guided_Tour_Types SET active = ? WHERE id = ?
 
---ADD
---First check that the label doesn't already exist:
+--ADD Guided tour type
+--First check that the label doesn't already exist. 
 SELECT id FROM Guided_Tour_Types WHERE label = ?
 --Then insert:
 INSERT INTO Guided_Tour_Types(label, meet_time, cost) VALUES (?)
@@ -84,8 +86,8 @@ INSERT INTO Guided_Tour_Types(label, meet_time, cost) VALUES (?)
 --view
 Select * FROM Service_Types
 
---ADD
---First check if label already exists
+--ADD Service type
+--First check if label already exists. 
 SELECT id FROM Service_Types WHERE label = ?
 --next insert:
 INSERT INTO Service_Types(label, description, cost) VALUES (?)
